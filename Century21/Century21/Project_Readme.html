@@ -148,4 +148,122 @@
     </div>
 
 </body>
+
+@model MVC.Models.AlphabeticalPagingViewModel
+
+<ul class="pagination alpha">
+    @foreach (var link in Model.Alphabet)
+    {
+    if (Model.FirstLetters.Contains(link) || (Model.NamesStartWithNumbers && link == "0-9") || link == "All")
+    {
+    if (Model.SelectedLetter == link || Model.SelectedLetter.IsEmpty() && link == "All")
+    {
+    <li class="active"><span>@link</span></li>
+    }
+    else
+    {
+    <li>@Html.ActionLink(link, "Index", new { selectedLetter = link })</li>
+    }
+    }
+    else
+    {
+    <li class="inactive"><span>@link</span></li>
+    }
+    }
+</ul>
+<ul>
+    @foreach (var item in Model.ProductNames)
+    {
+    <div class="col-sm-6 col-md-6" style=" cursor: pointer;">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 text-center">
+                @*<img src="http://api.randomuser.me/portraits/women/21.jpg" alt="" class="center-block img-circle img-thumbnail img-responsive">*@
+                <img src="http://dailychuckle.typepad.com/.a/6a00e54ee7a84388330134894291e5970c-250wi" alt="" class="center-block img-circle img-thumbnail img-responsive" style="width:76%;height:100px">
+
+            </div>
+            <!--/col-->
+            <div class="col-xs-12 col-sm-6">
+                <h4>@item.AGENT_FNAME @item.AGENT_LNAME </h4>
+                <b>Contact Number:</b> @item.AGENT_PHONE<br />
+                <b>Email ID:</b>@item.AGENT_EMAIL
+
+
+            </div>
+            <!--/col-->
+            <div class="clearfix"></div>
+
+        </div>
+
+    </div>
+    }
+</ul>
+public class AlphabeticalPagingViewModel
+    {
+        public List
+<agent_info>
+    ProductNames { get; set; }
+    public List<string>
+        Alphabet
+        {
+        get
+        {
+        var alphabet = Enumerable.Range(65, 26).Select(i => ((char)i).ToString()).ToList();
+        alphabet.Insert(0, "All");
+        alphabet.Insert(1, "0-9");
+        return alphabet;
+        }
+        }
+        public List<string>
+            FirstLetters { get; set; }
+            public string SelectedLetter { get; set; }
+            public bool NamesStartWithNumbers
+            {
+            get
+            {
+            var numbers = Enumerable.Range(0, 10).Select(i => i.ToString());
+            return FirstLetters.Intersect(numbers).Any();
+            }
+            }
+            }
+
+
+
+
+
+
+
+
+
+            public ActionResult Index(string selectedLetter)
+            {
+            var model = new AlphabeticalPagingViewModel { SelectedLetter = selectedLetter };
+            using (var context = new realproagentsdbEntities())
+            {
+            model.FirstLetters = context.AGENT_INFO
+            .GroupBy(p => p.AGENT_LNAME.Substring(0, 1))
+            .Select(x => x.Key.ToUpper())
+            .ToList();
+
+            if (string.IsNullOrEmpty(selectedLetter) || selectedLetter == "All")
+            {
+            model.ProductNames = context.AGENT_INFO.ToList();
+            }
+            else
+            {
+            if (selectedLetter == "0-9")
+            {
+            var numbers = Enumerable.Range(0, 10).Select(i => i.ToString());
+            model.ProductNames = context.AGENT_INFO
+            .Where(p => numbers.Contains(p.AGENT_LNAME.Substring(0, 1))).ToList();
+            }
+            else
+            {
+            model.ProductNames = context.AGENT_INFO
+            .Where(p => p.AGENT_LNAME.StartsWith(selectedLetter)).ToList();
+            }
+            }
+            }
+            return View(model);
+            }
 </html>
