@@ -333,6 +333,8 @@
     <Content Include="images\facebook.png" />
     <Content Include="images\google.png" />
     <Content Include="images\logo.jpg" />
+    <Content Include="images\mouse_off.png" />
+    <Content Include="images\mouse_on.png" />
     <Content Include="images\print.png" />
     <Content Include="images\product-img\product1.png" />
     <Content Include="images\product-img\product12.png" />
@@ -445,6 +447,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\SearchDetail.cshtml" />
+    <Content Include="Views\Home\Listings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

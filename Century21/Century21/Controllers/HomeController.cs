@@ -116,7 +116,6 @@ namespace Century21.Controllers
                 newResult.RemoveAll(t => t.list_price > filterprice2);
             }
 
-
             //PropertyDetail ActionMethod
 
             var city = "";
@@ -151,6 +150,11 @@ namespace Century21.Controllers
 
         public ActionResult PropertyDetail()
         {
+            return View();
+        }
+
+        public ActionResult Listings()
+        {
             string cityIs = Session["cityIs"].ToString();
             var city = "";
             if (Session["City"] != null)
@@ -173,11 +177,12 @@ namespace Century21.Controllers
                 var agentIDre = int.Parse(newResult.list_agent_id);
                 ViewBag.AgentInfo = realDbEntities.AGENT_INFO.Where(x => x.AGENTID == agentIDre).FirstOrDefault();
 
-               // return RedirectToAction("SearchDetail", "Home"); 
+                // return RedirectToAction("SearchDetail", "Home"); 
                 return View(newResult);
             }
             else
                 return RedirectToAction("Index", "Home");
+            
         }
     }
 }
