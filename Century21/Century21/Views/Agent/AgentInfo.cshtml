@@ -1,5 +1,56 @@
-﻿
+﻿@model MVC.Models.AlphabeticalPagingViewModel
+
 @{
     ViewBag.Title = "AgentInfo";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
+<ul class="pagination alpha">
+    @foreach (var link in Model.Alphabet)
+    {
+        if (Model.FirstLetters.Contains(link) || (Model.NamesStartWithNumbers && link == "0-9") || link == "All")
+        {
+            if (Model.SelectedLetter == link || Model.SelectedLetter.IsEmpty() && link == "All")
+            {
+                <li class="active"><span>@link</span></li>
+            }
+            else
+            {
+                <li>@Html.ActionLink(link, "Index", new { selectedLetter = link })</li>
+            }
+        }
+        else
+        {
+            <li class="inactive"><span>@link</span></li>
+        }
+    }
+</ul>
+<ul>
+    @foreach (var item in Model.ProductNames)
+    {
+        <div class="col-sm-6 col-md-6" style=" cursor: pointer;">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 text-center">
+                    @*<img src="http://api.randomuser.me/portraits/women/21.jpg" alt="" class="center-block img-circle img-thumbnail img-responsive">*@
+                    <img src="http://dailychuckle.typepad.com/.a/6a00e54ee7a84388330134894291e5970c-250wi" alt="" class="center-block img-circle img-thumbnail img-responsive" style="width:76%;height:100px">
+
+                </div>
+                <!--/col-->
+                <div class="col-xs-12 col-sm-6">
+                    <h4>@item.AGENT_FNAME @item.AGENT_LNAME </h4>
+                    <b>Contact Number:</b> @item.AGENT_PHONE<br />
+                    <b>Email ID:</b>@item.AGENT_EMAIL
+
+
+                </div>
+                <!--/col-->
+                <div class="clearfix"></div>
+
+            </div>
+
+        </div>
+    }
+</ul>
+<a id="alphabetA" href="@Url.Action("AgentInfo", "Agent", new { alphabet = "A" })">A</a>
