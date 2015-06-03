@@ -66,12 +66,12 @@ namespace Century21.Controllers
             if (!String.IsNullOrEmpty(Listtype) && Listtype.Split(',').Count() == 1)
             {
                 dbResult = dbEntities.getMlsDetailBySearchKeywordbycityTab(model.city, Listtype).DistinctBy(t => t.ml_number).ToList();
-
+                Session["dbResult"] = dbResult;
+                ViewBag.result = dbResult;
                 var mlNumber = dbResult[0].ml_number;
                 var cityIs = dbResult[0].city;
                 Session["mlNumber"] = mlNumber;
                 Session["cityIs"] = cityIs;
-
             }
             else
             {
@@ -80,6 +80,7 @@ namespace Century21.Controllers
                 {
                     jsonobject = JsonConvert.SerializeObject(dbEntities.MLS_DATA.Where(t => t.city == searchKey).ToList());
                     dbResult = JsonConvert.DeserializeObject<List<getMlsDetailBySearchKeywordbycityTab_Result>>(jsonobject);
+
                 }
                 else
                 {
@@ -91,7 +92,6 @@ namespace Century21.Controllers
                         if (item.ToLower() == "residential")
                         {
                             dbResult.AddRange(dbEntities.getMlsDetailBySearchKeywordbycityTab(model.city, "Residential").DistinctBy(t => t.ml_number).ToList());
-
                         }
                     }
                     // store in session so that we can showe the selected list of types again in page load when we call SearchDetailforMap() method 
@@ -116,36 +116,7 @@ namespace Century21.Controllers
                 newResult.RemoveAll(t => t.list_price > filterprice2);
             }
 
-            //PropertyDetail ActionMethod
-
-            var city = "";
-            string cityIs1 = Session["cityIs"].ToString();
-           // string cityIs="";
-            if (Session["City"] != null)
-            {
-                city = Session["City"].ToString();
-            }
-            if (!String.IsNullOrEmpty(cityIs1))
-            {
-                city = cityIs1;
-            }
-            string ml_number = Session["mlNumber"].ToString();
-            if (Session["city"] != null || !String.IsNullOrEmpty(cityIs1))
-            {
-                ViewBag.ml_number = ml_number;
-                var dbResult1 = dbEntities.MLS_DATA.Where(m => m.ml_number == ml_number && m.mls == 1).FirstOrDefault();
-                JavaScriptSerializer serialize1 = new JavaScriptSerializer();
-                var result1 = serialize1.Serialize(dbResult1);
-                var newResult1 = serialize1.Deserialize<storedResult>(result1);
-                //var agentIDre = int.Parse(newResult.list_agent_id);
-                var agentIDre = int.Parse(newResult1.list_agent_id);
-                ViewBag.AgentInfo = realDbEntities.AGENT_INFO.Where(x => x.AGENTID == agentIDre).ToList().FirstOrDefault();
-
-                return View(newResult1);
-            }
-            else
-                return RedirectToAction("Index", "Home");
-            //return View();
+            return View();
         }
 
         public ActionResult PropertyDetail()
@@ -153,36 +124,52 @@ namespace Century21.Controllers
             return View();
         }
 
-        public ActionResult Listings()
+        public ActionResult Listings(int index, string mlnumber, string cityName)
         {
-            string cityIs = Session["cityIs"].ToString();
-            var city = "";
-            if (Session["City"] != null)
+            var objStoredResult = new storedResult();
+            var resultSession = (List<getMlsDetailBySearchKeywordbycityTab_Result>)Session["dbResult"];
+            var mlNum = resultSession[index].ml_number;
+            var dbResult = dbEntities.MLS_DATA.Where(m => m.ml_number == mlNum && m.mls == 1).FirstOrDefault();
+            var result = JsonConvert.SerializeObject(dbResult);
+            objStoredResult = JsonConvert.DeserializeObject<storedResult>(result);
+            objStoredResult.currentIndex = (index);
+            var agentIDre = int.Parse(objStoredResult.list_agent_id);
+            ViewBag.AgentInfo = realDbEntities.AGENT_INFO.Where(x => x.AGENTID == agentIDre).FirstOrDefault();
+            if (index == 0 && index + 1 != resultSession.Count)
             {
-                city = Session["City"].ToString();
+                objStoredResult.currentIndex = 0;
+                objStoredResult.IsPrevVisible = false;
+                objStoredResult.IsNextVisible = true;
+                objStoredResult.nextmlNumber = resultSession[objStoredResult.currentIndex + 1].ml_number;
+                objStoredResult.nextCity = resultSession[objStoredResult.currentIndex + 1].address;
             }
-            if (!String.IsNullOrEmpty(cityIs))
+            else if (index == 0 && index + 1 == resultSession.Count)
             {
-                city = cityIs;
+                objStoredResult.currentIndex = index;
+                objStoredResult.IsNextVisible = false;
+                objStoredResult.IsPrevVisible = false;
+                //objStoredResult.prevmlNumber = resultSession[objStoredResult.currentIndex - 1].ml_number;
+                //objStoredResult.prevCity = resultSession[objStoredResult.currentIndex - 1].address;
             }
-            string ml_number = Session["mlNumber"].ToString();
-            if (Session["city"] != null || !String.IsNullOrEmpty(cityIs))
+            else if (index + 1 == resultSession.Count)
             {
-                ViewBag.ml_number = ml_number;
-                var dbResult = dbEntities.MLS_DATA.Where(m => m.ml_number == ml_number && m.mls == 1).FirstOrDefault();
-                JavaScriptSerializer serialize = new JavaScriptSerializer();
-                var result = serialize.Serialize(dbResult);
-                var newResult = serialize.Deserialize<storedResult>(result);
-                //var agentIDre = int.Parse(newResult.list_agent_id);
-                var agentIDre = int.Parse(newResult.list_agent_id);
-                ViewBag.AgentInfo = realDbEntities.AGENT_INFO.Where(x => x.AGENTID == agentIDre).FirstOrDefault();
-
-                // return RedirectToAction("SearchDetail", "Home"); 
-                return View(newResult);
+                objStoredResult.IsNextVisible = false;
+                objStoredResult.IsPrevVisible = true;
+                objStoredResult.prevmlNumber = resultSession[objStoredResult.currentIndex - 1].ml_number;
+                objStoredResult.prevCity = resultSession[objStoredResult.currentIndex - 1].address;
+                //objStoredResult.nextmlNumber = resultSession[objStoredResult.currentIndex + 1].ml_number;
+                //objStoredResult.nextCity = resultSession[objStoredResult.currentIndex + 1].address;
             }
             else
-                return RedirectToAction("Index", "Home");
-            
+            {
+                objStoredResult.IsNextVisible = true;
+                objStoredResult.IsPrevVisible = true;
+                objStoredResult.prevmlNumber = resultSession[objStoredResult.currentIndex - 1].ml_number;
+                objStoredResult.prevCity = resultSession[objStoredResult.currentIndex - 1].address;
+                objStoredResult.nextmlNumber = resultSession[objStoredResult.currentIndex + 1].ml_number;
+                objStoredResult.nextCity = resultSession[objStoredResult.currentIndex + 1].address;
+            }
+            return View(objStoredResult);
         }
     }
 }
