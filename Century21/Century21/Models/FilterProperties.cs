@@ -81,6 +81,16 @@ namespace Century21.Models
 
     public class storedResult
     {
+        public string nextmlNumber { get; set; }
+        public string prevmlNumber { get; set; }
+        public string nextCity { get; set; }
+        public string prevCity { get; set; }
+
+        public bool IsNextVisible { get; set; }
+        public bool IsPrevVisible { get; set; }
+
+        public int currentIndex { get; set; }
+
         public string mls_account { get; set; }
         public string url { get; set; }
         public Nullable<int> mls { get; set; }
@@ -508,6 +518,8 @@ namespace Century21.Models
         public string openhouse_time_end3 { get; set; }
         public string EMAIL_ADDRESS { get; set; }
         public string FIRST_NAME { get; set; }
+
+
 
     }
 }
