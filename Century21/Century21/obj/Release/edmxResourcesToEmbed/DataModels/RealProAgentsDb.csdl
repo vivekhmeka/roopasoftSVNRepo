@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="realproagentsdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AGENT_INFO">
+    <Key>
+      <PropertyRef Name="AGENTID" />
+    </Key>
+    <Property Name="AGENTID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AGENT_TITLE" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="OWNERBROKER" Type="Int32" />
+    <Property Name="AGENT_POSITION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="AGENT_FNAME" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="AGENT_LNAME" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="COMPID" Type="Int32" />
+    <Property Name="OFFICEID" Type="Int32" />
+    <Property Name="AGENT_PHONE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AGENT_CELL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AGENT_TXT" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="AGENT_FAX" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AGENT_EMAIL" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="AGENT_LANGUAGE" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="AGENT_PIC_TH" Type="Int32" />
+    <Property Name="AGENT_PIC" Type="Int32" />
+    <Property Name="AGENT_BIOTYPE" Type="Int32" />
+    <Property Name="AGENT_BIO_TEXT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AGENT_URL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="RETS_ID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="AGENT_LI_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AGENT_BROOKLYN_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AGENT_AOM" Type="DateTime" Precision="3" />
+    <Property Name="AGENT_TP" Type="DateTime" Precision="3" />
+    <Property Name="AGENT_TP_C" Type="DateTime" Precision="3" />
+    <Property Name="AGENT_TL" Type="DateTime" Precision="3" />
+    <Property Name="AGENT_TL_C" Type="DateTime" Precision="3" />
+    <Property Name="AGENT_CHECKEDTP" Type="Int32" />
+    <Property Name="AGENT_CHECKEDTL" Type="Int32" />
+    <Property Name="AGENT_AWARDS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AGENT_WEBSITE" Type="Int32" />
+    <Property Name="AGENT_ADDT_PAGE" Type="Int32" />
+    <Property Name="AGENT_ADDT_PAGE_LINK" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="AGENT_DATE" Type="DateTime" Precision="3" />
+    <Property Name="AGENT_PRODUCTION" Type="Decimal" Precision="24" Scale="0" />
+    <Property Name="AGENT_DESIGNATIONS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SHOWIT" Type="Int32" />
+    <Property Name="AGENT_BLOG" Type="Int32" />
+    <Property Name="AGENT_SERVES" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="AGENT_PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AGENT_LISTINGBOOK" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="AGENT_LB_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="AGENT_RP_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AGENT_RP_DISPLAY" Type="Int32" />
+    <Property Name="AGENT_FB_URL" Type="String" MaxLength="450" FixedLength="false" Unicode="false" />
+    <Property Name="AGENT_FEATURED" Type="Int32" />
+    <Property Name="AGENT_FEATURED_TEXT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CO_AGENT_FNAME" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="CO_AGENT_LNAME" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="CO_AGENT_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AGENT_SLOGAN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AGENT_IMAGE" Type="Int32" />
+    <Property Name="AGENT_IMAGE_LINK" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="AGENT_EMAIL_2" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="AGENT_NYSMLS" Type="Int32" />
+    <Property Name="AGENT_ImageNew" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Agent_Twitter_URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Agent_Youtube_URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Agent_Instagram_URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="USER">
+    <Key>
+      <PropertyRef Name="USERID" />
+    </Key>
+    <Property Name="USERNAME" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="PASSWORD" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="USERID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="USER_LEVEL" Type="Int32" />
+    <Property Name="COMPID" Type="Int32" />
+    <Property Name="AGENTID" Type="Int32" />
+    <Property Name="OFFICEID" Type="Int32" />
+    <Property Name="LAST_LOGGED" Type="DateTime" Precision="3" />
+    <Property Name="LAST_LOGGED_IP" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+    <Property Name="LAST_LOGGED_PC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="USER_EMAIL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="realproagentsdbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AGENT_INFO" EntityType="Self.AGENT_INFO" />
+    <EntitySet Name="USERS" EntityType="Self.USER" />
+  </EntityContainer>
+</Schema>

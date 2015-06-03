@@ -1,0 +1,476 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home</title>
+
+    <script>
+        var searchtype = "Residential";
+        function sellingHome() {
+            searchtype = "Residential";
+        }
+
+        function findingHome() {
+            searchtype = "Residential";
+        }
+    $(document).ready(function () {
+
+        $(".find-home").click(function () {
+            $(".find-home").addClass("active-home");
+            $(".sell-home").removeClass("active-home");
+        });
+        $(".sell-home").click(function () {
+            $(".find-home").removeClass("active-home");
+            $(".sell-home").addClass("active-home");
+            
+        });
+        
+        $("#txtSearch").autocomplete({
+            minLength: 2,
+            source: function (request, response) {
+                debugger;
+                var result = [];
+                var key = request.term;
+                Vdata = { 'Key': key, 'searchtype': searchtype };
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("AutoSearchResults", "Home")',
+                        datatype: "json",
+                        data: Vdata,
+                        success: function (data) {
+                            debugger;
+                            $.each(data, function (i, item) {
+                                debugger;
+                                result.push(item);
+                            });
+                            response(result);
+                        },
+                        error: function (err) {
+                        }
+                    });
+                },
+                select: function (event, ui) {
+                    debugger;
+                    $("#txtSearch").val(ui.item.value);
+                    //$("#btnSearch").click();
+                    SearchDetails();
+                }
+            });
+
+
+        function SearchDetails()
+        {
+            var city = $("#txtSearch").val();
+            window.location.href = '@Url.Action("SearchDetail", "Home")?searchKey=' + city + ' &Listtype=' + searchtype;
+        }
+
+        $("#btnSearch").click(function () {
+            debugger;
+            var city = $("#txtSearch").val();
+                window.location.href = '@Url.Action("SearchDetail", "Home")?searchKey=' + city + ' &Listtype=' + searchtype;
+            });
+        });
+    </script>
+</head><!--/head-->
+<body class="homepage">
+  
+    <section id="main-slider" class="no-margin">
+        <div class="search-homes">
+            @*<span class="find-home active-home" style="padding-right:32px;">Residential</span>*@
+            <span class="find-home active-home" style="padding-right:32px;" onclick="findingHome()">Find a Home</span>
+            <span class="sell-home" style="padding-right:32px;" onclick="sellingHome()">Sell a Home</span>
+            <input type="text" id="txtSearch" class="form-control find-home-box ui-autocomplete-input" aria-autocomplete="list" aria-haspopup="true" placeholder="Search here">
+             
+        </div>
+        <div class="carousel slide">
+            <ol class="carousel-indicators" style="display:none !important">
+                <li data-target="#main-slider" data-slide-to="0" class="active"></li>
+                <li data-target="#main-slider" data-slide-to="1"></li>
+                <li data-target="#main-slider" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="images/slider/bg1.png" width="100%">
+                </div><!--/.item-->
+                <div class="item">
+                    <img src="images/slider/bg2.png" width="100%">
+                </div><!--/.item-->
+                <div class="item">
+                    <img src="images/slider/bg3.png" width="100%">
+                </div><!--/.item-->
+            </div><!--/.carousel-inner-->
+        </div><!--/.carousel-->
+        <a class="prev hidden-xs" href="#main-slider" data-slide="prev" style="display:none !important">
+            <i class="fa fa-chevron-left"></i>
+        </a>
+        <a class="next hidden-xs" href="#main-slider" data-slide="next" style="display:none !important">
+            <i class="fa fa-chevron-right"></i>
+        </a>
+    </section><!--/#main-slider-->
+    <section id="feature">
+        <div class="container">
+            <div class="center wow fadeInDown">
+                <h2>Featured Properties</h2>
+                <p class="lead">View a list of Featured Properties</p>
+            </div>
+            <div class="row">
+                <div class="features">
+                    <div class="col-md-3 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                        <div class="feature-wrap">
+                            <img src="images/product-img/product1.png" width="100%">
+                            <p class="price-div">$269,999</p>
+                            <p style="padding:0 10px; font-size:16px;">It's a new year and that means new opportunities</p>
+                            <div style="width:100%;padding:10px; background:rgb(224, 222, 222);  float: left;">
+                                <button type="button" class="btn btn-info active pull-right">VIEW DETAIL</button>
+                            </div>
+                        </div>
+                    </div><!--/.col-md-4-->
+                    <div class="col-md-3 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                        <div class="feature-wrap">
+                            <img src="images/product-img/product12.png" width="100%">
+                            <p class="price-div">$269,999</p>
+                            <p style="padding:0 10px; font-size:16px;">It's a new year and that means new opportunities</p>
+                            <div style="width:100%;padding:10px; background:rgb(224, 222, 222);  float: left;">
+                                <button type="button" class="btn btn-info active pull-right">VIEW DETAIL</button>
+                            </div>
+                        </div>
+                    </div><!--/.col-md-4-->
+                    <div class="col-md-3 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                        <div class="feature-wrap">
+                            <img src="images/product-img/product13.png" width="100%">
+                            <p class="price-div">$269,999</p>
+                            <p style="padding:0 10px; font-size:16px;">It's a new year and that means new opportunities</p>
+                            <div style="width:100%;padding:10px; background:rgb(224, 222, 222);  float: left;">
+                                <button type="button" class="btn btn-info active pull-right">VIEW DETAIL</button>
+                            </div>
+                        </div>
+                    </div><!--/.col-md-4-->
+                    <div class="col-md-3 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                        <div class="feature-wrap">
+                            <img src="images/product-img/product13.png" width="100%">
+                            <p class="price-div">$269,999</p>
+                            <p style="padding:0 10px; font-size:16px;">It's a new year and that means new opportunities</p>
+                            <div style="width:100%;padding:10px; background:rgb(224, 222, 222);  float: left;">
+                                <button type="button" class="btn btn-info active pull-right">VIEW DETAIL</button>
+                            </div>
+                        </div>
+                    </div><!--/.col-md-4-->
+
+
+                </div><!--/.services-->
+            </div><!--/.row-->
+        </div><!--/.container-->
+    </section><!--/#feature-->
+    <section id="main-slider" class="no-margin wow fadeInDown">
+
+        <div class="carousel slide">
+            <ol class="carousel-indicators" style="display:none !important">
+                <li data-target="#main-slider" data-slide-to="0" class="active"></li>
+                <li data-target="#main-slider" data-slide-to="1"></li>
+                <li data-target="#main-slider" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="images/slider/bg4.jpg" width="100%">
+                </div><!--/.item-->
+                <div class="item">
+                    <img src="images/slider/bg5.jpg" width="100%">
+                </div><!--/.item-->
+                <div class="item">
+                    <img src="images/slider/bg6.jpg" width="100%">
+                </div><!--/.item-->
+            </div><!--/.carousel-inner-->
+        </div><!--/.carousel-->
+        <a class="prev hidden-xs" href="#main-slider" data-slide="prev" style="display:none !important">
+            <i class="fa fa-chevron-left"></i>
+        </a>
+        <a class="next hidden-xs" href="#main-slider" data-slide="next" style="display:none !important">
+            <i class="fa fa-chevron-right"></i>
+        </a>
+    </section><!--/#main-slider-->
+
+
+    <div class="row" style="  background: #f2f2f2; margin:0">
+        <div class="container wow fadeInDown">
+            <h2 class="video-heading" style="margin-top:25px; text-align:center">Buyers</h2>
+            <section class="video-slider">
+                <div class='row' style="margin:0">
+                    <div>
+                        <div class="carousel slide media-carousel" id="media">
+                            <div class="carousel-inner">
+                                <div class="item  active">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">
+
+                                                <iframe width="100%" height="300px" src="http://www.youtube.com/embed/bEKNhMIfIbU"></iframe>
+
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">
+                                                <iframe width="100%" height="300px" src="http://www.youtube.com/embed/BY_lnZa8KHg"></iframe>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">
+                                                <iframe width="100%" height="300px" src="http://www.youtube.com/embed/HKDgAW8NJoo"></iframe>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">
+                                                <iframe width="100%" height="300px" src="http://www.youtube.com/embed/bEKNhMIfIbU"></iframe>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">  <iframe width="100%" height="300px" src="http://www.youtube.com/embed/BY_lnZa8KHg"></iframe></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">  <iframe width="100%" height="300px" src="http://www.youtube.com/embed/HKDgAW8NJoo"></iframe></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">   <iframe width="100%" height="300px" src="http://www.youtube.com/embed/bEKNhMIfIbU"></iframe></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">  <iframe width="100%" height="300px" src="http://www.youtube.com/embed/BY_lnZa8KHg"></iframe></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">  <iframe width="100%" height="300px" src="http://www.youtube.com/embed/HKDgAW8NJoo"></iframe></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a data-slide="prev" href="#media" class="left carousel-control">‹</a>
+                            <a data-slide="next" href="#media" class="right carousel-control">›</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+        <div class="container wow fadeInDown">
+            <h2 class="video-heading" style="text-align:center"> Sellers</h2>
+            <section class="video-slider">
+                <div class='row' style="margin:0">
+                    <div>
+                        <div class="carousel slide media-carousel" id="media2">
+                            <div class="carousel-inner">
+                                <div class="item  active">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">
+
+                                                <iframe width="100%" height="300px" src="http://www.youtube.com/embed/bEKNhMIfIbU"></iframe>
+
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">
+                                                <iframe width="100%" height="300px" src="http://www.youtube.com/embed/BY_lnZa8KHg"></iframe>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">
+                                                <iframe width="100%" height="300px" src="http://www.youtube.com/embed/HKDgAW8NJoo"></iframe>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">
+                                                <iframe width="100%" height="300px" src="http://www.youtube.com/embed/bEKNhMIfIbU"></iframe>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">  <iframe width="100%" height="300px" src="http://www.youtube.com/embed/BY_lnZa8KHg"></iframe></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">  <iframe width="100%" height="300px" src="http://www.youtube.com/embed/HKDgAW8NJoo"></iframe></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">   <iframe width="100%" height="300px" src="http://www.youtube.com/embed/bEKNhMIfIbU"></iframe></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">  <iframe width="100%" height="300px" src="http://www.youtube.com/embed/BY_lnZa8KHg"></iframe></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">  <iframe width="100%" height="300px" src="http://www.youtube.com/embed/HKDgAW8NJoo"></iframe></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a data-slide="prev" href="#media2" class="left carousel-control">‹</a>
+                            <a data-slide="next" href="#media2" class="right carousel-control">›</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="container wow fadeInDown">
+            <h2 class="video-heading" style="text-align:center"> Homeowners</h2>
+            <section class="video-slider">
+                <div class='row' style="margin:0">
+                    <div>
+                        <div class="carousel slide media-carousel" id="media3">
+                            <div class="carousel-inner">
+                                <div class="item  active">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">
+
+                                                <iframe width="100%" height="300px" src="http://www.youtube.com/embed/bEKNhMIfIbU"></iframe>
+
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">
+                                                <iframe width="100%" height="300px" src="http://www.youtube.com/embed/BY_lnZa8KHg"></iframe>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">
+                                                <iframe width="100%" height="300px" src="http://www.youtube.com/embed/HKDgAW8NJoo"></iframe>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">
+                                                <iframe width="100%" height="300px" src="http://www.youtube.com/embed/bEKNhMIfIbU"></iframe>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">  <iframe width="100%" height="300px" src="http://www.youtube.com/embed/BY_lnZa8KHg"></iframe></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">  <iframe width="100%" height="300px" src="http://www.youtube.com/embed/HKDgAW8NJoo"></iframe></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">   <iframe width="100%" height="300px" src="http://www.youtube.com/embed/bEKNhMIfIbU"></iframe></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">  <iframe width="100%" height="300px" src="http://www.youtube.com/embed/BY_lnZa8KHg"></iframe></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a class="thumbnail" href="#">  <iframe width="100%" height="300px" src="http://www.youtube.com/embed/HKDgAW8NJoo"></iframe></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a data-slide="prev" href="#media3" class="left carousel-control">‹</a>
+                            <a data-slide="next" href="#media3" class="right carousel-control">›</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <section id="recent-works">
+        <div class="container">
+            <div class="center wow fadeInDown">
+                <h2>About Century 21 AA</h2>
+                <p class="lead">BRINGING THE DREAM OF HOME OWNERSHIP WITHIN REACH/p>
+            </div>
+            <div class="row">
+                <p style="text-align:justify">
+                    Proudly serving Nassau Suffolk and Queens Counties, CENTURY 21 AA Realty has an unmatched record when it comes to helping you
+                    buy or sell your home. A focus on superior costumer service has inspired our results-oriented professionals, superior technology and high ethical standards to provide our customers with the best real estate experience possible. To aid you in your home buying or selling
+                    process, our website offers a wealth of information about home-finding and buying process.
+                </p>
+            </div><!--/.row-->
+        </div><!--/.container-->
+    </section><!--/#recent-works--><!--/#services--><!--/#middle--><!--/#content--><!--/#partner--><!--/#conatcat-info-->
+    <section id="bottom">
+        <div class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="widget">
+                        <h4 style="color:#258EDF">Serving our Customers throughout Suffolk, Nassau, and Queens</h4>
+                        <p style="font-weight:bold">Call- 888.507.2445</p>
+                        <p style="font-weight:bold">Connect With Us Today!</p>
+                        <div class="footer-icon">
+                            <ul class="social-share">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><!--/.col-md-3-->
+
+                <div class="col-md-3 col-sm-3">
+                    <div class="widget">
+                        <h4 style="color:#258EDF">Departments</h4>
+                        <ul>
+                            <li><a href="#">Rentals</a></li>
+                            <li><a href="#">Relocation</a></li>
+                            <li><a href="#">Carrers</a></li>
+                            <li><a href="#">Customers service</a></li>
+                        </ul>
+                    </div>
+                </div><!--/.col-md-3-->
+                <div class="col-md-3 col-sm3">
+                    <div class="widget">
+                        <h4 style="color:#258EDF">Property Search</h4>
+
+                        <ul>
+                            <li><a href="#">Residential Properties</a></li>
+                            <li><a href="#">Rentals</a></li>
+                            <li><a href="#">Land</a></li>
+                            <li><a href="#">Commercial Properties</a></li>
+                        </ul>
+                    </div>
+                </div><!--/.col-md-3-->
+            </div>
+        </div>
+    </section><!--/#bottom-->
+   
+   
+    <script>
+
+        $('#main-slider .carousel').carousel({
+            interval: 4000,
+            pause: false
+        })
+    </script>
+    <script>
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 150) {
+
+                $(".navbar-inverse").addClass("fixed-header");
+
+            }
+            else {
+                $(".navbar-inverse").removeClass("fixed-header");
+            }
+        });
+    </script>
+</body>
+</html>

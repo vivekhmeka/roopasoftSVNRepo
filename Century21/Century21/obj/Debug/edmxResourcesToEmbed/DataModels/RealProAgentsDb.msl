@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="realproagentsdbModelStoreContainer" CdmEntityContainer="realproagentsdbEntities">
+    <EntitySetMapping Name="AGENT_INFO">
+      <EntityTypeMapping TypeName="realproagentsdbModel.AGENT_INFO">
+        <MappingFragment StoreEntitySet="AGENT_INFO">
+          <ScalarProperty Name="AGENTID" ColumnName="AGENTID" />
+          <ScalarProperty Name="AGENT_TITLE" ColumnName="AGENT_TITLE" />
+          <ScalarProperty Name="OWNERBROKER" ColumnName="OWNERBROKER" />
+          <ScalarProperty Name="AGENT_POSITION" ColumnName="AGENT_POSITION" />
+          <ScalarProperty Name="AGENT_FNAME" ColumnName="AGENT_FNAME" />
+          <ScalarProperty Name="AGENT_LNAME" ColumnName="AGENT_LNAME" />
+          <ScalarProperty Name="COMPID" ColumnName="COMPID" />
+          <ScalarProperty Name="OFFICEID" ColumnName="OFFICEID" />
+          <ScalarProperty Name="AGENT_PHONE" ColumnName="AGENT_PHONE" />
+          <ScalarProperty Name="AGENT_CELL" ColumnName="AGENT_CELL" />
+          <ScalarProperty Name="AGENT_TXT" ColumnName="AGENT_TXT" />
+          <ScalarProperty Name="AGENT_FAX" ColumnName="AGENT_FAX" />
+          <ScalarProperty Name="AGENT_EMAIL" ColumnName="AGENT_EMAIL" />
+          <ScalarProperty Name="AGENT_LANGUAGE" ColumnName="AGENT_LANGUAGE" />
+          <ScalarProperty Name="AGENT_PIC_TH" ColumnName="AGENT_PIC_TH" />
+          <ScalarProperty Name="AGENT_PIC" ColumnName="AGENT_PIC" />
+          <ScalarProperty Name="AGENT_BIOTYPE" ColumnName="AGENT_BIOTYPE" />
+          <ScalarProperty Name="AGENT_BIO_TEXT" ColumnName="AGENT_BIO_TEXT" />
+          <ScalarProperty Name="AGENT_URL" ColumnName="AGENT_URL" />
+          <ScalarProperty Name="RETS_ID" ColumnName="RETS_ID" />
+          <ScalarProperty Name="AGENT_LI_ID" ColumnName="AGENT_LI_ID" />
+          <ScalarProperty Name="AGENT_BROOKLYN_ID" ColumnName="AGENT_BROOKLYN_ID" />
+          <ScalarProperty Name="AGENT_AOM" ColumnName="AGENT_AOM" />
+          <ScalarProperty Name="AGENT_TP" ColumnName="AGENT_TP" />
+          <ScalarProperty Name="AGENT_TP_C" ColumnName="AGENT_TP_C" />
+          <ScalarProperty Name="AGENT_TL" ColumnName="AGENT_TL" />
+          <ScalarProperty Name="AGENT_TL_C" ColumnName="AGENT_TL_C" />
+          <ScalarProperty Name="AGENT_CHECKEDTP" ColumnName="AGENT_CHECKEDTP" />
+          <ScalarProperty Name="AGENT_CHECKEDTL" ColumnName="AGENT_CHECKEDTL" />
+          <ScalarProperty Name="AGENT_AWARDS" ColumnName="AGENT_AWARDS" />
+          <ScalarProperty Name="AGENT_WEBSITE" ColumnName="AGENT_WEBSITE" />
+          <ScalarProperty Name="AGENT_ADDT_PAGE" ColumnName="AGENT_ADDT_PAGE" />
+          <ScalarProperty Name="AGENT_ADDT_PAGE_LINK" ColumnName="AGENT_ADDT_PAGE_LINK" />
+          <ScalarProperty Name="AGENT_DATE" ColumnName="AGENT_DATE" />
+          <ScalarProperty Name="AGENT_PRODUCTION" ColumnName="AGENT_PRODUCTION" />
+          <ScalarProperty Name="AGENT_DESIGNATIONS" ColumnName="AGENT_DESIGNATIONS" />
+          <ScalarProperty Name="SHOWIT" ColumnName="SHOWIT" />
+          <ScalarProperty Name="AGENT_BLOG" ColumnName="AGENT_BLOG" />
+          <ScalarProperty Name="AGENT_SERVES" ColumnName="AGENT_SERVES" />
+          <ScalarProperty Name="AGENT_PASSWORD" ColumnName="AGENT_PASSWORD" />
+          <ScalarProperty Name="AGENT_LISTINGBOOK" ColumnName="AGENT_LISTINGBOOK" />
+          <ScalarProperty Name="AGENT_LB_ID" ColumnName="AGENT_LB_ID" />
+          <ScalarProperty Name="AGENT_RP_ID" ColumnName="AGENT_RP_ID" />
+          <ScalarProperty Name="AGENT_RP_DISPLAY" ColumnName="AGENT_RP_DISPLAY" />
+          <ScalarProperty Name="AGENT_FB_URL" ColumnName="AGENT_FB_URL" />
+          <ScalarProperty Name="AGENT_FEATURED" ColumnName="AGENT_FEATURED" />
+          <ScalarProperty Name="AGENT_FEATURED_TEXT" ColumnName="AGENT_FEATURED_TEXT" />
+          <ScalarProperty Name="CO_AGENT_FNAME" ColumnName="CO_AGENT_FNAME" />
+          <ScalarProperty Name="CO_AGENT_LNAME" ColumnName="CO_AGENT_LNAME" />
+          <ScalarProperty Name="CO_AGENT_ID" ColumnName="CO_AGENT_ID" />
+          <ScalarProperty Name="AGENT_SLOGAN" ColumnName="AGENT_SLOGAN" />
+          <ScalarProperty Name="AGENT_IMAGE" ColumnName="AGENT_IMAGE" />
+          <ScalarProperty Name="AGENT_IMAGE_LINK" ColumnName="AGENT_IMAGE_LINK" />
+          <ScalarProperty Name="AGENT_EMAIL_2" ColumnName="AGENT_EMAIL_2" />
+          <ScalarProperty Name="AGENT_NYSMLS" ColumnName="AGENT_NYSMLS" />
+          <ScalarProperty Name="AGENT_ImageNew" ColumnName="AGENT_ImageNew" />
+          <ScalarProperty Name="Agent_Twitter_URL" ColumnName="Agent_Twitter_URL" />
+          <ScalarProperty Name="Agent_Youtube_URL" ColumnName="Agent_Youtube_URL" />
+          <ScalarProperty Name="Agent_Instagram_URL" ColumnName="Agent_Instagram_URL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USERS">
+      <EntityTypeMapping TypeName="realproagentsdbModel.USER">
+        <MappingFragment StoreEntitySet="USERS">
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="USERID" ColumnName="USERID" />
+          <ScalarProperty Name="USER_LEVEL" ColumnName="USER_LEVEL" />
+          <ScalarProperty Name="COMPID" ColumnName="COMPID" />
+          <ScalarProperty Name="AGENTID" ColumnName="AGENTID" />
+          <ScalarProperty Name="OFFICEID" ColumnName="OFFICEID" />
+          <ScalarProperty Name="LAST_LOGGED" ColumnName="LAST_LOGGED" />
+          <ScalarProperty Name="LAST_LOGGED_IP" ColumnName="LAST_LOGGED_IP" />
+          <ScalarProperty Name="LAST_LOGGED_PC" ColumnName="LAST_LOGGED_PC" />
+          <ScalarProperty Name="USER_EMAIL" ColumnName="USER_EMAIL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
