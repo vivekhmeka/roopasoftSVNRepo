@@ -1,5 +1,5 @@
 ﻿<script type="text/javascript">
     
-    window.location.href = '@Url.Action("Listings", "Home")';
+    window.location.href = '@Url.Action("Listings", "Home", new { index = 0, mlnumber = @Session["mlNumber"].ToString(), city = @Session["cityIs"].ToString() })';
         
 </script>
