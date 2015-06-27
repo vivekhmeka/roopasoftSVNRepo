@@ -1,0 +1,19 @@
+﻿<div class="row">
+    <div class="features">
+        @foreach (var featuredlist in ViewBag.FeaturedListDetail)
+        {
+            var last3digit = featuredlist.ml_number.Substring(featuredlist.ml_number.Length - 3);
+            var image1 = "http://links.mlslirealtor.com/mlsphotos/FULL/1/" + last3digit + "/" + featuredlist.ml_number + ".jpg";
+            <div class="col-md-3 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                <div class="feature-wrap">
+                    <img src="@image1" width="100%">
+                    <p class="price-div">@String.Format("{0:C}", featuredlist.list_price)</p>
+                    <p style="padding:0 10px; font-size:16px;">It's a new year and that means new opportunities</p>
+                    <div style="width:100%;padding:10px; background:rgb(224, 222, 222);  float: left;">
+                        <button type="button" mlsid="@featuredlist.ml_number" class="btn btn-info active pull-right">VIEW DETAIL</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

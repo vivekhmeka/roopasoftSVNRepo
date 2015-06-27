@@ -86,7 +86,7 @@
                 <input type="button" id="btnPrevious" value="Previous" />*@
             @if (Model.IsNextVisible)
             {
-                <a class="glyphicon glyphicon-circle-arrow-right bacK_btn pull-right" style="font-size: 16px;" href="@Url.Action("Listings", "Home", new { index =Model.currentIndex+1, mlnumber = Model.nextmlNumber, cityName=Model.nextCity })">Next</a>
+                <a class="glyphicon glyphicon-circle-arrow-right bacK_btn pull-right" style="font-size: 16px; margin-top:12px" href="@Url.Action("Listings", "Home", new { index =Model.currentIndex+1, mlnumber = Model.nextmlNumber, cityName=Model.nextCity })">Next</a>
             }
             @if (Model.IsPrevVisible)
             {
@@ -1245,7 +1245,8 @@
 
 
         $("#CaptchaInputText").addClass("form-control");
-        var hoverData = "<p>@Model.street , @Model.address </p><p> @String.Format("{0:C}", Model.list_price) </p>";
+
+        var hoverData = "<p>@Model.street , @Model.county </p><p> @String.Format("{0:C}", Model.list_price) </p>";
         // alert(hoverData);
 
         var mapOptions = {

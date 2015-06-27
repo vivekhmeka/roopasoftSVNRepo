@@ -1,0 +1,541 @@
+﻿@model Century21.Models.NewAgentDetail
+@{
+    ViewBag.Title = "EditAgentDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+     .home-link a {
+        background: transparent !important;
+    }
+
+     .home-link a:hover, .admin-menu a {
+        background: #8C6D00  !important;
+    }
+</style>
+<script src="~/Scripts/bootstrap-multiselect.js"></script>
+<link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
+<script src="~/scripts/tinymce/tinymce.min.js"></script>
+
+<script type="text/javascript">
+    tinyMCE.init({
+        // General options
+        menubar: false,
+        statusbar: false,
+        mode: "textareas",
+        theme: "modern",
+        // Theme options
+        plugins: [
+               "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+               "searchreplace wordcount visualblocks visualchars code fullscreen",
+               "insertdatetime media nonbreaking save table contextmenu directionality",
+               "emoticons template paste textcolor colorpicker textpattern"
+        ],
+        toolbar1: "undo redo | styleselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | print pvreiew | forecolor backcolor emoticons ",
+        image_advtab: true,
+        templates: [
+            { title: 'Test template 1', content: 'Test 1' },
+            { title: 'Test template 2', content: 'Test 2' }
+        ]
+    });
+</script>
+
+
+<style>
+    .left {
+        float: left;
+    }
+
+    div.note-editable {
+        height: auto !important;
+    }
+
+    .note-toolbar {
+        padding: 5px;
+        background-color: #DDD;
+        border: 1px solid #a9a9a9;
+        border-bottom: 0;
+    }
+
+    .note-codable {
+        width: 100%;
+        height: 168px;
+    }
+
+    .form-group .form-control {
+        padding: 7px 12px;
+        border-color: #CCC;
+        webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+        -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    }
+
+    .profile-div {
+        background-color: whitesmoke;
+        padding-bottom: 10px;
+        border: 2px solid #DDD;
+        margin: 0px;
+        margin-bottom: 15px;
+        padding-top: 10px;
+    }
+
+    .agent-details-div h4 {
+        color: #258EDF;
+        font-size: 22px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+
+    #profilepic {
+        width: 200px !important;
+        height: 220px !important;
+    }
+
+    #AGENT_LANGUAGE {
+        height: 78px;
+    }
+
+    @@media (max-width:1199px) {
+        #profilepic {
+            width: 100% !important;
+            height: auto !important;
+        }
+    }
+
+    @@media (max-width:767px) {
+        #profilepic {
+            width: 200px !important;
+            height: 220px !important;
+        }
+    }
+</style>
+<script>
+    debugger;
+    //$('.form-control input[type=text]').attr('disabled', 'disabled');
+
+    $(document).ready(function () {
+        debugger;
+        //$('#AGENT_BIO_TEXT').summernote();
+        var roleID = $("#hdnRoleID").val();
+        if (roleID != '1001' && roleID != '1002') {
+            $("#agentDate,#agentAom,#agentTp,#agentTpc,#agentTl,#agentTlc,#agentCompID,#agentBlog,#agentOwnerBroker,#agentLanguage,#fileUpload").attr('disabled', 'disabled');
+            $('input[type=text]').attr('disabled', 'disabled');
+            $("#agentPassword,#agentPhone,.note-codable,.note-editable").prop('disabled', false);
+            $(".note-editable").attr('contenteditable', 'true');
+        }
+        debugger;
+
+        $('#AGENT_LANGUAGE').multiselect();
+        var lang = '@Model.AGENT_LANGUAGE';
+        var languages = lang.split(',');
+        for (var i = 0; i < languages.length; i++) {
+            $('#AGENT_LANGUAGE').multiselect('select', languages[i].trim());
+        }
+    });
+</script>
+
+<div class="container" style="margin-top: 10px; min-height: 350px;  margin-bottom: 20px;">
+    <input type="hidden" id="hdnRoleID" value="@ViewBag.RoleID" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+
+   
+    <div class="row agent-details-div">
+        @using (Html.BeginForm("EditAgentDetail", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.hiddenBio)
+            var agentImage = "http://rpengine.realproconsulting.com/agents/" + @Model.AGENTID + ".jpg";
+            var defaultImage = "~/images/user_icon.png";
+
+            <h4 class="wow fadeInDown">Agent Basic Details</h4>
+
+            <div class="row profile-div wow fadeInDown">
+                <div class="col-xs-12 col-sm-3 form-group">
+                    <div style="border: 2px solid #DDD; text-align:center; padding:15px;background-color: #FFF;">
+                        @{ try
+                         {
+                             WebRequest req = WebRequest.Create(agentImage);
+                             WebResponse res = req.GetResponse();
+                         }
+                         catch
+                         {
+                             agentImage = defaultImage;
+                         }
+                        }
+                        @if (Model.AGENT_ImageNew != null)
+                        {
+                            @*<img src="data:image/png;base64,@Convert.ToBase64String(@Model.AGENT_ImageNew)" height="150px" width="120px" id="profilepic" />*@
+                            <img src=@Url.Content(agentImage) id="profilepic" />
+                        }
+                        else
+                        {
+                            <img src=@Url.Content(agentImage) id="profilepic" />
+                        }
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AGENT_ImageNew)
+                            <input id="fileUpload" style=" margin-top: 15px;" name="file" type="file" class="validationRequired" onchange="ReadUrl(this)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-9">
+                    <div class="col-xs-12 col-sm-6 form-group">
+                        @Html.LabelFor(model => model.AGENT_TITLE, htmlAttributes: new { @class = "left" })
+                        @Html.EditorFor(model => model.AGENT_TITLE, new { htmlAttributes = new { @class = "form-control", @id = "agentTitle" } })
+                        @Html.ValidationMessageFor(model => model.AGENT_TITLE, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-xs-12 col-sm-6 form-group">
+                        @Html.LabelFor(model => model.AGENT_FNAME, htmlAttributes: new { @class = "left" })
+                        @Html.EditorFor(model => model.AGENT_FNAME, new { htmlAttributes = new { @class = "form-control", @id = "agentFName" } })
+                        @Html.ValidationMessageFor(model => model.AGENT_FNAME, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-xs-12 col-sm-6 form-group">
+                        @Html.LabelFor(model => model.AGENT_LNAME, htmlAttributes: new { @class = "left" })
+                        @Html.EditorFor(model => model.AGENT_LNAME, new { htmlAttributes = new { @class = "form-control", @id = "agentLName" } })
+                        @Html.ValidationMessageFor(model => model.AGENT_LNAME, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-xs-12 col-sm-6 form-group">
+                        @Html.LabelFor(model => model.AGENT_EMAIL, htmlAttributes: new { @class = "left" })
+                        @Html.EditorFor(model => model.AGENT_EMAIL, new { htmlAttributes = new { @class = "form-control", @id = "agentEmail" } })
+                        @Html.ValidationMessageFor(model => model.AGENT_EMAIL, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-xs-12 col-sm-6 form-group">
+                        @Html.LabelFor(model => model.AGENT_EMAIL_2, htmlAttributes: new { @class = "left" })
+                        @Html.EditorFor(model => model.AGENT_EMAIL_2, new { htmlAttributes = new { @class = "form-control", @id = "agentEmail2" } })
+                        @Html.ValidationMessageFor(model => model.AGENT_EMAIL_2, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-xs-12 col-sm-6 form-group">
+                        @Html.LabelFor(model => model.AGENT_DATE, htmlAttributes: new { @class = "left" })
+                        @Html.EditorFor(model => model.AGENT_DATE, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @id = "agentDate" } })
+                        @Html.ValidationMessageFor(model => model.AGENT_DATE, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-xs-12 col-sm-6 form-group">
+
+                        @Html.LabelFor(model => model.AGENT_LANGUAGE, htmlAttributes: new { @class = "left" })
+                        @* @Html.EditorFor(model => model.AGENT_LANGUAGE, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.DropDownListFor(m => m.AGENT_LANGUAGE, new SelectList(Model.AllLanguages, "Value", "Text"), null, new { @class = "form-control", multiple = "multiple" })
+                        @Html.ValidationMessageFor(model => model.AGENT_LANGUAGE, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="col-xs-12 col-sm-6 form-group">
+                        @Html.LabelFor(model => model.AGENTID, htmlAttributes: new { @class = "left" })
+                        @Html.EditorFor(model => model.AGENTID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @id = "agentID" } })
+                        @Html.ValidationMessageFor(model => model.AGENTID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 form-group">
+                    @Html.LabelFor(model => model.AGENT_BIO_TEXT, htmlAttributes: new { @class = "left" })
+                    @Html.TextAreaFor(model => model.AGENT_BIO_TEXT, htmlAttributes: new { @style = "height:250px" })
+
+                </div>
+            </div>
+
+            <h4 class="wow fadeInDown">Phone and Fax Details</h4>
+
+            <div class="row profile-div wow fadeInDown">
+                <div class="col-xs-12 col-sm-6 form-group">
+                    @Html.LabelFor(model => model.AGENT_PHONE, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_PHONE, new { htmlAttributes = new { @class = "form-control", @id = "agentPhone" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_PHONE, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-12 col-sm-6 form-group">
+                    @Html.LabelFor(model => model.AGENT_CELL, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_CELL, new { htmlAttributes = new { @class = "form-control", @id = "agentCell" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_CELL, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-12 col-sm-6 form-group">
+                    @Html.LabelFor(model => model.AGENT_FAX, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_FAX, new { htmlAttributes = new { @class = "form-control", @id = "agentFax" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_FAX, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <h4>Co Agent Data</h4>
+            <div class="row profile-div wow fadeInDown">
+                <div class="col-xs-12 col-sm-6 form-group">
+                    @Html.LabelFor(model => model.CO_AGENT_ID, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.CO_AGENT_ID, new { htmlAttributes = new { @class = "form-control", @id = "CoAgentID" } })
+                    @Html.ValidationMessageFor(model => model.CO_AGENT_ID, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-12 col-sm-6 form-group">
+                    @Html.LabelFor(model => model.CO_AGENT_FNAME, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.CO_AGENT_FNAME, new { htmlAttributes = new { @class = "form-control", @id = "CoAgentFName" } })
+                    @Html.ValidationMessageFor(model => model.CO_AGENT_FNAME, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-12 col-sm-6 form-group">
+                    @Html.LabelFor(model => model.CO_AGENT_LNAME, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.CO_AGENT_LNAME, new { htmlAttributes = new { @class = "form-control", @id = "CoAgentLName" } })
+                    @Html.ValidationMessageFor(model => model.CO_AGENT_LNAME, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <h4 class="wow fadeInDown">Agent Status and ID Related Data</h4>
+            <div class="row profile-div">
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.AGENT_TITLE, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_TITLE, new { htmlAttributes = new { @class = "form-control", @id = "agentTitle" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_TITLE, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.AGENT_TXT, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_TXT, new { htmlAttributes = new { @class = "form-control", @id = "agentTxt" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_TXT, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="col-xs-12 col-sm-6 form-group">
+                    @Html.LabelFor(model => model.AGENT_DESIGNATIONS, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_DESIGNATIONS, new { htmlAttributes = new { @class = "form-control", @id = "agentDesignation" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_DESIGNATIONS, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.AGENT_BROOKLYN_ID, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_BROOKLYN_ID, new { htmlAttributes = new { @class = "form-control", @id = "agentBrooklynID" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_BROOKLYN_ID, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.AGENT_LB_ID, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_LB_ID, new { htmlAttributes = new { @class = "form-control", @id = "agentLbId" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_LB_ID, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.AGENT_LI_ID, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_LI_ID, new { htmlAttributes = new { @class = "form-control", @id = "agentLiId" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_LI_ID, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.AGENT_RP_ID, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_RP_ID, new { htmlAttributes = new { @class = "form-control", @id = "agentRpId" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_RP_ID, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.COMPID, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.COMPID, new { htmlAttributes = new { @class = "form-control", @id = "agentCompID" } })
+                    @Html.ValidationMessageFor(model => model.COMPID, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-6 form-group">
+                    @Html.LabelFor(model => model.RETS_ID, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.RETS_ID, new { htmlAttributes = new { @class = "form-control", @id = "agentRetsId" } })
+                    @Html.ValidationMessageFor(model => model.RETS_ID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <h4 class="wow fadeInDown">Agent Social Links</h4>
+            <div class="row profile-div wow fadeInDown">
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.AGENT_FB_URL, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_FB_URL, new { htmlAttributes = new { @class = "form-control", @id = "agentFbUrl" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_FB_URL, "", new { @class = "text-danger" })
+
+
+                </div>
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.Agent_Twitter_URL, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.Agent_Twitter_URL, new { htmlAttributes = new { @class = "form-control", @id = "agentTwitterUrl" } })
+                    @Html.ValidationMessageFor(model => model.Agent_Twitter_URL, "", new { @class = "text-danger" })
+
+
+                </div>
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.Agent_Youtube_URL, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.Agent_Youtube_URL, new { htmlAttributes = new { @class = "form-control", @id = "agentYoutubeUrl" } })
+                    @Html.ValidationMessageFor(model => model.Agent_Youtube_URL, "", new { @class = "text-danger" })
+
+
+                </div>
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.Agent_Instagram_URL, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.Agent_Instagram_URL, new { htmlAttributes = new { @class = "form-control", @id = "agentInstagramUrl" } })
+                    @Html.ValidationMessageFor(model => model.Agent_Instagram_URL, "", new { @class = "text-danger" })
+
+
+                </div>
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.AGENT_BLOG, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_BLOG, new { htmlAttributes = new { @class = "form-control", @id = "agentBlog" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_BLOG, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.AGENT_URL, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_URL, new { htmlAttributes = new { @class = "form-control", @id = "agentUrl" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_URL, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.AGENT_ADDT_PAGE_LINK, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_ADDT_PAGE_LINK, new { htmlAttributes = new { @class = "form-control", @id = "agentAddtPageLink" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_ADDT_PAGE_LINK, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+
+            <h4 class="wow fadeInDown"> Special Status</h4>
+
+            <div class="row profile-div wow fadeInDown">
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.AGENT_POSITION, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_POSITION, new { htmlAttributes = new { @class = "form-control", @id = "agentPosition" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_POSITION, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.AGENT_DESIGNATIONS, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_DESIGNATIONS, new { htmlAttributes = new { @class = "form-control", @id = "agentDesignation" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_DESIGNATIONS, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.AGENT_SLOGAN, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_SLOGAN, new { htmlAttributes = new { @class = "form-control", @id = "agentSLogan" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_SLOGAN, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.AGENT_AWARDS, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_AWARDS, new { htmlAttributes = new { @class = "form-control", @id = "agentAwards" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_AWARDS, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.OWNERBROKER, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.OWNERBROKER, new { htmlAttributes = new { @class = "form-control", @id = "agentOwnerBroker" } })
+                    @Html.ValidationMessageFor(model => model.OWNERBROKER, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.AGENT_PRODUCTION, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_PRODUCTION, new { htmlAttributes = new { @class = "form-control", @id = "agentProduction" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_PRODUCTION, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.AGENT_LISTINGBOOK, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_LISTINGBOOK, new { htmlAttributes = new { @class = "form-control", @id = "agentListingBook" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_LISTINGBOOK, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.AGENT_PASSWORD, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_PASSWORD, new { htmlAttributes = new { @class = "form-control", @id = "agentPassword" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_PASSWORD, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.AGENT_SERVES, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_SERVES, new { htmlAttributes = new { @class = "form-control", @id = "agentServes" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_SERVES, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.AGENT_FEATURED_TEXT, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_FEATURED_TEXT, new { htmlAttributes = new { @class = "form-control", @id = "agentFeaturedText" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_FEATURED_TEXT, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+
+            <h4 class="wow fadeInDown"> Date Information </h4>
+
+            <div class="row profile-div wow fadeInDown">
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.AGENT_DATE, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_DATE, new { htmlAttributes = new { @class = "form-control", @id = "agentDate" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_DATE, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.AGENT_AOM, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_AOM, new { htmlAttributes = new { @class = "form-control", @id = "agentAom" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_AOM, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.AGENT_TP, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_TP, new { htmlAttributes = new { @class = "form-control", @id = "agentTp" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_TP, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.AGENT_TP_C, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_TP_C, new { htmlAttributes = new { @class = "form-control", @id = "agentTpc" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_TP_C, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.AGENT_TL, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_TL, new { htmlAttributes = new { @class = "form-control", @id = "agentTl" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_TL, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="col-xs-12 col-sm-6 form-group">
+
+                    @Html.LabelFor(model => model.AGENT_TL_C, htmlAttributes: new { @class = "left" })
+                    @Html.EditorFor(model => model.AGENT_TL_C, new { htmlAttributes = new { @class = "form-control", @id = "agentTlc" } })
+                    @Html.ValidationMessageFor(model => model.AGENT_TL_C, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+            @Html.Hidden("hiddenLanguage")
+
+            <div class="row profile-div" style="background-color:transparent; border:0">
+                <div class="col-xs-12 col-sm-12 form-group">
+                    <button type="button" value="Back" id="btnback" onclick="back()" style="margin-top: 7px;background-color: rgba(158, 131, 32, 0.81) !important" class="btn btn-primary  pull-right">BACK</button>
+                    <button type="submit" value="Save" id="btnSubmit" style="margin-top: 7px;  margin-right: 15px;background-color: rgba(158, 131, 32, 0.81) !important" class="btn btn-primary pull-right">SAVE</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script>
+    function ReadUrl(obj) {
+        debugger;
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#profilepic').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(obj.files[0]);
+    }
+    function back() {
+        debugger;
+        window.location.href = '@Url.Action("Agents", "Admin")';
+    }
+    $("#btnSubmit").click(function () {
+        debugger;
+        $("#hiddenBio").val($(".note-codable").val());
+        var languages = $("#AGENT_LANGUAGE").val();
+        var strLang = languages.toString();
+        $('#hiddenLanguage').val(strLang);
+    });
+</script>
+
+

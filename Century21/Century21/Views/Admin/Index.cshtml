@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+   .home-link a {
+        background: transparent !important;
+    }
+
+     .home-link a:hover, .admin-menu a {
+        background: #8C6D00  !important;
+    }
+</style>
+<section id="contact-page" class="container" style="min-height: 392px">
+    <div class="row">
+        <div class="col-sm-5">
+            <form id="main-contact-form" class="contact-form" name="contact-form" method="post" role="form">
+                <div class="col-sm-10">
+                    @if (Session["RoleID"].ToString() == "1001")
+                    {
+                        var roleID = Session["RoleID"];
+                        <div id="dvShowAllAgents" class="col-sm-6">
+                            <div class="form-group">
+                                <a style="background-color: rgba(158, 131, 32, 0.81) !important" href="@Url.Action("Agents","Admin")" class="btn btn-primary btn-lg" onclick="SuperAdmin(roleID)">Show Company Administrators</a>
+                            </div>
+                        </div>
+                    }
+                    else if (Session["RoleID"].ToString() == "1002")
+                    {
+                        var roleID = Session["RoleID"];
+                        <div id="dvShowCompanyAdministrators" class="col-sm-6">
+                            <div class="form-group">
+                                <a style ="background-color: rgba(158, 131, 32, 0.81) !important" href="@Url.Action("Agents","Admin")" + class="btn btn-primary btn-lg" onclick="CompanyAdmin(roleID)">Show All Agents</a>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        var roleID = Session["RoleID"];
+                        <div id="dvShowCompanyAdministrators" class="col-sm-6">
+                            <div class="form-group">
+                                <script>
+                                    debugger;
+                                    window.location.href = '@Url.Action("EditAgentDetail", "Admin")';
+                                </script>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

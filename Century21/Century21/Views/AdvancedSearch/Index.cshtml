@@ -1,0 +1,1947 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var nassaucity = ViewBag.Nassau as List<string>;
+    var suffolkcity = ViewBag.suffolk as List<string>;
+    var queenscity = ViewBag.queens as List<string>;
+}
+
+
+
+<script>
+    $(function () {
+        $("#slider-range").slider({
+            range: true,
+            min: 0,
+            max: 500,
+            values: [75, 300],
+            slide: function (event, ui) {
+                $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+            }
+        });
+        $("#amount").val("$" + $("#slider-range").slider("values", 0) +
+          " - $" + $("#slider-range").slider("values", 1));
+    });
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home</title>
+    <!-- core CSS -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+
+    <style>
+        .bedsandbath-div img {
+            cursor: pointer;
+        }
+
+        hr {
+            border-top: 2px solid #e5e5e5;
+            border-bottom: 2px solid #fff;
+        }
+
+        .newsearchpage-right-cnt {
+            float: left;
+            width: 100%;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border: 2px solid #ccc;
+            border-radius: 7px;
+            -moz-border-radius: 7px;
+            background: #f2f2f2;
+            background: -moz-linear-gradient(top,#f2f2f2 0%,#e7e7e7 100%);
+            background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#f2f2f2),color-stop(100%,#e7e7e7));
+        }
+        .home-link a:hover, .for-buyers-link-subnew, .for-buyers-link .dropdown-toggle {
+            background: #8C6D00 !important;
+        }
+        .home-link a {
+            background: transparent !important;
+        }
+         .submit-search-button {
+            width: 100%;
+            border-radius: 5px;
+            border: 0px !important;
+            color: #FFF;
+            padding: 7px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .chech-box-height, .right-side-boxs {
+            width: 100%;
+            max-height: 200px;
+            overflow-y: scroll;
+            height: 200px;
+            border: 1px solid #DDD;
+            background-color: #FFF;
+        }
+
+        .right-side-boxs {
+            /* max-height: 470px;
+            height: 475px;
+            margin-top: 20px;*/
+            max-height: inherit;
+            height: auto;
+            margin-top: 20px;
+            overflow: hidden;
+            border: 0;
+        }
+
+        .tabs-buttons-div {
+            margin-top: 70px;
+        }
+
+        .right-side-boxs .check {
+            padding: 5px;
+        }
+
+        .chech-box-height .check {
+            padding: 5px;
+            border-bottom: 1px solid #DDD;
+        }
+
+        .select-country-div {
+            width: 175px;
+            text-align: center;
+            margin-left: 25%;
+            background-color: rgba(213, 180, 62, 0.81) !important;
+            padding: 10px;
+            border: 4px solid #DDD;
+            margin-top: 15px;
+        }
+
+        .location-div-sty {
+            border-radius: 7px;
+            padding: 15px;
+            margin-top: 5px !important;
+        }
+
+        .select-country-div, .location2-content, .location3-content {
+            display: none;
+        }
+
+        .location1, .location2, .location3 {
+            cursor: pointer;
+            font-size: 18px;
+            text-align: center;
+            margin: 0px;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            border-bottom: 1.8px dotted #CCC;
+            width: 85%;
+        }
+        @@media (min-width:1450px) {
+            .active-tab-img, .active-tab-img2, .active-tab-img3 {
+                margin-left: 82.5%;
+            }
+        }
+            .active-tab-img {
+                position: absolute;
+                margin-left: 83%;
+                margin-top: -8px;
+                background-color: #FFF;
+                z-index: 99999;
+            }
+
+            .active-tab-img2 {
+                position: absolute;
+                margin-left: 83%;
+                margin-top: 36px;
+                background-color: #FFF;
+                display: none;
+                z-index: 99999;
+            }
+
+            .active-tab-img3 {
+                position: absolute;
+                margin-left: 83%;
+                margin-top: 81px;
+                background-color: #FFF;
+                display: none;
+                z-index: 99999;
+            }
+
+            .glyphicon-arrow-right {
+                color: #FFF;
+            }
+
+            .location-active {
+                color: rgba(213, 180, 62, 0.81) !important;
+                /*border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;*/
+            }
+
+            .advancesearch-container {
+                margin-top: 20px;
+                border-radius: 0.5rem;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: 4rem auto;
+                background-color: #fff;
+                padding: 2rem;
+                border: 1px solid #ccc;
+                box-shadow: 0px 0px 7px 3px #DDD;
+            }
+
+            .advance_search {
+                background: #d2b205;
+                background: -moz-linear-gradient(top, #d2b205 1%, #9a8802 100%);
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(1%, #d2b205), color-stop(100%, #9a8802));
+                background: -webkit-linear-gradient(top, #d2b205 1%, #9a8802 100%);
+                background: -o-linear-gradient(top, #d2b205 1%, #9a8802 100%);
+                background: -ms-linear-gradient(top, #d2b205 1%, #9a8802 100%);
+                background: linear-gradient(to bottom, #d2b205 1%, #9a8802 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2b205', endColorstr='#9a8802', GradientType=0 );
+                color: #FFF;
+                margin-bottom: 15px;
+            }
+
+                .advance_search h2 {
+                    margin-left: 25px;
+                    color: #FFF;
+                    padding-bottom: 5px !important;
+                    font-size: 18px !important;
+                }
+
+            #btnSubmitSearchTop, #btnSubmitSearchBottom {
+                background: #d2b205;
+                background: -moz-linear-gradient(top, #d2b205 1%, #9a8802 100%);
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(1%, #d2b205), color-stop(100%, #9a8802));
+                background: -webkit-linear-gradient(top, #d2b205 1%, #9a8802 100%);
+                background: -o-linear-gradient(top, #d2b205 1%, #9a8802 100%);
+                background: -ms-linear-gradient(top, #d2b205 1%, #9a8802 100%);
+                background: linear-gradient(to bottom, #d2b205 1%, #9a8802 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2b205', endColorstr='#9a8802', GradientType=0 );
+                font-weight: 400;
+            }
+
+            .advance-search-page-boxes {
+                border: 2px solid #ccc;
+                border-radius: 7px;
+            }
+
+
+            @@media (max-width:1199px) {
+                .active-tab-img, .active-tab-img2, .active-tab-img3 {
+                    margin-left: 77%;
+                }
+
+                .bedsandbath-div-res {
+                    width: 100% !important;
+                }
+
+                .responsive-increment {
+                    width: 100% !important;
+                    margin-right: 0px !important;
+                }
+            }
+
+            @@media (max-width:991px) {
+                .active-tab-img, .active-tab-img2, .active-tab-img3 {
+                    margin-left: 70%;
+                }
+
+                .active-tab-img {
+                    margin-top: -6px;
+                }
+
+                .active-tab-img2 {
+                    margin-top: 59px;
+                }
+
+                .active-tab-img3 {
+                    margin-top: 125px;
+                }
+            }
+
+            @@media (max-width:767px) {
+                .active-tab-img, .active-tab-img2, .active-tab-img3 {
+                    display: none !important;
+                }
+
+                .tabs-buttons-div {
+                    margin-top: 0px;
+                }
+
+                .location1, .location2, .location3 {
+                    width: 100%;
+                }
+            }
+    </style>
+
+</head>
+<!--/head-->
+<body class="homepage">
+
+    <!--/header-->
+
+    <div class="container advancesearch-container">
+        <div class="col-xs-12 advance_search">
+            <h2 style="font-size:18px;">ADVANCED SEARCH</h2>
+        </div>
+        <div class="col-xs-12 col-sm-12" style="margin:0">
+            <div class="col-xs-12 col-sm-1" style="padding: 0">
+                <p style="font-weight: bold; font-size: 18px;">Location</p>
+            </div>
+
+            <div class="col-xs-12 col-sm-8" style="padding: 0; margin-top:-7px;">
+                <input type="text" class="form-control" id="txtSearchByMls" placeholder="Search By MLS #" style="width: 200px; float: left;">
+                <img src="~/images/arrow_right-512.png" style="width: 30px; margin-left: 10px; cursor: pointer" onclick="SearchbyMlsID()">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-8" style="margin-bottom: 15px;padding-bottom: 15px;">
+            <div class="row" style="margin:0">
+
+
+
+            </div>
+            <div class="row location-div-sty" style="margin:0;">
+                <div class="col-xs-12 col-sm-3 tabs-buttons-div" style="padding: 0;  -moz-border-radius: 7px;;">
+                    <div class="active-tab-img">
+                        <img src="~/images/selector.png" />
+                    </div>
+                    <div class="active-tab-img2">
+                        <img src="~/images/selector.png" />
+                    </div>
+                    <div class="active-tab-img3">
+                        <img src="~/images/selector.png" />
+                    </div>
+                    <p class="location1 location-active" style="font-size: 18px;">Nassau &nbsp;&nbsp;<span class="glyphicon glyphicon-arrow-right"></span></p>
+                    <p class="location2" style="font-size: 18px;">Suffolk &nbsp;&nbsp;<span class="glyphicon glyphicon-arrow-right"></span></p>
+                    <p class="location3" style="font-size: 18px;">Queens &nbsp;&nbsp;<span class="glyphicon glyphicon-arrow-right"></span></p>
+                </div>
+                <div class="col-xs-12 col-sm-9 advance-search-page-boxes" style="padding: 0;   padding-left: 15px; padding-right:15px;">
+                    <div>
+                        <button class="select-country-div">
+                            Please select a county
+                            to start your search
+                        </button>
+
+                        <div class="row" style="margin:0">
+                            <h2 style="font-size:21px; margin-left:20px; color:#8C6D00 !important;">SELECT LOCATION</h2>
+                            <hr>
+                        </div>
+
+
+                        @*<p style="font-weight: bold" class="location-heading">Neighborhoods</p>*@
+                        <div class="check location1-content">
+                            <label class="checkbox-inline" for="checkboxes-0" style="font-weight: bold">
+                                <input type="checkbox" name="Location" id="chkNASSAU" value="NASSAU">
+                                NASSAU
+                            </label>
+                        </div>
+                        <div class="check location2-content">
+                            <label class="checkbox-inline" for="checkboxes-0" style="font-weight: bold">
+                                <input type="checkbox" name="Location" id="chkSUFFOLK" value="SUFFOLK">
+                                SUFFOLK
+                            </label>
+                        </div>
+                        <div class="check location3-content">
+                            <label class="checkbox-inline" for="checkboxes-0" style="font-weight: bold">
+                                <input type="checkbox" name="Location" id="chkQUEENS" value="QUEENS">
+                                QUEENS
+                            </label>
+                        </div>
+                        <div class="row right-side-first-boxes location1-content" style="margin: 0">
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="right-side-boxs">
+
+                                    @for (int i = 0; i < (nassaucity.Count / 2); i++)
+                                    {
+
+                                        <div class="check">
+                                            <label class="checkbox-inline" for="checkboxes-0">
+                                                <input type="checkbox" name="NASSAUCounty" id="checkboxes-0" value='@nassaucity[i]'>
+                                                @nassaucity[i]
+
+                                            </label>
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="right-side-boxs">
+                                    @for (int i = (nassaucity.Count / 2); i < nassaucity.Count; i++)
+                                    {
+
+
+                                        <div class="check">
+                                            <label class="checkbox-inline" for="checkboxes-0">
+                                                <input type="checkbox" name="NASSAUCounty" id="checkboxes-0" value='@nassaucity[i]'>
+                                                @nassaucity[i]
+
+                                            </label>
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row right-side-first-boxes  location2-content" style="margin: 0">
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="right-side-boxs">
+
+                                    @for (int i = 0; i < (suffolkcity.Count / 2); i++)
+                                    {
+
+                                        <div class="check">
+                                            <label class="checkbox-inline" for="checkboxes-0">
+                                                <input type="checkbox" name="SUFFOLKCounty" id="checkbox1" value='@suffolkcity[i]'>
+                                                @suffolkcity[i]
+
+                                            </label>
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="right-side-boxs">
+                                    @for (int i = (suffolkcity.Count / 2); i < suffolkcity.Count; i++)
+                                    {
+                                        <div class="check">
+                                            <label class="checkbox-inline" for="checkboxes-0">
+                                                <input type="checkbox" name="SUFFOLKCounty" id="checkbox73" value='@suffolkcity[i]'>
+                                                @suffolkcity[i]
+
+                                            </label>
+                                        </div>
+
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row right-side-first-boxes  location3-content" style="margin: 0">
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="right-side-boxs">
+
+                                    @for (int i = 0; i < (queenscity.Count / 2); i++)
+                                    {
+
+                                        <div class="check">
+                                            <label class="checkbox-inline" for="checkboxes-0">
+                                                <input type="checkbox" name="QUEENSCounty" id="checkbox180" value='@queenscity[i]'>
+                                                @queenscity[i]
+
+                                            </label>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="right-side-boxs">
+                                    @for (int i = (queenscity.Count / 2); i < queenscity.Count; i++)
+                                    {
+                                        <div class="check">
+                                            <label class="checkbox-inline" for="checkboxes-0">
+                                                <input type="checkbox" name="QUEENSCounty" id="checkbox216" value='@queenscity[i]'>
+                                                @queenscity[i]
+
+                                            </label>
+                                        </div>
+
+                                    }
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-4">
+            <div style="margin-top:15px">
+                <input type="button" id="btnSubmitSearchTop" class="submit-search-button" value="SUBMIT SEARCH" style="display:block !important">
+            </div>
+            <div class="newsearchpage-right-cnt">
+
+                <div class="row" style="margin: 0">
+                    <div class="col-xs-12 col-sm-6 bedsandbath-div-res">
+                        <h3 style="color: #8C6D00 ; font-weight: bold; margin-top:0px;">Property Type</h3>
+                        <div class="check">
+                            <label class="checkbox-inline" for="checkboxes-0">
+                                <input type="checkbox" name="Listtype" id="checkboxes-0" value="Residential">
+                                Residential
+
+                            </label>
+                        </div>
+                        <div class="check">
+                            <label class="checkbox-inline" for="checkboxes-0">
+                                <input type="checkbox" name="Listtype" id="checkboxes-0" value="Commercial">
+                                Commercial
+
+                            </label>
+                        </div>
+                        <div class="check">
+                            <label class="checkbox-inline" for="checkboxes-0">
+                                <input type="checkbox" name="Listtype" id="checkboxes-0" value="Condos/Co-ops">
+                                Condos/Co-ops
+
+                            </label>
+                        </div>
+                        <div class="check">
+                            <label class="checkbox-inline" for="checkboxes-0">
+                                <input type="checkbox" name="Listtype" id="checkboxes-0" value="Rentals">
+                                Rentals
+
+                            </label>
+                        </div>
+                        <div class="check">
+                            <label class="checkbox-inline" for="checkboxes-0">
+                                <input type="checkbox" name="Listtype" id="checkboxes-0" value="Land">
+                                Land
+
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 bedsandbath-div bedsandbath-div-res">
+
+                        <h3 style="color: #8C6D00 ; font-weight: bold; margin-top:0px">Beds & Baths</h3>
+                        <div class="responsive-increment" style="width:150px;margin-right:25px;float:right;position:relative;text-align:left;margin-top:15px;">
+                            <div id="bedscounter" style="width:50px;height:30px;text-align:left;float:right;">
+                                <img src="~/images/minus.png" style="width:21px;height:21px;cursor:pointer;" id="minusbeds" onclick="updatebeds(-1)">
+                                <img src="~/images/plus.png" style="width:21px;height:21px;cursor:pointer;" id="plusbeds" onclick="updatebeds(1)">
+
+                            </div>
+                            <div id="bedsvalues" style="width:100px;height:30px;text-align:left;">Any Beds</div>
+                            <div id="bathscounter" style="width:50px;height:30px;text-align:left;float:right;">
+                                <img src="~/images/minus.png" style="width:21px;height:21px;cursor:pointer;" id="minusbeds" onclick="updatebaths(-1)">
+                                <img src="~/images/plus.png" style="width:21px;height:21px;cursor:pointer;" id="plusbeds" onclick="updatebaths(1)">
+                            </div>
+                            <div id="bathsvalues" style="width:100px;height:30px;text-align:left;">Any Baths</div>
+                            <input type="hidden" name="beds_min1" id="beds_min1" value="">
+                            <input type="hidden" name="baths_min1" id="baths_min1" value="">
+                            <input type="hidden" name="beds_max1" id="beds_max1" value="">
+                            <input type="hidden" name="baths_max1" id="baths_max1" value="">
+                        </div>
+                    </div>
+
+                </div>
+                <hr style="margin: 0; margin-top:10px;">
+                <div class="row" style="margin:7px 0px;">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="check">
+                            <label class="checkbox-inline" for="checkboxes-0">
+                                <input type="checkbox" name="WithOpenHouse" id="checkboxes-0" value="With Open House">
+                                With Open House
+
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="check">
+                            <label class="checkbox-inline" for="checkboxes-0">
+                                <input type="checkbox" name="Waterfront" id="checkboxes-0" value="Waterfront">
+                                Waterfront
+
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <hr style="margin: 0">
+
+
+
+
+
+                @*<p>
+                        <label for="amount">Price range:</label>
+                        <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                    </p>
+
+                    <div id="slider-range"></div>*@
+
+
+                <div>
+                    <div><h3 class="propheads" style="color: #8C6D00; font-weight: bold; margin-left: 5%;">Price</h3></div>
+                    <div id="slider-range" class="col-xs-12" style=" width:90%;margin-left:20px; margin-right:20px:#cccccc;" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false">
+                        <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0%; width: 100%; background-color:rgba(213, 180, 62, 0.81)">
+                        </div>
+                        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0%;"></a>
+                        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 100%;"></a>
+                    </div>
+                    <input type="text" id="amount" class="col-xs-12" style="border:0px;color:#000000;  background-color: transparent;text-align:center;width:100%;margin-left:5px;" disabled="disabled">
+                    <input type="hidden" name="pricelow1" id="pricelow1" onchange="loadresults();">
+                    <input type="hidden" name="pricehigh1" id="pricehigh1" onchange="loadresults();">
+                </div>
+
+
+
+                <div class="row" style="margin: 0px;">
+                    <div class="col-xs-12 col-sm-6">
+                        <h3 style="color: #8C6D00; font-weight: bold">Styles</h3>
+                        <div class="chech-box-height">
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="2 Story">
+                                    2 Story
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Antique/Hist">
+                                    Antique/Hist
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Barn">
+                                    Barn
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Bungalow">
+                                    Bungalow
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Cape">
+                                    Cape
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Colonial">
+                                    Colonial
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Contemporary">
+                                    Contemporary
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Cottage">
+                                    Cottage
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Duplex">
+                                    Duplex
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Estate">
+                                    Estate
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Exp Cape">
+                                    Exp Cape
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Exp Ranch">
+                                    Exp Ranch
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Farm Ranch">
+                                    Farm Ranch
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Farmhouse">
+                                    Farmhouse
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Hi Ranch">
+                                    Hi Ranch
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Houseboat">
+                                    Houseboat
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Mediterranean">
+                                    Mediterranean
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Mobile Home">
+                                    Mobile Home
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Modern">
+                                    Modern
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Other">
+                                    Other
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Post Modern">
+                                    Post Modern
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Raised Ranch">
+                                    Raised Ranch
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Ranch">
+                                    Ranch
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Saltbox">
+                                    Saltbox
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Splanch">
+                                    Splanch
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Split">
+                                    Split
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Split Ranch">
+                                    Split Ranch
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Store+Dwell">
+                                    Store+Dwell
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Townhouse">
+                                    Townhouse
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Traditional">
+                                    Traditional
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Tudor">
+                                    Tudor
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="Styles" id="checkboxes-0" value="Victorian">
+                                    Victorian
+
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <h3 style="color: #8C6D00; font-weight: bold">School Districts</h3>
+                        <div class="chech-box-height">
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Amaganset">
+                                    Amaganset
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Babylon">
+                                    Babylon
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Baldwin">
+                                    Baldwin
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Bay Shore">
+                                    Bay Shore
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Bayport-Blue Point">
+                                    Bayport-Blue Point
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Bellmore">
+                                    Bellmore
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Bethpage">
+                                    Bethpage
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Brentwood">
+                                    Brentwood
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Bridgehampton">
+                                    Bridgehampton
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Carle Place">
+                                    Carle Place
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Center Moriches">
+                                    Center Moriches
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Central Islip">
+                                    Central Islip
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Cold Spring Harbor">
+                                    Cold Spring Harbor
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Commack">
+                                    Commack
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Comsewogue">
+                                    Comsewogue
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Connetquot">
+                                    Connetquot
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Copiague">
+                                    Copiague
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Deer Park">
+                                    Deer Park
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="East Hampton">
+                                    East Hampton
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="East Islip">
+                                    East Islip
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="East Meadow">
+                                    East Meadow
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="East Moriches">
+                                    East Moriches
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="East Quogue">
+                                    East Quogue
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="East Rockaway">
+                                    East Rockaway
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="East Williston">
+                                    East Williston
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Eastport">
+                                    Eastport
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Elmont">
+                                    Elmont
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Elwood">
+                                    Elwood
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Farmingdale">
+                                    Farmingdale
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Fire Island">
+                                    Fire Island
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Floral Park-Bellerose">
+                                    Floral Park-Bellerose
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Franklin Square">
+                                    Franklin Square
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Freeport">
+                                    Freeport
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Garden City">
+                                    Garden City
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Glen Cove">
+                                    Glen Cove
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Great Neck">
+                                    Great Neck
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Greenport">
+                                    Greenport
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Half Hollow Hills">
+                                    Half Hollow Hills
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Hampton Bays">
+                                    Hampton Bays
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Harborfields">
+                                    Harborfields
+
+                                </label>
+                            </div>
+
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Hauppauge">
+                                    Hauppauge
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Hempstead">
+                                    Hempstead
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Herricks">
+                                    Herricks
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Hewlett-Woodmere">
+                                    Hewlett-Woodmere
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Hicksville">
+                                    Hicksville
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Huntington">
+                                    Huntington
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Island Park">
+                                    Island Park
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Islip">
+                                    Islip
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Jericho">
+                                    Jericho
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Kings Park">
+                                    Kings Park
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Laurel">
+                                    Laurel
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Lawrence">
+                                    Lawrence
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Levittown">
+                                    Levittown
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Lindenhurst">
+                                    Lindenhurst
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Little Flower">
+                                    Little Flower
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Locust Valley">
+                                    Locust Valley
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Long Beach">
+                                    Long Beach
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Longwood">
+                                    Longwood
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Lynbrook">
+                                    Lynbrook
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Malverne">
+                                    Malverne
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Manhasset">
+                                    Manhasset
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Massapequa">
+                                    Massapequa
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Mattituck-Cutchogue">
+                                    Mattituck-Cutchogue
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Merrick">
+                                    Merrick
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Middle Country">
+                                    Middle Country
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Miller Place">
+                                    Miller Place
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Mineola">
+                                    Mineola
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Montauk">
+                                    Montauk
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Mount Sinai">
+                                    Mount Sinai
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="N. Babylon">
+                                    N. Babylon
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="N. Bellmore">
+                                    N. Bellmore
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="N. Merrick">
+                                    N. Merrick
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="New Hyde Park-Garden City Park">
+                                    New Hyde Park-Garden City Park
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="New Suffolk">
+                                    New Suffolk
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="North Shore">
+                                    North Shore
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Northport-East Northport">
+                                    Northport-East Northport
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Oceanside">
+                                    Oceanside
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Oyster Bay-East Norwich">
+                                    Oyster Bay-East Norwich
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Oyster Ponds">
+                                    Oyster Ponds
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Patchogue-Medford">
+                                    Patchogue-Medford
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Plainedge">
+                                    Plainedge
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Plainview-Old Bethpage">
+                                    Plainview-Old Bethpage
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Port Jefferson">
+                                    Port Jefferson
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Port Washington">
+                                    Port Washington
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Quogue">
+                                    Quogue
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Remsenberg-Speonk">
+                                    Remsenberg-Speonk
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Riverhead">
+                                    Riverhead
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Rockville Centre">
+                                    Rockville Centre
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Rocky Point">
+                                    Rocky Point
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Roosevelt">
+                                    Roosevelt
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Roslyn">
+                                    Roslyn
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="S. Huntington">
+                                    S. Huntington
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Sachem">
+                                    Sachem
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Sag Harbor">
+                                    Sag Harbor
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Sayville">
+                                    Sayville
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Seaford">
+                                    Seaford
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Shelter Island">
+                                    Shelter Island
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Shoreham-Wading River">
+                                    Shoreham-Wading River
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Smithtown">
+                                    Smithtown
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="South Country">
+                                    South Country
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="South Manor">
+                                    South Manor
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Southampton">
+                                    Southampton
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Southold">
+                                    Southold
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Springs">
+                                    Springs
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Syosset">
+                                    Syosset
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Three Village">
+                                    Three Village
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Tuckahoe">
+                                    Tuckahoe
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Uniondale">
+                                    Uniondale
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Valley Stream 13">
+                                    Valley Stream 13
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Valley Stream 24">
+                                    Valley Stream 24
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Valley Stream 30">
+                                    Valley Stream 30
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="W. Babylon">
+                                    W. Babylon
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="W. Hempstead">
+                                    W. Hempstead
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Wainscott">
+                                    Wainscott
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Wantagh">
+                                    Wantagh
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="West Islip">
+                                    West Islip
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Westbury">
+                                    Westbury
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Westhampton Beach">
+                                    Westhampton Beach
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="William Floyd">
+                                    William Floyd
+
+                                </label>
+                            </div>
+                            <div class="check">
+                                <label class="checkbox-inline" for="checkboxes-0">
+                                    <input type="checkbox" name="SchoolDistricts" id="checkboxes-0" value="Wyandanch">
+                                    Wyandanch
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div style="margin-bottom:15px">
+                <input type="button" id="btnSubmitSearchBottom" class="submit-search-button" value="SUBMIT SEARCH" style="display:block !important">
+            </div>
+        </div>
+    </div>
+    <div class=" col-xs-12 col-sm-4" "></div>
+    <div style="margin-top:15px">
+
+    </div>
+
+
+
+
+    <script>
+        $('#main-slider .carousel').carousel({
+            interval: 4000,
+            pause: false
+        })
+
+        function SearchbyMlsID() {
+            debugger;
+            var residential = "Residential";
+            var priceLow1 = $("#pricelow1").val();
+            var pricehigh1 = $("#pricehigh1").val();
+            var price = priceLow1 + '-' + pricehigh1;
+            var mlsID = $("#txtSearchByMls").val();
+            window.location.href = '@Url.Action("AdvancedSearchResults", "AdvancedSearch")?searchKey=' + mlsID + '&price=' + price;
+        }
+
+        $("#btnSubmitSearchTop,#btnSubmitSearchBottom").click(function () {
+            debugger;
+            var numberOfBeds = $("#bedsvalues").text();
+            var numberOfBaths = $("#bathsvalues").text();
+            var searchKey = $("#txtSearchByMls").val();
+            var priceLow1 = $("#pricelow1").val();
+            var pricehigh1 = $("#pricehigh1").val();
+            var price = priceLow1 + '-' + pricehigh1;
+            var WithOpenHouse = "null";
+            var Waterfront = "N";
+
+            var Counties = [];
+            var Streets = [];
+            var ListingType = [];
+            var Styles = [];
+            var SchoolDistricts = [];
+
+            var NassauCheckVal = "";
+            var SuffolkCheckVal = "";
+            var QueensCheckVal = "";
+            var NASSAUStreets = [];
+            var QUEENSStreets = [];
+            var SUFFOLKStreets = [];
+            $("input[name=Location]:checked").map(function () {
+                debugger;
+                var checkboxvalue = $(this).val();
+                if ($(this).val() == "NASSAU") {
+                    NassauCheckVal = "NASSAU";
+                }
+                if ($(this).val() == "SUFFOLK") {
+                    SuffolkCheckVal = "SUFFOLK";
+                }
+                if ($(this).val() == "QUEENS") {
+                    QueensCheckVal = "QUEENS";
+                }
+                Counties.push($(this).val());
+            });
+
+            $("input[name=NASSAUCounty]:checked").map(function () {
+                debugger;
+                var checkboxvalue = $(this).val();
+                NASSAUStreets.push($(this).val());
+            });
+            $("input[name=SUFFOLKCounty]:checked").map(function () {
+                debugger;
+                var checkboxvalue = $(this).val();
+                SUFFOLKStreets.push($(this).val());
+            });
+            $("input[name=QUEENSCounty]:checked").map(function () {
+                debugger;
+                var checkboxvalue = $(this).val();
+                QUEENSStreets.push($(this).val());
+            });
+            $("input[name=Listtype]:checked").map(function () {
+                debugger;
+                var checkboxvalue = $(this).val();
+                ListingType.push($(this).val());
+            });
+            $("input[name=Styles]:checked").map(function () {
+                debugger;
+                var checkboxvalue = $(this).val();
+                Styles.push($(this).val());
+            });
+            $("input[name=SchoolDistricts]:checked").map(function () {
+                debugger;
+                var checkboxvalue = $(this).val();
+                SchoolDistricts.push($(this).val());
+            });
+            $("input[name=WithOpenHouse]:checked").map(function () {
+                debugger;
+                WithOpenHouse = "null";
+            });
+            $("input[name=Waterfront]:checked").map(function () {
+                debugger;
+                Waterfront = "Y";
+            });
+
+            window.location.href = '@Url.Action("AdvancedSearchResults", "AdvancedSearch")?searchKey=' + searchKey.replace(/ /, '_').replace(',', '/').trim() + '&Beds=' + numberOfBeds + '&Baths=' + numberOfBaths + '&withOpenHouse=' + WithOpenHouse.replace(/ /, '_').replace(',', '/').trim() + '&waterFront=' + Waterfront + '&price=' + price + '&NassauCheckVal=' + NassauCheckVal.replace(/ /, '_').replace(',', '/').trim() + '&SuffolkCheckVal=' + SuffolkCheckVal.replace(/ /, '_').replace(',', '/').trim() + '&QueensCheckVal=' + QueensCheckVal.replace(/ /, '_').replace(',', '/').trim() + '&NASSAUStreets=' + NASSAUStreets + '&QUEENSStreets=' + QUEENSStreets + '&SUFFOLKStreets=' + SUFFOLKStreets + '&Listtype=' + ListingType + '&Styles=' + Styles + '&SchoolDistricts=' + SchoolDistricts;
+        });
+    </script>
+    <script>
+        $(function () {
+            var realvalues = ['0', '$10,000', '$20,000', '$30,000', '$40,000', '$50,000', '$60,000', '$70,000', '$80,000', '$90,000', '$100,000', '$110,000', '$120,000',
+                '$130,000', '$140,000', '$150,000', '$160,000', '$170,000', '$180,000', '$190,000', '$200,000', '$225,000', '$250,000', '$275,000', '$300,000', '$325,000',
+                '$350,000', '$375,000', '$400,000', '$425,000', '$450,000', '$475,000', '$500,000', '$525,000', '$550,000', '$575,000', '$600,000', '$625,000', '$650,000',
+                '$675,000', '$700,000', '$750,000', '$800,000', '$850,000', '$900,000', '$950,000', '$1,000,000', '$1,250,000', '$1,500,000', '$1,750,000', '$2,000,000',
+                '$2,250,000', '$2,500,000', '$2,750,000', '$3,000,000', '$3,250,000', '$3,500,000', '$3,750,000', '$4,000,000', '$4,250,000', '$4,500,000', '$4,750,000',
+                '$5,000,000', '$6,000,000', '$7,000,000', '$8,000,000', '$9,000,000', '$10,000,000', , '100000000000'];
+            var realvalues1 = [0, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000, 130000, 140000, 150000, 160000, 170000, 180000,
+                190000, 200000, 225000, 250000, 275000, 300000, 325000, 350000, 375000, 400000, 425000, 450000, 475000, 500000, 525000, 550000, 575000, 600000, 625000,
+                650000, 675000, 700000, 750000, 800000, 850000, 900000, 950000, 1000000, 1250000, 1500000, 1750000, 2000000, 2250000, 2500000, 2750000, 3000000, 3250000,
+                3500000, 3750000, 4000000, 4250000, 4500000, 4750000, 5000000, 6000000, 7000000, 8000000, 9000000, 10000000, , '100000000000'];
+
+            $("#slider-range").slider({
+                range: true,
+                min: 0,
+                max: 67,
+                step: 1,
+                values: [0, 67],
+                slide: function (event, ui) {
+                    $("#amount").val(realvalues[ui.values[0]] + " - " + realvalues[ui.values[1]]);
+                    $("#pricelow1").val(realvalues1[ui.values[0]]);
+                    $("#pricehigh1").val(realvalues1[ui.values[1]]);
+                    loadresults();
+                }
+            });
+            $("#amount").val("From $0 - Any Price");
+        });
+
+    </script>
+
+    <script language="javascript" type="text/javascript">
+        var beds = ['Any Beds', '1 - 2 Beds', '2 - 3 Beds', '3 - 4 Beds', '4 - 5 Beds', '5 Beds or More'];
+        var baths = ['Any Baths', '1 - 2 Baths', '2 - 3 Baths', '3 - 4 Baths', '4 - 5 Baths', '5 Baths or More'];
+        var bedv = 0;
+        var bathv = 0;
+        document.getElementById('bedsvalues').innerHTML = beds[bedv];
+        document.getElementById('bathsvalues').innerHTML = baths[bathv];
+        function updatebeds(x) {
+            bedv = bedv + x;
+            if (bedv < 0) {
+                bedv = 0;
+            }
+            if (bedv == 6) {
+                bedv = 5;
+            }
+            document.getElementById('bedsvalues').innerHTML = beds[bedv];
+            document.searching.beds_min1.value = bedv;
+            if (bedv != 5) {
+                document.searching.beds_max1.value = bedv + 1;
+            }
+            else {
+                document.searching.beds_max1.value = 100;
+            }
+            loadresults();
+        }
+        function updatebaths(x) {
+            bathv = bathv + x;
+            if (bathv < 0) {
+                bathv = 0;
+            }
+            if (bathv == 6) {
+                bathv = 5;
+            }
+            document.getElementById('bathsvalues').innerHTML = baths[bathv];
+            document.searching.baths_min1.value = bathv;
+            if (bathv != 5) {
+                document.searching.baths_max1.value = bathv + 1;
+            }
+            else {
+                document.searching.baths_max1.value = 100;
+            }
+
+            loadresults();
+        }
+
+        $("document").ready(function () {
+            $("#btnSubmitSearchTop,#btnSubmitSearchBottom").hide();
+            $(".location1").click(function () {
+                $("#chkNASSAU").prop("checked", true);
+                //$("#chkSUFFOLK").prop("checked", false);
+                //$("#chkQUEENS").prop("checked", false);
+
+                $("#btnSubmitSearchTop,#btnSubmitSearchBottom").show();
+                $(".location1").addClass("location-active");
+                $(".location2,.location3").removeClass("location-active");
+                $(".location1-content").css("display", "block");
+                $(".location2-content").css("display", "none");
+                $(".location3-content").css("display", "none");
+                $(".select-country-div, .active-tab-img2,.active-tab-img3").css("display", "none");
+                $(".location-heading, .active-tab-img").css("display", "block");
+            });
+
+            $(".location2").click(function () {
+                $("#chkSUFFOLK").prop("checked", true);
+                //$("#chkNASSAU").prop("checked", false);
+                //$("#chkQUEENS").prop("checked", false);
+                $(".select-country-div").css("display", "none");
+                $("#btnSubmitSearchTop,#btnSubmitSearchBottom").show();
+                $(".location2").addClass("location-active");
+                $(".location1,.location3").removeClass("location-active");
+                $(".location2-content").css("display", "block");
+                $(".location1-content, .active-tab-img,.active-tab-img3").css("display", "none");
+                $(".location3-content").css("display", "none");
+                $(".location-heading, .active-tab-img2").css("display", "block");
+            });
+
+            $(".location3").click(function () {
+                $("#chkQUEENS").prop("checked", true);
+                //$("#chkNASSAU").prop("checked", false);
+                //$("#chkSUFFOLK").prop("checked", false);
+                $(".select-country-div").css("display", "none");
+                $("#btnSubmitSearchTop,#btnSubmitSearchBottom").show();
+                $(".location3").addClass("location-active");
+                $(".location1,.location2").removeClass("location-active");
+                $(".location3-content").css("display", "block");
+                $(".location1-content,.active-tab-img,.active-tab-img2").css("display", "none");
+                $(".location2-content").css("display", "none");
+                $(".location-heading,.active-tab-img3").css("display", "block");
+            });
+        });
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 150) {
+                $(".navbar-inverse").addClass("fixed-header");
+            }
+            else {
+                $(".navbar-inverse").removeClass("fixed-header");
+            }
+        });
+    </script>
+</body>
+</html>

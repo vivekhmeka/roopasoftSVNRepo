@@ -1,0 +1,480 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home</title>
+
+    <!-- core CSS -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+
+    <style>
+        .buyers-info-content li {
+            margin-bottom: 10px;
+        }
+
+        .seller-link-main, .for-sellers-link-sub3 a, .for-sellers-link-sub2 a:HOVER, .for-sellers-link-sub1 a:HOVER, .for-sellers-link-sub4 a:HOVER, .for-sellers-link-sub5 a:HOVER {
+            background: #8C6D00 !important;
+        }
+
+        .home-link a, .for-sellers-link-sub2 a {
+            background: transparent !important;
+        }
+
+            .home-link a:hover, .for-buyers-link-subl a:hover, .for-buyers-link-sub2 a:hover {
+                background: #8C6D00 !important;
+            }
+
+        .bg-img-div {
+            background-image: url("../../images/contemporary colonial.jpg");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-size: 100% 1000px;
+            background-attachment: fixed;
+            background-attachment: fixed;
+        }
+
+        .background-img-container {
+            background: rgba(255, 255, 255, 0.76);
+        }
+
+        .buyers-info-content li, p {
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 31px;
+            text-align: justify;
+        }
+
+        .buyers-info {
+            background: transparent;
+        }
+
+            .buyers-info h1 {
+                text-align: center;
+                font-size: 80px;
+                font-weight: bold;
+                color: #000;
+                padding-top: 80px;
+                margin: 0;
+                margin-left: 36%;
+                letter-spacing: -8px;
+                font-family: bebas-neue, sans-serif;
+                transform: scale(1,1.3);
+                -webkit-transform: scale(1,1.3);
+                -moz-transform: scale(1,1.3);
+                -ms-transform: scale(1,1.3);
+                -o-transform: scale(1,1.3);
+            }
+
+
+
+                .buyers-info h1 span {
+                    color: #8C6D00 !important;
+                }
+
+            .buyers-info h3 {
+                text-align: center;
+                font-size: 25px;
+                font-weight: bold;
+                color: #FFF;
+                padding-bottom: 90px;
+                background-image: url('../../images/bar1-u7536.png');
+                background-repeat: no-repeat;
+                /* text-align: center; */
+                background-size: 100% 55px;
+                width: 68%;
+                margin: 0 auto;
+                margin-left: 22%;
+                position: relative;
+                margin-top: 0%;
+            }
+
+        @@media (max-width:1199px) {
+            .buyers-info h3 span {
+                margin-left: 2% !important;
+            }
+
+            .buyers-info h1 {
+                margin-left: 21%;
+                font-size: 70px;
+                .;
+            }
+        }
+
+        @@media (max-width:991px) {
+            .buyers-info h3 {
+                font-size: 19px;
+            }
+        }
+
+        @@media (max-width:800px) {
+            .buyers-info h3 {
+                width: 100%;
+                margin-left: 16px;
+            }
+        }
+
+
+
+
+        @@media (max-width:767px) {
+
+            .buyers-info h1 {
+                margin-left: 10%;
+            }
+
+            .buyers-info h3 {
+                margin-left: 0px;
+            }
+        }
+
+
+
+        @@media (max-width:650px) {
+            .buyers-info h3 {
+                background-image: none;
+                color: #258EDF;
+            }
+        }
+
+        .buyers-info h3 span {
+            padding-top: 13px;
+            display: -webkit-inline-box;
+            margin-left: 32%;
+        }
+
+        .buyers-info h4 {
+            background-color: rgba(252, 209, 53, 0.81) !important;
+        }
+
+        .buyers-page-heading {
+            background: #8C6D00 !important;
+            color: #FFF;
+            font-size: 30px;
+            text-align: left;
+            padding: 5px;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 0px;
+            font-weight: inherit;
+        }
+
+        .buyers-info-content {
+            background-color: transparent;
+            padding-bottom: 10px;
+            border: 0px solid #DDD;
+            margin-bottom: 0px;
+            color: #000;
+            font-size: 17px;
+        }
+
+        #bottom {
+            border-top: 3px solid #8C6D00 !important;
+        }
+
+        iframe {
+            border: 5px solid #000 !important;
+        }
+    </style>
+</head><!--/head-->
+<body class="homepage">
+    <div class="row" style="margin:0">
+        <!--<div class="fixed-img"></div>-->
+
+        <div class="container background-img-container">
+            <div class="buyers-info wow fadeInDown">
+                <h1><span>FOR</span> SELLERS</h1>
+                <h3><span>THINGS EVERY BUYER SHOULD KNOW</span></h3>
+            </div>
+            <div class="row buyers-info-content wow fadeInDown">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">Tips for Packing Like a Pro</h1>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <ol style="padding-top: 13px;">
+                        <li>Develop a master “to do” list so you won’t forget something critical.</li>
+
+                        <li>Sort and get rid of things you no longer want or need. Have a garage sale, donate to a charity, or recycle.</li>
+
+                        <li>Don’t throw out everything. If your inclination is to just toss it, ask yourself how frequently you use an item and how you’d feel if you no longer had it.</li>
+
+                        <li>Pack like items together. Put toys with toys, kitchen utensils with kitchen utensils.</li>
+
+                        <li>Decide what if anything you plan to move yourself. Precious items, such as family photos, valuable breakables, or must-haves during the move, should probably stay with you.</li>
+
+                        <li>Use the right box for the item. Loose items encourage breakage.</li>
+
+                        <li>Put heavy items in small boxes so they’re easier to lift. Keep weight under 50 lbs. if possible.</li>
+
+                        <li>Don’t over-pack boxes and increase the chances they will break.</li>
+
+                        <li>Wrap every fragile item separately and pad bottom and sides of boxes.</li>
+
+                        <li>Label every box on all sides. You never know how they’ll be stacked and you don’t want to have to move other boxes aside to find out what’s there.</li>
+
+                        <li>Use color-coded labels to indicate which room each item should go in. Color-code a floor plan for your new house to help movers.</li>
+
+                        <li>Keep your moving documents together, including phone numbers, driver’s name, and van number. Also keep your address book handy.</li>
+
+                        <li>Back up your computer files before moving your computer.</li>
+
+                        <li>Inspect each box and all furniture for damage as soon as it arrives.</li>
+
+                        <li> Remember, most movers won’t take plants.</li>
+
+                    </ol>
+                </div>
+
+            </div>
+
+
+
+
+            <div class="row buyers-info-content wow fadeInDown">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">Understanding Agency</h1>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <p style="padding-top: 13px;"> It’s important to understand what legal responsibilities your real estate salesperson has to you and to other parties in the transactions. Ask your salesperson to explain what type of agency relationship you have with him or her and with the brokerage company.</p>
+                    <ol style="padding-top: 13px;">
+                        <li>Seller's representative (also known as a listing agent or seller's agent). A seller's agent is hired by and represents the seller. All fiduciary duties are owed to the seller. The agency relationship usually is created by a listing contract.</li>
+
+                        <li> Subagent. A subagent owes the same fiduciary duties to the agent's principal as the agent does. Subagency usually arises when a cooperating sales associate from another brokerage, who is not representing the buyer as a buyer’s representative or operating in a nonagency relationship, shows property to a buyer. In such a case, the subagent works with the buyer as a customer but owes fiduciary duties to the listing broker and the seller. Although a subagent cannot assist the buyer in any way that would be detrimental to the seller, a buyer-customer can expect to be treated honestly by the subagent. It is important that subagents fully explain their duties to buyers.</li>
+
+                        <li>Buyer's representative (also known as a buyer’s agent). A real estate licensee who is hired by prospective buyers to represent them in a real estate transaction. The buyer's rep works in the buyer's best interest throughout the transaction and owes fiduciary duties to the buyer. The buyer can pay the licensee directly through a negotiated fee, or the buyer's rep may be paid by the seller or by a commission split with the listing broker.</li>
+
+                        <li>Disclosed dual agent. Dual agency is a relationship in which the brokerage firm represents both the buyer and the seller in the same real estate transaction. Dual agency relationships do not carry with them all of the traditional fiduciary duties to the clients. Instead, dual agents owe limited fiduciary duties. Because of the potential for conflicts of interest in a dual-agency relationship, it's vital that all parties give their informed consent. In many states, this consent must be in writing. Disclosed dual agency, in which both the buyer and the seller are told that the agent is representing both of them, is legal in most states.</li>
+
+                        <li>Designated agent (also called, among other things, appointed agency). This is a brokerage practice that allows the managing broker to designate which licensees in the brokerage will act as an agent of the seller and which will act as an agent of the buyer. Designated agency avoids the problem of creating a dual-agency relationship for licensees at the brokerage. The designated agents give their clients full representation, with all of the attendant fiduciary duties. The broker still has the responsibility of supervising both groups of licensees.</li>
+
+                        <li>Nonagency relationship (called, among other things, a transaction broker or facilitator). Some states permit a real estate licensee to have a type of non-agency relationship with a consumer. These relationships vary considerably from state to state, both as to the duties owed to the consumer and the name used to describe them. Very generally, the duties owed to the consumer in a non-agency relationship are less than the complete, traditional fiduciary duties of an agency relationship.</li>
+
+                    </ol>
+                </div>
+
+            </div>
+
+
+            <div class="row buyers-info-content wow fadeInDown">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">5 Things to Do Before You Sell</h1>
+                    <div class="col-xs-12 col-sm-12">
+                        <ol style="padding-top: 13px;">
+                            <li>Get estimates from a reliable repairperson on items that need to be replaced soon, such as a roof or worn carpeting, for example. In this way, buyers will have a better sense of how much these needed repairs will affect their costs.</li>
+
+
+                            <li>Have a termite inspection to prove to buyers that the property is not infested.</li>
+
+
+                            <li> Get a pre-sale home inspection so you’ll be able to make repairs before buyers become concerned and cancel a contract.</li>
+
+
+                            <li> Gather together warranties and guarantees on the furnace, appliances, and other items that will remain with the house.</li>
+
+
+                            <li>Fill out a disclosure form provided by your sales associate. Take the time to be sure that you don’t forget problems, however minor, that might create liability for you after the sale.</li>
+
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="row buyers-info-content wow fadeInDown">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">Tips for Holding a Yard Sale</h1>
+                    <div class="col-xs-12 col-sm-12">
+                        <p style="padding-top: 13px"> Hold a yard sale to reduce the clutter in your home and get rid of items you don’t want to move.</p>
+                        <ol style="padding-top: 13px">
+                            <li> Check with your city government to see if you need a permit or license.</li>
+
+                            <li> See if neighbors want to participate and have a “block” sale to attract more visitors.</li>
+
+                            <li> Advertise. Put an ad in free classified papers, and put up signs and balloons at major intersections and in stores near your home.</li>
+
+                            <li>Price items ahead and attach prices with removable stickers. Remember, yard sales are supposed to be bargains, so don’t try to sell anything of significant value this way.</li>
+
+                            <li> Check items before the sale to be sure you haven’t including something you want by mistake.</li>
+
+                            <li>Keep pets away from the sale.</li>
+
+                            <li> Display everything neatly and individually so customers don’t have to dig through boxes.</li>
+
+                            <li> Have an electrical outlet so buyers can test appliances. </li>
+
+                            <li>Have plenty of bags and newspaper for wrapping fragile items. </li>
+
+                            <li> Get enough change, and keep a close eye on your cash.</li>
+
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row buyers-info-content wow fadeInDown">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">10 Ways to Make Your House More Salable</h1>
+                    <div class="col-xs-12 col-sm-12">
+                        <ol style="padding-top: 13px">
+                            <li>Get rid of clutter. Throw out or file stacks of newspapers and magazines. Pack away most of your small decorative items. Store out-of-season clothing to make closets seem roomier. Clean out the garage.</li>
+
+                            <li> Wash your windows and screens to let more light into the interior.</li>
+
+                            <li> Keep everything extra clean. Wash fingerprints from light switch plates. Mop and wax floors. Clean the stove and refrigerator. A clean house makes a better first impression and convinces buyers that the home has been well cared for.</li>
+
+                            <li> Get rid of smells. Clean carpeting and drapes to eliminate cooking odors, smoke, and pet smells. Open the windows.</li>
+
+
+                            <li>Put higher wattage bulbs in light sockets to make rooms seem brighter, especially basements and other dark rooms. Replace any burnt-out bulbs.</li>
+
+
+                            <li> Make minor repairs that can create a bad impression. Small problems, such as sticky doors, torn screens, cracked caulking, or a dripping faucet, may seem trivial, but they’ll give buyers the impression that the house isn’t well maintained.</li>
+
+
+                            <li>Tidy your yard. Cut the grass, rake the leaves, trim the bushes, and edge the walks. Put a pot or two of bright flowers near the entryway.</li>
+
+
+                            <li> Patch holes in your driveway and reapply sealant, if applicable.</li>
+
+
+                            <li> Clean your gutters.</li>
+
+
+                            <li> Polish your front doorknob and door numbers.</li>
+
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row buyers-info-content wow fadeInDown">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">5 Ways to Speed Up Your Sale</h1>
+                    <div class="col-xs-12 col-sm-12">
+                        <ol style=" padding-top: 13px">
+                            <li>Price it right. Set a price at the lower end of your property’s realistic price range.</li>
+
+                            <li>Get your house market-ready for at least two weeks before you begin showing it.</li>
+
+                            <li>Be flexible about showings. It’s often disruptive to have a house ready to show on the spur of the moment, but the more often someone can see your home, the sooner you’ll find a seller.</li>
+
+                            <li>Be ready for the offers. Decide in advance what price and terms you’ll find acceptable.</li>
+
+                            <li>Don’t refuse to drop the price. If your home has been on the market for more than 30 days without an offer, be prepared to lower your asking price.</li>
+
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row buyers-info-content wow fadeInDown">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">7 Steps to Preparing for an Open House</h1>
+                    <div class="col-xs-12 col-sm-12">
+                        <ol style="padding-top: 13px">
+
+                            <li>Hire a cleaning service. A spotlessly clean home is essential; dirt will turn off a prospect faster than anything.</li>
+
+                            <li> Mow your lawn, and be sure toys and yard equipment are put away.</li>
+
+                            <li>Serve cookies, coffee, and soft drinks. It creates a welcoming touch. But be sure the kitchen has been cleaned up; use disposable cups so the sink doesn’t fill up.</li>
+
+                            <li> Lock up your valuables, jewelry, and money. Although the real estate salesperson will be on site during the open house, it’s impossible to watch everyone all the time.</li>
+
+                            <li> Turn on all the lights. Even in the daytime, incandescent lights add sparkle.</li>
+
+                            <li> Send your pets to a neighbor or take them outside. If that’s not possible, crate them or confine them to one room (a basement or bath), and let the salesperson know where to find them.</li>
+
+                            <li> Leave. It’s awkward for prospective buyers to look in your closets and express their opinions of your home with you there.</li>
+
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row buyers-info-content wow fadeInDown">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">7 Terms to Watch for in a Purchase Contract</h1>
+                    <div class="col-xs-12 col-sm-12">
+                        <ol style=" padding-top: 13px; margin-bottom:50PX;">
+                            <li>The closing date. See if the date the buyer wants to take title is reasonable for you.</li>
+
+                            <li> Date of possession. See if the date the buyer wants to move in is reasonable for you.</li>
+
+
+                            <li> The earnest money. Look for the largest earnest-money deposit possible; since it is forfeited if the buyer backs out, a large deposit is usually a good indication of a sincere buyer.</li>
+
+
+                            <li> Fixtures and personal property. Check the list of items that the buyer expects to remain with the property and be sure it’s acceptable.</li>
+
+
+                            <li> Repairs. Determine what the requested repairs will cost and whether you’re willing to do the work or would rather lower the price by that amount.</li>
+
+
+                            <li> Contingencies. See what other factors the buyer wants met before the contract is final—inspections, selling a home, obtaining a mortgage, review of the contract by an attorney. Set time limits on contingencies so that they won’t drag on and keep your sale from becoming final.</li>
+
+
+                            <li> The contract expiration date. See how long you have to make a decision on the offer.</li>
+
+
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script>
+        function toggleChevron(e) {
+            $(e.target)
+                .prev('.panel-heading')
+                .find("i.indicator")
+                .toggleClass('glyphicon-chevron-down glyphicon-chevron-right');
+        }
+        $('#accordion').on('hidden.bs.collapse', toggleChevron);
+        $('#accordion').on('shown.bs.collapse', toggleChevron);
+    </script>
+    <script>
+
+        $('#main-slider .carousel').carousel({
+            interval: 4000,
+            pause: false
+        })
+    </script>
+    <script>
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 150) {
+
+                $(".navbar-inverse").addClass("fixed-header");
+
+            }
+            else {
+                $(".navbar-inverse").removeClass("fixed-header");
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,17 +1,298 @@
-﻿@{
-    ViewBag.Title = "Contact";
+﻿@model Century21.Models.Contact
+@{
+    ViewBag.Title = "ContactUs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home</title>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <style>
+        .home-link a {
+            background: transparent !important;
+        }
+
+            .contact-link a, .home-link a:hover {
+                background: #8C6D00 !important;
+            }
+
+        .contact-chechboxs {
+            margin-bottom: 15px;
+        }
+
+            .contact-chechboxs h1 {
+                background: transparent !important;
+            }
+
+        .contact-info-fields input {
+            height: auto !important;
+        }
+
+        .check {
+            font-size: 17px;
+            color: #000;
+            margin-bottom: 10px;
+        }
+
+        .contact-chechboxs #SellAHome, .contact-chechboxs #BuyAHome,
+        .contact-chechboxs #RealtysBuyersGuide, .contact-chechboxs #MarketAnalysisOfMyHome, .contact-chechboxs #CareerInRealEstate {
+            width: 20px;
+            height: 20px !important;
+            margin-right: 10px;
+            margin-top: 0px;
+        }
+
+        .well {
+            background-color: #CACACA !important;
+        }
+
+        .well-sm .form-group input {
+            height: 45px !important;
+            font-size: 16px;
+        }
+
+        @@media (max-width:1199px) {
+            .contact-info-fields .col-md-class, .contact-info-fields .col-md-class2 {
+                width: 33% !important;
+            }
+        }
+
+        @@media (max-width:991px) {
+            .contact-info-fields .col-md-class, .contact-info-fields .col-md-class2 {
+                width: 50% !important;
+            }
+        }
+
+        @@media (max-width:767px) {
+            .contact-info-fields .col-md-class, .contact-info-fields .col-md-class2 {
+                width: 100% !important;
+            }
+        }
+    </style>
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+    <script>
+        function initialize() {
+            var myLatlng = new google.maps.LatLng(40.678515, -73.486663);
+            var mapOptions = {
+                zoom: 10,
+                center: myLatlng
+            }
+            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(40.674569, -73.488487),
+                map: map,
+                title: '3900 Sunrise Highway, Seaford, NY11783 (516) 826-8100'
+            });
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(40.704354, -73.387589),
+                map: map,
+                title: '1596 Straight Path Lindenhurst, NY 115757 (631) 226-5995'
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+
+</head>
+<!--/head-->
+@using (Html.BeginForm("ContactUs", "Home", FormMethod.Get))
+{
+    <body class="homepage">
+        <div class="row" style="margin: 0">
+            <!--<div class="fixed-img"></div>-->
+            <div class="contact-info wow fadeInDown">
+                <h1>Contact Us</h1>
+            </div>
+            <div class="container">
+                <div class="col-md-12 wow fadeInDown contact-info-fields">
+                    <div class="well well-sm">
+                        <form>
+                            <div class="contact-chechboxs">
+                                <div class="col-xs-12">
+                                    <h1 style="  margin-bottom: 25px;">
+                                        I am interested in...
+                                        Please Check All That Apply:
+                                    </h1>
+                                </div>
+
+                                <div class="col-xs-12 col-md-class col-sm-2">
+                                    <div class="check">
+                                        <label class="checkbox-inline"
+                                               for="checkboxes-0">
+                                            @Html.EditorFor(x => x.SellAHome)
+                                            @*@Html.CheckBoxFor(c => c.SellAHome, new { @value = "1", @Text = "Sell a Home" })*@
+
+                                            Sell a Home
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-class   col-sm-2">
+                                    <div class="check">
+                                        <label class="checkbox-inline"
+                                               for="checkboxes-0">
+                                            @Html.EditorFor(x => x.BuyAHome)
+                                            @*@Html.CheckBoxFor(c => c.BuyAHome, new { @value = "2", @Text = "Buy a Home" })*@
+
+                                            Buy A Home
+                                        </label>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12   col-md-class col-sm-3">
+                                    <div class="check">
+                                        <label class="checkbox-inline"
+                                               for="checkboxes-0">
+                                            @Html.EditorFor(x => x.RealtysBuyersGuide)
+                                            @*@Html.CheckBoxFor(c => c.RealtysBuyersGuide, new { @value = "3", @Text = "Realty's Buyers Guide" })*@
+
+                                            Realty's Buyers Guide
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12  col-md-class2 col-sm-5">
+                                    <div class="check">
+                                        <label class="checkbox-inline"
+                                               for="checkboxes-0">
+                                            @Html.EditorFor(x => x.MarketAnalysisOfMyHome)
+                                            @*@Html.CheckBoxFor(c => c.MarketAnalysisOfMyHome, new { @value = "4", @Text = "Market Analysis of My Home" })*@
+
+                                            Market Analysis of My Home
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-class2 col-sm-6">
+                                    <div class="check">
+                                        <label class="checkbox-inline" for="checkboxes-0">
+                                            @Html.EditorFor(x => x.CareerInRealEstate)
+                                            @*@Html.CheckBoxFor(c => c.CareerInRealEstate, new { @value = "5", @Text = "Career in Real Estate" })*@
+
+                                            Career in Real Estate
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(t => t.Name, new { @class = "form-control", @placeholder = "Name", @required = "required" })
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(t => t.Email, new { @class = "form-control", @placeholder = "Email" })
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(t => t.Company, new { @class = "form-control", @placeholder = "Company" })
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(t => t.Phone, new { @class = "form-control", @placeholder = "Phone" })
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(t => t.Cell, new { @class = "form-control", @placeholder = "Cell" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(t => t.City, new { @class = "form-control", @placeholder = "City" })
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(t => t.Zip, new { @class = "form-control", @placeholder = "Zip" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextAreaFor(t => t.Message, new { @class = "form-control", @placeholder = "Message", @height = "162px", @rows = "7", @cols = "25" })
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary pull-right" id="btnSubmitContactUs" onclick="SendContactUs()">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row" style="margin:0; margin-bottom:20px;">
+                    <div class="col-md-8 wow fadeInDown">
+                        <div style="width:100%;height:300px;" id="map-canvas"></div>
+                    </div>
+                    <div class="col-md-4 wow fadeInDown">
+                        <form>
+                            <legend style="color:#258EDF">
+                                <span class="glyphicon glyphicon-globe"></span> Our office
+                            </legend>
+                            <address>
+                                <strong>Suffolk</strong><br>
+                                1596 Straight Path<br>
+                                Lindenhurst, NY 115757<br>
+                                <abbr title="Phone">
+                                </abbr>
+                                (631) 226-5995
+                            </address>
+                            <address>
+                                <strong>Nassau</strong><br>
+                                3900 Sunrise Highway,<br>
+                                Seaford, NY11783<br>
+                                <abbr title="Phone">
+                                </abbr>
+                                (516) 826-8100
+                            </address>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+            <script>
+            function SendContactUs()
+            {
+                window.location.href = '@Url.Action("ContactUs", "Home")';
+            }
+
+            function toggleChevron(e) {
+                $(e.target)
+                    .prev('.panel-heading')
+                    .find("i.indicator")
+                    .toggleClass('glyphicon-chevron-down glyphicon-chevron-right');
+            }
+            $('#accordion').on('hidden.bs.collapse', toggleChevron);
+            $('#accordion').on('shown.bs.collapse', toggleChevron);
+            </script>
+            <script>
+
+                $('#main-slider .carousel').carousel({
+                    interval: 4000,
+                    pause: false
+                })
+            </script>
+            <script>
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 150) {
+                        $(".navbar-inverse").addClass("fixed-header");
+                    }
+                    else {
+                        $(".navbar-inverse").removeClass("fixed-header");
+                    }
+                });
+            </script>
+    </body>
+}
+</html>

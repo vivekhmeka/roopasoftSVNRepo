@@ -1,0 +1,440 @@
+﻿@model  Century21.DataModels.AGENT_INFO
+
+@{
+    ViewBag.Title = "AgentDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var agentImage = "http://rpengine.realproconsulting.com/agents/" + @Model.AGENTID + ".jpg";
+    var defaultImage = "~/images/user_icon.png";
+    //var agentImage = "http://www.realproadvantage.com/agentphotos/1/Photo" + @Model.AGENTID + "-1.jpeg";
+}
+
+<style>
+    a:hover {
+        border-color: none;
+        outline: none;
+    }
+
+    a:link {
+        border-color: none;
+        outline: none;
+    }
+
+    .agent_border {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+    }
+
+    .right_contact {
+        border: 1px solid #ccc;
+        padding: 8px;
+        border-radius: 10px;
+        padding-top: 30px;
+    }
+
+    .form_gap {
+        margin-bottom: 10px;
+    }
+    #profilepic {
+          width: 70%;
+  padding: 5px;
+  border: 2px solid #DDD !important;
+    }
+    .head_text {
+        border: 1px solid rgba(195, 173, 90, 1) !important;
+        margin-bottom: 8px;
+        padding: 10px;
+        background-color: #fff;
+    }
+
+    .active_list {
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid rgba(195, 173, 90, 1) !important;
+    }
+
+        .active_list h2 {
+            background: #d2b205;
+            background: -moz-linear-gradient(top, #d2b205 1%, #9a8802 100%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(1%, #d2b205), color-stop(100%, #9a8802));
+            background: -webkit-linear-gradient(top, #d2b205 1%, #9a8802 100%);
+            background: -o-linear-gradient(top, #d2b205 1%, #9a8802 100%);
+            background: -ms-linear-gradient(top, #d2b205 1%, #9a8802 100%);
+            background: linear-gradient(to bottom, #d2b205 1%, #9a8802 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2b205', endColorstr='#9a8802', GradientType=0 );
+            color: #FFF;
+            margin-bottom: -1px;
+            padding: 14px;
+            -webkit-border-top-left-radius: 10px;
+            -webkit-border-top-right-radius: 10px;
+            -moz-border-radius-topleft: 10px;
+            -moz-border-radius-topright: 10px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+    .header_text {
+        padding: 8px;
+        margin: 1px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #000;
+    }
+
+    .top_gap {
+        margin-top: 10px;
+    }
+
+    .top_gap_1 {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    #btnReviews {
+          background-color: rgba(158, 131, 32, 0.81) !important;
+  border: 0;
+  float: right;
+  color: #FFF;
+  border-radius: 3px;
+  padding: 5px;
+    }
+    .home-link a:hover,.agents-link a {
+         background: #8C6D00 !important;
+    }
+    .home-link a  {
+        background:transparent !important;
+    }
+    @@media (max-width:767px)
+    {
+    #profilepic {
+        width:250px !important;
+    }
+    }
+</style>
+<div class="container">
+    <h3 style="color: #1B5098;font-weight: bold;  padding-top: 15px;">Meet the Agent</h3>
+    <div class="row profile-div">
+        <div class="col-xs-12 col-sm-3 form-group">
+            <div class="row  agent_border">
+                <div>
+                    <div style="border: 1px solid #DDD; text-align:center; padding:15px;">
+                        @{ try
+                         {
+                             WebRequest req = WebRequest.Create(agentImage);
+                             WebResponse res = req.GetResponse();
+                         }
+                         catch
+                         {
+                             agentImage = defaultImage;
+                         }
+                        }
+                        @if (Model.AGENT_ImageNew != null)
+                        {
+                            <img src=@Url.Content(agentImage) height="auto" width="120px" id="profilepic" class="profile-img" />
+                        }
+                        else
+                        {
+                            <img src=@Url.Content(agentImage) height="auto" width="120px" id="profilepic" class="profile-img" />
+                        }
+                        <p style="background: #DDD;padding: 3px;text-align: left;padding-left: 10px;  margin-top: 15px;">Phone: @Model.AGENT_PHONE</p>
+                        <p style="background: #DDD;padding: 3px;text-align: left;padding-left: 10px;">Cell: @Model.AGENT_CELL</p>
+                        <p style="background: #DDD;padding: 3px;text-align: left;padding-left: 10px;">Email:@Model.AGENT_EMAIL</p>
+                        <p style="text-align:left">
+                            <a href="@Model.AGENT_FB_URL" target="_blank" style="font-size: 25px;  margin-right: 25px;"><i class="fa fa-facebook"></i></a>
+                            <a href="http://www.facebook.com/krishna1.pradeep" target="_blank" style="font-size: 25px;  margin-right: 25px;"><i class="fa fa-twitter"></i></a>
+                            <a href="http://www.facebook.com/krishna1.pradeep" target="_blank" style="font-size: 25px;"><i class="fa fa-google-plus"></i></a>
+                           @if (Session["RoleID"] != null)
+                           {
+                               if (Session["RoleID"].ToString() == "1001" || Session["RoleID"].ToString() == "1002")
+                               {
+                                <input type="button" id="btnReviews" value="Write Reviews">
+                               }
+                           }
+                             
+                         </p>
+                             </div>
+                </div>
+            </div>
+        </div>
+        @*<div class="col-xs-12 col-sm-4 form-group" style="text-align:justify">
+                <b>@Model.AGENT_FNAME @Model.AGENT_LNAME </b>
+                <hr />
+                @Html.Raw(Model.AGENT_BIO_TEXT)
+            </div>
+            <div class="col-xs-12 col-sm-4 form-group">
+                <b>My Stats </b>
+                <hr />
+                <div class="mystaus-div">
+                    <p><span>My Listing</span>   @ViewBag.ListItems.Count</p>
+                    <p> <span>My Sold</span>     @ViewBag.ListSold.Count</p>
+                </div>
+            </div>*@
+        <div class="col-xs-12 col-sm-9 form-group" style="text-align:justify">
+            <div class="right_contact">
+                <form name="form" id="form" class="form-horizontal" enctype="multipart/form-data" method="POST">
+                    <div class="input-group form_gap">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" class="form-control" name="user" id="txtName" value="" placeholder="Your Name">
+                    </div>
+
+                    <div class="input-group form_gap">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                        <input type="email" id="txtFromEmail" class="form-control" name="Email" placeholder="Email">
+                    </div>
+
+                    <div class="input-group form_gap">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                        <input type="email" id="txtMobileNumber" class="form-control" name="MobileNumber" placeholder="Phone Number">
+                    </div>
+                    <div class="input-group form_gap" style="width: 100%">
+                        <textarea class="form-control" id="txtAreaQuery" style="border-radius: 3px; min-height:113px;" placeholder="Enter Your Message"></textarea>
+                    </div>
+                    <div>
+                        <input type="button" id="btnSendAgentEmail" class="btn btn-primary  button-style button-bg-color" value="Submit" style="background-color:rgba(158, 131, 32, 0.81); margin-top: 0px;margin-bottom: 5px;" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+  
+
+    <div class="row">
+
+        <section class="active_list" id="listings">
+            <h2>Active Listings</h2>
+            @if (ViewBag.ListItems.Count != 0)
+            {
+                foreach (var item in ViewBag.ListItems as List<Century21.DataModels.MLS_DATA>)
+                {
+
+                    var last3digit = @item.ml_number.Substring(@item.ml_number.Length - 3);
+                    var image1 = "http://links.mlslirealtor.com/mlsphotos/FULL/1/" + last3digit + "/" + @item.ml_number + ".jpg";
+                    <section class="head_text">
+                        <div class="row header_text">
+                            <div class="col-xs-12 col-sm-2"></div>
+                            <div class="col-xs-12 col-sm-4"></div>
+                            <div class="col-xs-12 col-sm-3"> </div>
+                            <div class="col-xs-12 col-sm-3"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-2"><img src='@image1' class="media-object" style="width: 126px; height:135px" alt='' /></div>
+                            <div class="col-xs-12 col-sm-4"><b>@item.address &nbsp; @item.city ,&nbsp;@item.state @item.zip</b></div>
+                            <div class="col-xs-12 col-sm-3">Bedrooms :@item.beds  Bathrooms:@item.baths  <br />Days on the Market <b>@((DateTime.Now.Date - item.list_date.Value.Date).Days)  </div>
+                            <div class="col-xs-12 col-sm-3">@String.Format("{0:C}", item.list_price)</div>
+                        </div>
+                        @*<div>*@
+
+                        @*<div class="media" data-toggle="modal" city="@item.city" mlnumber="@item.ml_number" street="@item.street" address="@item.address" onclick="clickMedia(this)">
+                            <a href="#" class="pull-left">
+                                <img src='@image1' class="media-object" style="width: 126px; height:135px" alt='' />
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">
+
+                                    <a><b>@item.address &nbsp; @item.city ,&nbsp;@item.state @item.zip</b></a>
+                                </h4>
+                                <p class="rent-div">
+                                    <span>
+                                        <img src="~/Images/mouse_off.png" style="width: 14px;" />
+                                    </span>&nbsp;@item.list_type
+                                </p>
+                                <p class="doller-div"><b>@String.Format("{0:C}", item.list_price)</b></p>
+                                <p class="db-div">Bedrooms :@item.beds  Bathrooms:@item.baths</p>
+                                @{   ((DateTime.Now-item.list_date).value.TotalDays}
+                                <p class="db-div">Days on the Market <b>@((DateTime.Now.Date - item.list_date.Value.Date).Days)</b></p>
+                            </div>
+                        </div>*@
+                        @*<hr />
+                        </div>*@
+                    </section>
+                }
+            }
+            else
+            {
+                <div>
+                    There is no property
+                </div>
+            }
+        </section>
+    </div>
+
+    <div class="row top_gap">
+        <section class="active_list" id="mySales">
+            <h2>sold properties</h2>
+
+            @if (ViewBag.ListSold.Count != 0)
+            {
+                foreach (var item in ViewBag.ListSold as List<Century21.DataModels.MLS_DATA>)
+                {
+                    var last3digit = item.ml_number.Substring(item.ml_number.Length - 3);
+                    var image1 = "http://links.mlslirealtor.com/mlsphotos/FULL/1/" + last3digit + "/" + item.ml_number + ".jpg";
+                    <section class="head_text">
+                        <div class="row header_text">
+                            <div class="col-xs-12 col-sm-2"></div>
+                            <div class="col-xs-12 col-sm-4"></div>
+                            <div class="col-xs-12 col-sm-3"> </div>
+                            <div class="col-xs-12 col-sm-3"></div>
+
+
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-2"><img src='@image1' class="media-object" style="width: 126px; height:135px" alt='' /></div>
+                            <div class="col-xs-12 col-sm-4"><b>@item.address &nbsp; @item.city ,&nbsp;@item.state @item.zip</b></div>
+                            <div class="col-xs-12 col-sm-3">Bedrooms :@item.beds  Bathrooms:@item.baths <br />Days on the Market <b>@((DateTime.Now.Date - item.list_date.Value.Date).Days) </div>
+                            <div class="col-xs-12 col-sm-3">@String.Format("{0:C}", item.list_price)</div>
+
+
+
+                        </div>
+                        @*<div>
+                            <div class="media" data-toggle="modal" city="@item.city" mlnumber="@item.ml_number" street="@item.street" address="@item.address" onclick="clickMedia(this)">
+                                <a href="#" class="pull-left">
+                                    <img src="@image1" class="media-object" style="width: 126px; height:135px" alt='' />
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">
+
+                                        <a><b>@item.address &nbsp; @item.city ,&nbsp;@item.state @item.zip</b></a>
+                                    </h4>
+                                    <p class="rent-div">
+                                        <span>
+                                            <img src="~/Images/mouse_off.png" style="width: 14px;" />
+                                        </span>&nbsp;@item.list_type
+                                    </p>
+                                    <p class="doller-div"><b>@String.Format("{0:C}", item.list_price) </b></p>
+                                    <p class="db-div">Bedrooms :@item.beds  Bathrooms:@item.baths</p>
+                                    <p class="db-div">Days on the Market <b>@((DateTime.Now.Date - item.list_date.Value.Date).Days)</b></p>
+                                </div>
+                            </div>
+                            <hr />
+                        </div>*@
+                    </section>
+                }
+            }
+            else
+            {
+                <div>
+                    There is no property
+                </div>
+            }
+        </section>
+    </div>
+    <div class="row top_gap_1">
+
+        <section class="active_list" id="reviews">
+            <h2>My reviews</h2>
+        </section>
+
+    </div>
+
+
+
+
+</div>
+
+@*//boostrap tab*@
+
+
+<script>
+    $(document).ready(function () {
+        $('#accountForm')
+            // Called when a field is invalid
+            .on('err.field.fv', function (e, data) {
+                // data.element --> The field element
+                var $tabPane = data.element.parents('.tab-pane'),
+                    tabId = $tabPane.attr('id');
+
+                $('a[href="#' + tabId + '"][data-toggle="tab"]')
+                    .parent()
+                    .find('i')
+                    .removeClass('fa-check')
+                    .addClass('fa-times');
+            })
+            // Called when a field is valid
+            .on('success.field.fv', function (e, data) {
+                // data.fv      --> The FormValidation instance
+                // data.element --> The field element
+
+                var $tabPane = data.element.parents('.tab-pane'),
+                    tabId = $tabPane.attr('id'),
+                    $icon = $('a[href="#' + tabId + '"][data-toggle="tab"]')
+                                .parent()
+                                .find('i')
+                                .removeClass('fa-check fa-times');
+
+                // Check if all fields in tab are valid
+                var isValidTab = data.fv.isValidContainer($tabPane);
+                if (isValidTab !== null) {
+                    $icon.addClass(isValidTab ? 'fa-check' : 'fa-times');
+                }
+            });
+    });
+
+    $(function () {
+        $("#btnSendAgentEmail").click(function () {
+            var agentFirstName = '@Model.AGENT_FNAME';
+            var AgentEmail = '@Model.AGENT_EMAIL';
+            var CustomerEmail = $("#txtFromEmail").val();
+            var Mobilenumber = $("#txtMobileNumber").val();
+            var name = $("#txtName").val();
+            var query = $("#txtAreaQuery").val();
+            if (name != "" && query != "" && CustomerEmail != "") {
+                if (ValidateEmail(CustomerEmail)) {
+                    $.ajax({
+                        url: "@Url.Action("SendQuery", "Agent")",
+                        data: { AgentName: agentFirstName, CustomerEmail: CustomerEmail, AgentEmail: AgentEmail, name: name, query: query },
+                        success: function () {
+                            debugger;
+                            alert("Mail sent successfully");
+                            $("#txtName").val("");
+                            $("#txtFromEmail").val("");
+                            $("#txtAreaQuery").val("");
+
+                        }
+                    });
+                }
+                else {
+                    alert("phone number and email  should be valid");
+                    $("#txtFromEmail").val("");
+                    $("#txtName").val("");
+                    $("#txtAreaQuery").val("");
+
+                    return false;
+                }
+            }
+            else {
+                alert("please enter all details ");
+                $("#txtFromEmail").val("");
+                $("#txtName").val("");
+                $("#txtAreaQuery").val("");
+                return false;
+            }
+        });
+    });
+
+    function clickMedia(obj) {
+        debugger;
+        var ml_number = $(obj).attr('mlnumber');
+        var street = $(obj).attr('address');
+        var city = $(obj).attr('city');
+        window.location.href = '@Url.Action("PropertyDetail", "Home")?street=' + street + '&ml_number=' + ml_number + '&cityIs=' + city + '';
+    }
+     $(function () {
+        if ('@Session["agentInfo"]' == 'listings') {
+            debugger;
+            var scrollPos = $('#listings').offset().top;
+            $(window).scrollTop(scrollPos);
+            //$('#listings').click();
+        }
+        else if ('@Session["agentInfo"]' == 'mySales') {
+            var scrollPos = $('#mySales').offset().top;
+            $(window).scrollTop(scrollPos);
+        }
+        else if ('@Session["agentInfo"]' == 'myReviews') {
+            var scrollPos = $('#reviews').offset().top;
+            $(window).scrollTop(scrollPos);
+        }
+    });
+</script>

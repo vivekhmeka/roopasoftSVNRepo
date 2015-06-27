@@ -3,21 +3,222 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    @Scripts.Render("~/bundles/bootstrap")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/modernizr")
-    
-</head>
-<body>
-    <script>
-        function AgentInfo()
-        {
-            alert("agent");
-            window.location.href = '@Url.Action("AgentInfo","Agent")';
+
+
+    <style>
+
+        .panel-login {
+            border-color: #ccc;
+            -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+            -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+            box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
         }
 
+            .panel-login > .panel-heading {
+                color: #00415d;
+                background-color: #fff;
+                border-color: #fff;
+                text-align: center;
+            }
+
+                .panel-login > .panel-heading a {
+                    text-decoration: none;
+                    color: #666;
+                    font-weight: bold;
+                    font-size: 15px;
+                    -webkit-transition: all 0.1s linear;
+                    -moz-transition: all 0.1s linear;
+                    transition: all 0.1s linear;
+                }
+
+                    .panel-login > .panel-heading a.active {
+                        color: #1B5098;
+                        font-size: 18px;
+                    }
+
+                .panel-login > .panel-heading hr {
+                    margin-top: 10px;
+                    margin-bottom: 0px;
+                    clear: both;
+                    border: 0;
+                    height: 1px;
+                    background-image: -webkit-linear-gradient(left,rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.15),rgba(0, 0, 0, 0));
+                    background-image: -moz-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+                    background-image: -ms-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+                    background-image: -o-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+                }
+
+            .panel-login input[type="text"], .panel-login input[type="email"], .panel-login input[type="password"] {
+                height: 35px;
+                border: 1px solid #ddd;
+                font-size: 16px;
+                -webkit-transition: all 0.1s linear;
+                -moz-transition: all 0.1s linear;
+                transition: all 0.1s linear;
+            }
+
+            .panel-login input:hover,
+            .panel-login input:focus {
+                outline: none;
+                -webkit-box-shadow: none;
+                -moz-box-shadow: none;
+                box-shadow: none;
+                border-color: #ccc;
+            }
+
+        .btn-login {
+            background-color: #59B2E0;
+            outline: none;
+            color: #fff;
+            font-size: 14px;
+            height: auto;
+            font-weight: normal;
+            padding: 14px 0;
+            text-transform: uppercase;
+            border-color: #59B2E6;
+        }
+
+            .btn-login:hover,
+            .btn-login:focus {
+                color: #fff;
+                background-color: #53A3CD;
+                border-color: #53A3CD;
+            }
+
+        .forgot-password {
+            text-decoration: underline;
+            color: #888;
+        }
+
+            .forgot-password:hover,
+            .forgot-password:focus {
+                text-decoration: underline;
+                color: #666;
+            }
+
+        .btn-register {
+            background-color: #1CB94E;
+            outline: none;
+            color: #fff;
+            font-size: 14px;
+            height: auto;
+            font-weight: normal;
+            padding: 14px 0;
+            text-transform: uppercase;
+            border-color: #1CB94A;
+        }
+
+            .btn-register:hover,
+            .btn-register:focus {
+                color: #fff;
+                background-color: #1CA347;
+                border-color: #1CA347;
+            }
+
+        #loginModal {
+            z-index: 999999;
+            background-color: rgba(0, 0, 0, 0.38);
+            overflow: hidden !important;
+        }
+
+        .hide {
+            display: none;
+        }
+        .register-button-div {
+              margin-top: -13px;
+        }
+    </style>
+</head>
+
+<body class="bg-img-div">
+    <script>
+        $(document).ready(function () {
+
+            $(".modal-backdrop, .modal").click(function () {
+                $(".modal-backdrop, .modal").css("display", "none !important")
+            });
+
+            $("#login_submit").click(function () {
+                var username = $("#username").val();
+                var password = $("#password").val();
+                if (username == "") {
+                    $("#username").css("border", "1px solid #c21e00");
+                    return false;
+                }
+                else {
+                    $("#username").css("border", "");
+                }
+                if (password == "") {
+                    $("#password").css("border", "1px solid #c21e00");
+                    return false;
+                }
+                else {
+                    $("#password").css("border", "");
+                }
+                window.location.href = '@Url.Action("Login", "Home")?username=' + username + '&password=' + password;
+            });
+        });
     </script>
+
+    <script>
+        function AgentInfo() {
+            window.location.href = '@Url.Action("AgentInfo","Agent")';
+        }
+        function Home() {
+            window.location.href = '@Url.Action("Index","Home")';
+        }
+        function ForBuyers() {
+            window.location.href = '@Url.Action("ForBuyers", "Buyers")';
+        }
+        function ForSellers() {
+            window.location.href = '@Url.Action("Index", "Sellers")';
+        }
+
+        function crossSymbol() {
+            $("#loginModal").addClass("hide");
+            $(".modal-backdrop").addClass("hide");
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#myCarousel').carousel({
+                interval: 30000
+            });
+
+            $('#login-form-link').click(function (e) {
+                $("#login-form").delay(100).fadeIn(100);
+                $("#register-form").fadeOut(100);
+                $('#register-form-link').removeClass('active');
+                $(this).addClass('active');
+                e.preventDefault();
+            });
+            $('#register-form-link').click(function (e) {
+                $("#register-form").delay(100).fadeIn(100);
+                $("#login-form").fadeOut(100);
+                $('#login-form-link').removeClass('active');
+                $(this).addClass('active');
+                e.preventDefault();
+            });
+            $(".close-icon").click(function () {
+                $("#loginModal").css("display", "none");
+                $(".modal-open").css("overflow-y", "scroll");
+                $(".modal-backdrop").css("display", "none");
+
+            });
+            $("#IDLogin").click(function () {
+                $("#loginModal").css("display", "block");
+                $(".modal-open").css("overflow-y", "scroll");
+                $(".modal-backdrop").css("display", "block");
+
+            });
+        });
+    </script>
+
     <header id="header">
         <div class="top-bar">
             <div class="container">
@@ -40,6 +241,7 @@
                                     <i class="fa fa-search"></i>
                                 </form>
                             </div>
+                            @*<div><a class="search-form" href="@Url.Action("AdvancedSearch","Home")">Advanced Search</a></div>*@
                         </div>
                     </div>
                 </div>
@@ -54,97 +256,222 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="@Url.Action("Index", "Home")"><img src="/images/logo.jpg" alt="logo" style="width:110px;"></a>
+                    <a class="navbar-brand" href="@Url.Action("Index", "Home")"><img src="~/images/logo.jpg" alt="logo" style="width:110px;"></a>
                 </div>
 
-                <div class="collapse navbar-collapse navbar-right">
+                <div class="collapse navbar-collapse navbar-right" style="margin-right: -38px;">
                     <ul class="nav navbar-nav">
 
-                        <li class="dropdown active">
-                            <a href="@Url.Action("Index","Home")" class="dropdown-toggle" data-toggle="dropdown">Home <i class="fa fa-angle-down"></i></a>
+                        <li class="dropdown home-link">
+                            <a href="@Url.Action("Index","Home")" onclick="Home()">Home </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">VIDEOS</a></li>
+                                @*<li><a href="@Url.Action("Videos","Home")">VIDEOS</a></li>*@
                             </ul>
                         </li>
 
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">For Buyers <i class="fa fa-angle-down"></i></a>
+                        <li class="dropdown for-buyers-link">
+                            <a href="@Url.Action("ForBuyers", "Buyers")" class="dropdown-toggle" data-toggle="dropdown" onclick="ForBuyers()">Buyers <i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Buyers Information</a></li>
-                                <li><a href="#">Listings</a></li>
+                                <li class="for-buyers-link-subnew"><a href="@Url.Action("Index", "AdvancedSearch")">Property Search</a></li>
+                                <li class="for-buyers-link-subl"><a href="@Url.Action("Index","Buyers")">Buyers Information</a></li>
+                                @*<li class="for-buyers-link-sub2"><a href="#">Listings</a></li>*@
+                                <li class="for-buyers-link-sub3"><a href="@Url.Action("BuyerVideos", "Buyers")">Videos</a></li>
                             </ul>
                         </li>
 
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">For Sellers <i class="fa fa-angle-down"></i></a>
+                        <li class="dropdown for-sellers-link">
+                            <a href="@Url.Action("Index", "Sellers")" class="dropdown-toggle seller-link-main" data-toggle="dropdown" onclick="ForSellers();">Sellers <i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Sellers</a></li>
-                                <li><a href="#">FAQ's</a></li>
+                                @*<li class="for-sellers-link-sub1"><a href="@Url.Action("Sellers", "Sellers")">Sellers</a></li>*@
+                                @*<li class="for-sellers-link-sub2"><a href="@Url.Action("Index", "Sellers")">Selling Process</a></li>*@
+                                <li class="for-sellers-link-sub3"><a href="@Url.Action("ForSellers", "Sellers")">For Sellers</a></li>
+                                <li class="for-sellers-link-sub4"><a href="@Url.Action("Faqs", "Sellers")">FAQ's</a></li>
+                                <li class="for-sellers-link-sub5"><a href="@Url.Action("SellerVideos", "Sellers")">Videos</a></li>
                             </ul>
                         </li>
 
-                        <li class="dropdown">
-                            <a href="@Url.Action("AgentInfo", "Agent")" class="dropdown-toggle" data-toggle="dropdown" onclick="AgentInfo()">Agents <i class="fa fa-angle-down"></i></a>
+                        <li class="dropdown agents-link">
+                            <a href="@Url.Action("AgentInfo", "Agent")" class="dropdown-toggle" data-toggle="dropdown" onclick="AgentInfo();">Agents</a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Agent Bio</a></li>
+                                @*<li><a href="@Url.Action("AgentInfo", "Agent")">Agent Bio</a></li>*@
 
+                                @if(Session["RoleID"] != null)
+                                {
+                                if (Session["RoleID"].ToString() == "1001" || Session["RoleID"].ToString()=="1002")
+                                {
+                                    <li><a href="@Url.Action("AddAgent", "Admin")">Add Agent</a></li>
+                                }
+                                }
                             </ul>
                         </li>
-                        <li><a href="#">Financing</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li class="financing-link"><a href="@Url.Action("Index","Financing")">Financing</a></li>
+                        <li class="contact-link"><a href="@Url.Action("Contact","Home")">Contact Us</a></li>
+                        @if (Session["Username"] != null)
+                        {
+                            <li class="admin-menu"><a href="@Url.Action("Index","Admin")"><span id="spnReg">Admin</span></a></li>
+                        }
+                        @*@if (Session["Username"] == null)
+                        {
+                            <li><a href="#"><span id="IDLogin" class="media" data-toggle="modal" data-target="#loginModal">Login/Register</span></a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@Url.Action("Logout","Home")"><span id="IDLogout">Logout</span></a></li>
+                        }*@
+                        @*<li class="contact-link"><a href="@Url.Action("Contact","Home")">Log In</a></li>*@
                     </ul>
                 </div>
+
             </div><!--/.container-->
         </nav><!--/nav-->
-
     </header><!--/header-->
-   @* <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-        </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>*@
-    
     <div>
         @RenderBody()
-        <hr />
-        @*<footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>*@
     </div>
-   
-  
-    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-</body>
-<footer id="footer" class="midnight-blue">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6">
-                Copyrights ©  2015 Centure 21 AA, All Rights Reserved
+    <section id="bottom">
+        <div class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="widget">
+                        <h4 style="color:#258EDF">Serving our Customers throughout Suffolk, Nassau, and Queens</h4>
+                        <p style="font-weight:bold">Cell- 888.507.2445</p>
+                        <p style="font-weight:bold">Connect With Us Today!</p>
+                        <div class="footer-icon">
+                            <ul class="social-share">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><!--/.col-md-3-->
+
+                <div class="col-md-3 col-sm-3">
+                    <div class="widget">
+                        <h4 style="color:#258EDF">Departments</h4>
+                        <ul>
+                            <li><a href="#">Rentals</a></li>
+                            <li><a href="#">Relocation</a></li>
+                            <li><a href="#">Carrers</a></li>
+                            <li><a href="#">Customers service</a></li>
+                        </ul>
+                    </div>
+                </div><!--/.col-md-3-->
+                <div class="col-md-3 col-sm3">
+                    <div class="widget">
+                        <h4 style="color:#258EDF">Property Search</h4>
+                        <ul>
+                            <li><a href="#">Residential Properties</a></li>
+                            <li><a href="#">Rentals</a></li>
+                            <li><a href="#">Land</a></li>
+                            <li><a href="#">Commercial Properties</a></li>
+                        </ul>
+                    </div>
+                </div><!--/.col-md-3-->
             </div>
-            <div class="col-sm-6">
-                <ul class="pull-right">
-                    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                </ul>
+        </div>
+    </section><!--/#bottom-->
+    <footer id="footer" class="midnight-blue">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    Copyrights ©  2015 Century 21 AA , All Rights Reserved
+                </div>
+                <div class="col-sm-6">
+                    <ul class="pull-right">
+                        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="@Url.Action("Contact", "Home")">Contact Us</a></li>
+                        @if (Session["Username"] == null)
+                        {
+                            <li><a href="#"><span id="IDLogin" class="media" data-toggle="modal" data-target="#loginModal">Login/Register</span></a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@Url.Action("Logout","Home")"><span id="IDLogout">Logout</span></a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer><!--/#footer-->
+
+
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="voteLabel" aria-hidden="true">
+        <div class="popup-div">
+            <div class="panel panel-login">
+                <div style="float:right"><span class="glyphicon glyphicon glyphicon-remove close-icon" style="  z-index: 9999;right: 15px; top:10px;cursor:pointer;background-color: #8C6D00;padding: 5px;padding-top: 3px;width: 23px;border-radius: 30px;color: #FFF;"></span></div>
+
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a href="#" class="active" id="login-form-link">Login</a>
+                        </div>
+                        <div class="col-xs-6 register-button-div" >
+                            <a href="#" id="register-form-link">Register</a>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form id="login-form" role="form" style="display: block;">
+                                <div class="form-group">
+                                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                                </div>
+                                <div class="form-group text-center">
+                                    <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+                                    <label for="remember"> Remember Me</label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-sm-offset-3">
+                                            <input style="background-color:#39b3d7" type="button" name="login-submit" id="login_submit" tabindex="4" class="form-control btn btn-primary" value="Log In">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="text-center">
+                                                <a href="#" tabindex="5" class="forgot-password">Forgot Password?</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <form id="register-form" action="http://phpoll.com/register/process" method="post" role="form" style="display: none;">
+                                <div class="form-group">
+                                    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-sm-offset-3">
+                                            <input style="background-color: #39b3d7" type="button" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-primary" value="Register Now">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</footer><!--/#footer-->
 </html>

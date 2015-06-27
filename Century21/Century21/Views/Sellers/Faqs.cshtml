@@ -1,0 +1,285 @@
+﻿@{
+    ViewBag.Title = "Faqs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home</title>
+
+    <!-- core CSS -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+
+    <style>
+        .home-link a, .for-sellers-link-sub3 a, .for-sellers-link-sub5 a {
+            background: transparent !important;
+        }
+
+            .for-sellers-link-sub4 a, seller-link-main, .home-link a:hover, .for-sellers-link .dropdown-toggle,.for-sellers-link-sub3 a:hover, .for-sellers-link-sub5 a:hover {
+                background: #8C6D00 !important;
+            }
+
+        .for-sellers-link-sub2 a:hover, .for-sellers-link-sub3 a:hover, .for-sellers-link-sub5 a:hover {
+            background: #8C6D00 !important;
+        }
+
+        .for-sellers-link-sub1 a {
+            background: transparent !important;
+        }
+
+            .for-sellers-link-sub1 a:hover {
+                background: #8C6D00 !important;
+            }
+
+
+            .buyers-info h1 {
+                text-align: center;
+                font-size: 50px;
+                font-weight: bold;
+                color: #258EDF;
+                padding-top: 50px;
+                margin: 0;
+                font-family: overlock-sc, sans-serif;
+                font-weight: bold;
+
+            }
+
+            .buyers-info h3 {
+                text-align: center;
+                font-size: 25px;
+                font-weight: bold;
+                font-family: overlock-sc, sans-serif;
+                font-weight: 400;
+                padding-bottom: 50px;
+                color: #258EDF;
+            }
+
+            .buyers-info h4 {
+                background-color: rgba(252, 209, 53, 0.81) !important;
+            }
+
+        .buyers-page-heading {
+            background: #8C6D00 !important;
+            color: #FFF;
+            font-size: 25px;
+            text-align: center;
+            padding: 5px;
+            margin: 0px;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .buyers-info-content {
+            background-color: whitesmoke;
+            padding-bottom: 10px;
+            border: 2px solid #DDD;
+            margin-bottom: 15px;
+        }
+
+        .faqs-page-question {
+            background-color: #FFF;
+            margin-top: 20px;
+            padding: 10px;
+            border: 2px solid #DDD;
+            min-height: 375px;
+        }
+
+        .question {
+            font-size: 18px !important;
+            font-weight: 100 !important;
+            background: #258EDF !important;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            min-height: 55px;
+        }
+
+        .question-active {
+            border-bottom-right-radius: 0px;
+            border-top-right-radius: 0px;
+            background: #8C6D00 !important;
+            background-color: #464646;
+        }
+
+        .answer2, .answer3, .answer4, .answer5 {
+            display: none;
+        }
+
+        .shape1, .shape2, .shape3, .shape4, .shape5 {
+            width: 0;
+            height: 0;
+            border-top: 20px solid transparent;
+            border-left: 30px solid rgb(140, 109, 1);
+            border-bottom: 21px solid transparent;
+            position: absolute;
+            margin-left: 93%;
+            z-index: 9999;
+            margin-top: 7px;
+        }
+
+        .shape2, .shape3, .shape4, .shape5 {
+            display: none;
+        }
+    </style>
+</head><!--/head-->
+<body class="homepage">
+    <div class="row" style="margin:0">
+        <!--<div class="fixed-img"></div>-->
+        <div class="buyers-info wow fadeInDown">
+
+            <h1>Buyer/Seller Resources</h1>
+            <h3>FAQ's</h3>
+        </div>
+        <div class="container">
+            <div class="row buyers-info-content wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown; -webkit-animation-name: fadeInDown;">
+                <div class="col-xs-5 col-sm-5">
+                    <div><div class="shape1"></div><h1 class="question question1 question-active"><span style="font-weight:bold">Q:</span> Does my broker encourage me to be actively involved in my investment strategy?</h1></div>
+                    <div>
+                        <div class="shape2"></div> <h1 class="question question2"><span style="font-weight:bold">Q:</span> Reasons to Buy an Existing Home?</h1>
+                    </div>
+                    <div>
+                        <div class="shape3"></div> <h1 class="question question3"><span style="font-weight:bold">Q:</span> Are there standard ways to determine how much a home is worth?</h1>
+                    </div>
+                    <div>
+                        <div class="shape4"></div> <h1 class="question question4"><span style="font-weight:bold">Q:</span> How to Save Money on Your Kitchen Remodel without Skimping on Style?</h1>
+                    </div>
+                    <div>
+                        <div class="shape5"></div> <h1 class="question question5"><span style="font-weight:bold">Q:</span> Fixed Mortgage Rates Relatively Flat?</h1>
+                    </div>
+                </div>
+                <div class="col-xs-7 col-sm-7">
+                    <div class="faqs-page-question">
+                        <div class="answer1 wow fadeInDown">
+                            <p><span style="font-weight:bold">A:</span> Ninety-seven percent of Americans who are highly engaged in various activities in their lives say they want to be involved in the decisions that their broker is making, according to a Schwab study of engaged Americans conducted in May 2013. Does your broker make this easy for you to do?</p>
+                            <p>Sitting down and having a conversation with your broker to discuss the level of involvement you want is the first step. You should determine how and when you'd like to be contacted so your broker can keep you up-to-date on major developments in your financial situation. Make sure you feel empowered to ask questions and your broker's answers make sense, you are comfortable giving feedback, and your broker encourages you to check in as frequently as you want - on your terms.</p>
+                        </div>
+                        <div class="answer2 wow fadeInDown">
+                            <p><span style="font-weight:bold">A: Get more house for less money</span></p>
+                            <p>Existing houses typically cost less per square foot than new builds do. And lot sizes may be bigger, too, an important consideration for people who love to spend time in the yard.</p>
+                            <p><span style="font-weight:bold">Move in immediately</span></p>
+                            <p>Instead of waiting for building to complete on your new house, you can usually move into a new house immediately after closing day. No rain delays or builder setbacks to worry about.</p>
+
+                            <p><span style="font-weight:bold">Spend less on upgrades</span></p>
+                            <p>When you have a home built, you pay a set price for every upgrade you choose. But when you purchase an existing home, you also purchase all of the upgrades done by the previous owners at a depreciated value because it’s been slightly used. A fancy floor that’s been walked on a few times usually costs less than a fancy floor that’s brand spanking new.</p>
+                        </div>
+                        <div class="answer3 wow fadeInDown">
+                            <p><span style="font-weight:bold">A:</span> Yes. A comparative market analysis and an appraisal are the two most common and reliable ways to determine a home's value.</p>
+                            <p>Your real estate agent can provide a comparative market analysis, an informal estimate of value based on the recent selling price of similar neighborhood properties. Reviewing comparable homes that have sold within the past year along with the listing, or asking, price on current homes for sale should prevent you from overpricing your home or underestimating its value</p>
+                        </div>
+                        <div class="answer4 wow fadeInDown">
+                            <p><span style="font-weight:bold">A:</span> When remodeling your kitchen, consider ways to use what already exists, but upgrade it with a fresh, new look. For example, if your kitchen countertops are faded, covered in stains and worn out, don't try to replace everything.</p>
+                            <p>Instead, consider replacing just the tops with granite-styled laminate - designed to mirror the look of granite, but at a fraction of the cost. The laminate is resistant to scratching and marring from sharp objects. This way you can keep the existing cabinets, but change the color and look of the room simply by switching out the countertops.</p>
+                        </div>
+                        <div class="answer5 wow fadeInDown">
+                            <p><span style="font-weight:bold">A:</span>  According to results, the 30-year fixed-rate mortgage (FRM) averaged 4.28 percent with an average 0.7 point for the week ending February 13, 2014, up from last week when it averaged 4.23 percent. A year ago at this time, the 30-year FRM averaged 3.53 percent.</p>
+                            <p>Additionally, the 15-year FRM this week averaged 3.33 percent with an average 0.7 point, unchanged from last week. A year ago at this time, the 15-year FRM averaged 2.77 percent.</p>
+                            <p>The 5-year Treasury-indexed hybrid adjustable-rate mortgage (ARM) averaged 3.05 percent this week with an average 0.5 point, down from last week when it averaged 3.08 percent. A year ago, the 5-year ARM averaged 2.64 percent.</p>
+                            <p>Results show that the 1-year Treasury-indexed ARM averaged 2.55 percent this week with an average 0.4 point, up from last week when it averaged 2.51 percent. At this time last year, the 1-year ARM averaged 2.61 percent.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row buyers-info-content wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown; -webkit-animation-name: fadeInDown;">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">Home Evaluation</h1>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <p style="text-align:center;padding-top:10px;">
+                        We can provide a free evaluation of your home using the specific characteristics to
+                        compare it with relevant current market prices. This detailed analysis will give you
+                        a preliminary idea of how much you can expect from the market and where we
+                        should aim. Contact us to get this process started so that you can move forward into
+                        what the future holds next for you.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        $("document").ready(function () {
+
+            $(".question1").mouseenter(function () {
+                $(".question1").addClass("question-active");
+                $(".answer1,.shape1").css("display", "block");
+                $(".answer2,.answer3,.answer4,.answer5,.shape2,.shape3,.shape4,.shape5").css("display", "none");
+                $(".question2,.question3,.question4,.question5").removeClass("question-active");
+            });
+
+            $(".question2").mouseenter(function () {
+                debugger
+                $(".question2").addClass("question-active");
+                $(".answer2,.shape2").css("display", "block");
+                $(".answer1,.answer3,.answer4,.answer5,.shape1,.shape3,.shape4,.shape5").css("display", "none");
+                $(".question1,.question3,.question4,.question5").removeClass("question-active");
+            });
+
+            $(".question3").mouseenter(function () {
+                $(".question3").addClass("question-active");
+                $(".answer3,.shape3").css("display", "block");
+                $(".answer1,.answer2,.answer4,.answer5,.shape1,.shape2,.shape4,.shape5").css("display", "none");
+                $(".question1,.question2,.question4,.question5").removeClass("question-active");
+            });
+
+            $(".question4").mouseenter(function () {
+                $(".question4").addClass("question-active");
+                $(".answer4,.shape4").css("display", "block");
+                $(".answer1,.answer2,.answer3,.answer5,shape1,.shape2,.shape3,.shape5").css("display", "none");
+                $(".question1,.question2,.question3,.question5").removeClass("question-active");
+            });
+
+            $(".question5").mouseenter(function () {
+                $(".question5").addClass("question-active");
+                $(".answer5,.shape5").css("display", "block");
+                $(".answer1,.answer2,.answer3,.answer4,shape1,.shape2,.shape3,.shape4").css("display", "none");
+                $(".question1,.question2,.question3,.question4").removeClass("question-active");
+            });
+
+
+        });
+
+        function toggleChevron(e) {
+            $(e.target)
+                .prev('.panel-heading')
+                .find("i.indicator")
+                .toggleClass('glyphicon-chevron-down glyphicon-chevron-right');
+        }
+        $('#accordion').on('hidden.bs.collapse', toggleChevron);
+        $('#accordion').on('shown.bs.collapse', toggleChevron);
+    </script>
+    <script>
+
+        $('#main-slider .carousel').carousel({
+            interval: 4000,
+            pause: false
+        })
+    </script>
+    <script>
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 150) {
+
+                $(".navbar-inverse").addClass("fixed-header");
+
+            }
+            else {
+                $(".navbar-inverse").removeClass("fixed-header");
+            }
+        });
+    </script>
+</body>
+</html>

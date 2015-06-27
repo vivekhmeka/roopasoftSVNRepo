@@ -1,0 +1,409 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home</title>
+
+    <!-- core CSS -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+
+    <style>
+        .for-buyers-link a, .for-buyers-link-subl a {
+            background: #8C6D00 !important;
+        }
+
+        .home-link a, .for-buyers-link-sub2 a,.for-buyers-link-sub3 a, .for-buyers-link-subnew a {
+            background: transparent !important;
+        }
+
+            .home-link a:hover, .for-buyers-link-subl a:hover, .for-buyers-link-sub2 a:hover,.for-buyers-link-sub3 a:hover, .for-buyers-link-subnew a:hover {
+                background: #8C6D00 !important;
+            }
+
+        .bg-img-div {
+            background-image: url("../../images/contemporary colonial.jpg");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-size: 100% 1000px;
+            background-attachment: fixed;
+            background-attachment: fixed;
+        }
+
+        .background-img-container {
+            background: rgba(255, 255, 255, 0.76);
+        }
+
+        .buyers-info-content li, p {
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 31px;
+            text-align: justify;
+        }
+
+        .buyers-info {
+            background: transparent;
+        }
+
+            .buyers-info h1 {
+                text-align: center;
+                font-size: 80px;
+                font-weight: bold;
+                color: #000;
+                padding-top: 80px;
+                margin: 0;
+                margin-left: 37%;
+                letter-spacing: -8px;
+                font-family: bebas-neue, sans-serif;
+                transform: scale(1,1.3);
+                -webkit-transform: scale(1,1.3);
+                -moz-transform: scale(1,1.3);
+                -ms-transform: scale(1,1.3);
+                -o-transform: scale(1,1.3);
+            }
+
+
+
+                .buyers-info h1 span {
+                    color: #8C6D00 !important;
+                }
+
+            .buyers-info h3 {
+                text-align: center;
+                font-size: 25px;
+                font-weight: bold;
+                color: #FFF;
+                padding-bottom: 90px;
+                background-image: url('../../images/bar1-u7536.png');
+                background-repeat: no-repeat;
+                /* text-align: center; */
+                background-size: 100% 55px;
+                width: 68%;
+                margin: 0 auto;
+                margin-left: 22%;
+                position: relative;
+                margin-top: 0%;
+            }
+
+        @@media (max-width:1199px) {
+            .buyers-info h3 span {
+                margin-left: 2% !important;
+            }
+
+            .buyers-info h1 {
+                margin-left: 21%;
+                font-size: 71px;
+            }
+        }
+
+        @@media (max-width:991px) {
+            .buyers-info h3 {
+                font-size: 19px;
+            }
+        }
+
+        @@media (max-width:800px) {
+            .buyers-info h3 {
+                width: 100%;
+                margin-left: 16px;
+            }
+        }
+
+
+
+
+        @@media (max-width:767px) {
+
+            .buyers-info h1 {
+                margin-left: 10%;
+            }
+
+            .buyers-info h3 {
+                margin-left: 0px;
+            }
+        }
+
+
+
+        @@media (max-width:650px) {
+            .buyers-info h3 {
+                background-image: none;
+                color: #258EDF;
+            }
+        }
+
+        .buyers-info h3 span {
+            padding-top: 13px;
+            display: -webkit-inline-box;
+            margin-left: 32%;
+        }
+
+        .buyers-info h4 {
+            background-color: rgba(252, 209, 53, 0.81) !important;
+        }
+
+        .buyers-page-heading {
+            background: #8C6D00 !important;
+            color: #FFF;
+            font-size: 30px;
+            text-align: left;
+            padding: 5px;
+            border-radius: 5px;
+            padding: 15px;
+            font-weight: inherit;
+        }
+
+        .buyers-info-content {
+            background-color: transparent;
+            padding-bottom: 10px;
+            border: 0px solid #DDD;
+            margin-bottom: 0px;
+            color: #000;
+            font-size: 17px;
+        }
+
+        #bottom {
+            border-top: 3px solid #8C6D00 !important;
+        }
+
+        iframe {
+            border: 5px solid #000 !important;
+        }
+    </style>
+</head><!--/head-->
+<body class="homepage">
+    <div class="row" style="margin:0">
+        <!--<div class="fixed-img"></div>-->
+
+        <div class="container background-img-container">
+            <div class="buyers-info wow fadeInDown">
+                <h1><span style="color:#8C6D00;">BUYERS</span> INFO</h1>
+                <h3><span>THINGS EVERY BUYER SHOULD KNOW</span></h3>
+            </div>
+            <div class="row buyers-info-content wow fadeInDown">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">Now Everyone's a Winner</h1>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <p>Buying a home may be the biggest investment you'll ever make.  So you should be as prepared as possible, ready for anything, with a trusted professional on your side.</p>
+                    <p>And that's where a CENTURY 21® Buyer Representative can be a very valuable ally, ready to server your best interests.  Negotiate the best terms.  Provide you with the necessary information to make the best decisions.</p>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <iframe class="actAsDiv" width="100%" height="300" src="http://www.youtube.com/embed/-mlevfmLhtg?autoplay=0&amp;loop=0&amp;showinfo=0&amp;theme=light&amp;color=red&amp;controls=1&amp;modestbranding=0&amp;start=0&amp;fs=1&amp;iv_load_policy=1&amp;wmode=transparent&amp;rel=0" frameborder="0" allowfullscreen=""></iframe>
+                </div>
+            </div>
+
+            <div class="row buyers-info-content wow fadeInDown">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">Two Very Different Sides</h1>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <p>Buying a home may be the biggest investment you'll ever make. So you should be as prepared as possible, ready for anything, with a trusted professional on your side.</p>
+                    <p>And that's where a CENTURY 21® Buyer Representative can be a very valuable ally, ready to server your best interests. Negotiate the best terms. Provide you with the necessary information to make the best decisions..</p>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <iframe class="actAsDiv" width="100%" height="300" src="http://www.youtube.com/embed/-mlevfmLhtg?autoplay=0&amp;loop=0&amp;showinfo=0&amp;theme=light&amp;color=red&amp;controls=1&amp;modestbranding=0&amp;start=0&amp;fs=1&amp;iv_load_policy=1&amp;wmode=transparent&amp;rel=0" frameborder="0" allowfullscreen=""></iframe>
+                </div>
+            </div>
+
+            <div class="row buyers-info-content wow fadeInDown">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">What a Buyer Representative Does For You</h1>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <ul>
+                        <li>
+                            Provides all the information needed to help you
+                            make an educated decision.
+                        </li>
+                        <li>
+                            Uses unique CENTURY 21® technology tools to help
+                            you find the right location and home.
+                        </li>
+                        <li> Helps you evaluate specific properties.</li>
+                        <li>Helps you determine a fair market value.</li>
+                        <li>
+                            Works with you to develop negotiating strategies
+                            specific to the property and seller.
+                        </li>
+                        <li>
+                            Assists you in determining the most favorable price
+                            and terms to offer.
+                        </li>
+                        <li>Assists you in closing the transaction.</li>
+                        <li>Provides access to the full range of services available through the CENTURY 21® System. </li>
+                        <li>
+                            Makes available to you the full-service shopping convenience of home-related products and services
+
+                            through our exclusive Preferred Alliance Program.
+                        </li>
+                    </ul>
+
+                    @*<div class="col-xs-12 col-sm-6">
+                    <iframe class="actAsDiv" width="100%" height="300" src="http://www.youtube.com/embed/-mlevfmLhtg?autoplay=0&amp;loop=0&amp;showinfo=0&amp;theme=light&amp;color=red&amp;controls=1&amp;modestbranding=0&amp;start=0&amp;fs=1&amp;iv_load_policy=1&amp;wmode=transparent&amp;rel=0" frameborder="0" allowfullscreen=""></iframe>
+                </div>*@
+                </div>
+            </div>
+
+            <div class="row buyers-info-content wow fadeInDown">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">You Win With a Buyer Representative Who Will ...</h1>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <ul>
+                        <li>Be loyal and act in your best interests.</li>
+                        <li>Be loyal and act in your best interests strategies.</li>
+                        <li>Advise you in negotiating the best price and terms.</li>
+                        <li>
+                            Use state-of-the-art technology tools to help you
+                            find the right home.
+                        </li>
+                        <li>
+                            tt Disclose information to you about the property
+                            and/or seller's motivation within legal guidelines.
+                        </li>
+                        <li>
+                            Help you make informed decisions.
+
+                            A CENTURY 21® Buyer Representative can take the guesswork out of the sometimes challenging process of buying a home to assist you in buying the right home. Contact CENTURY 21 AA Realty for more information on Buyer Representative
+                        </li>
+
+                    </ul>
+                </div>
+                @*<div class="col-xs-12 col-sm-6">
+                    <iframe class="actAsDiv" width="100%" height="300" src="http://www.youtube.com/embed/-mlevfmLhtg?autoplay=0&amp;loop=0&amp;showinfo=0&amp;theme=light&amp;color=red&amp;controls=1&amp;modestbranding=0&amp;start=0&amp;fs=1&amp;iv_load_policy=1&amp;wmode=transparent&amp;rel=0" frameborder="0" allowfullscreen=""></iframe>
+                </div>*@
+            </div>
+
+            <div class="row buyers-info-content wow fadeInDown">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">How do you balance the odds...  when you're buying a home?</h1>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <ul>
+                        <p>Look at the variety of services your CENTURY 21 AA Realty Buyers Rep will perform for you:</p>
+                        <li>Provide extensive help in finding "your" home</li>
+                        <li> Share knowledge of current real estate market values</li>
+                        <li>Actively negotiate advantageous price and terms</li>
+                        <li>Explain and arrange preferable financing options</li>
+                        <li>Prepare and present offers to purchase</li>
+                        <li>Arrange and participate in closing</li>
+                        <li>Assure confidentiality </li>
+                        <li>Advise Buyers in areas of negotiation, strategizing and terms of offer to purchase</li>
+                    </ul>
+                </div>
+                @*<div class="col-xs-12 col-sm-6">
+                    <iframe class="actAsDiv" width="100%" height="300" src="http://www.youtube.com/embed/-mlevfmLhtg?autoplay=0&amp;loop=0&amp;showinfo=0&amp;theme=light&amp;color=red&amp;controls=1&amp;modestbranding=0&amp;start=0&amp;fs=1&amp;iv_load_policy=1&amp;wmode=transparent&amp;rel=0" frameborder="0" allowfullscreen=""></iframe>
+                </div>*@
+            </div>
+
+
+            <div class="row buyers-info-content wow fadeInDown">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">Agency Relationshop</h1>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <p>Buyer may choose to employ a real estate broker to represent his or her interests as a Buyer’s Agent, and if so, should enter into a written contract that clearly establishes the obligations of both the Buyer and the Buyer’s Agent and specifies how the Buyer’s Agent will be compensated.</p>
+                    <p style="font-weight:bold">Some of the duties of the Agent for the Buyer are to:</p>
+                    <ul>
+                        <li>Promote the best interest of the Buyer.</li>
+                        <li>Fully disclose to the Buyer any and all facts which might effect or influence the Buyer’s decision.</li>
+                        <li> Offer the property without regard to race, color, religion, sex, ancestry, national origin, handicap, or familial status.</li>
+                        <li>Treat all parties to a transaction honestly.</li>
+
+                    </ul>
+                    <p>First and Foremost, We Represent YOUR Interests, not the seller’s Our role is not to "sell" you a home, our job is to provide advice, expertise and counseling. • Advise Buyers in areas of negotiation, strategizing and terms of offer to purchase</p>
+                </div>
+                @*<div class="col-xs-12 col-sm-6">
+                    <iframe class="actAsDiv" width="100%" height="300" src="http://www.youtube.com/embed/-mlevfmLhtg?autoplay=0&amp;loop=0&amp;showinfo=0&amp;theme=light&amp;color=red&amp;controls=1&amp;modestbranding=0&amp;start=0&amp;fs=1&amp;iv_load_policy=1&amp;wmode=transparent&amp;rel=0" frameborder="0" allowfullscreen=""></iframe>
+                </div>*@
+            </div>
+
+
+            <div class="row buyers-info-content wow fadeInDown">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">Which Agent is "Right for You?"</h1>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <p style="font-weight:bold">Exclusive Buyer's Agent</p>
+                    <ul>
+                        <li>Consultation appointment to discuss your wants and needs.</li>
+                        <li>Suggests several reputable mortgage lenders with good rates and excellent reputations.</li>
+                        <li> Searches for your property in: Multiple listing Expired Listings For Sale By Owners Builders Exclusives Off Markets</li>
+                        <li>Stays objective about all properties so that all of the pros and cons of the property can be reviewed by the buyer</li>
+                        <li>Reviews all Due Diligence inspections and contingencies with the buyer.</li>
+                        <li>Prepares a Market Analysis for the buyer to determine the best price and terms for the buyer to offer</li>
+                        <li>Provides interpretation of conditions and values.</li>
+                        <li>Buyer Agents prepare offers that benefit the buyer and utilize negotiating skills to present offers to the seller on behalf of the buyer.</li>
+                        <li>Both the agent and buyer collaborate on the proper pricing and negotiation strategy's.</li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <p style="font-weight:bold">Traditional Agent</p>
+                    <ul>
+                        <li>Consultation appointment to discuss your wants and needs.</li>
+                        <li>Suggests several reputable mortgage lenders with good rates and excellent reputations.</li>
+                        <li>Searches for your property in: Multiple listing only</li>
+                        <li>Relates all of the good aspects of the property as the seller wishes.</li>
+                        <li>Reviews only the inspections and contingencies that the buyer specifically requests.</li>
+                        <li>Counsels on full asking price and terms in the best interest of the seller . Write offers for the benefit of the seller to be presented by the listing agent</li>
+                        <li> Provides interpretation of conditions and values.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row wow fadeInDown" style="margin:0; margin-bottom:50px;">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 style="color: #258EDF; font-size:20px;text-align: center;padding-bottom: 12px;">Buyers Agents negotiate for YOU!</h1>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script>
+        function toggleChevron(e) {
+            $(e.target)
+                .prev('.panel-heading')
+                .find("i.indicator")
+                .toggleClass('glyphicon-chevron-down glyphicon-chevron-right');
+        }
+        $('#accordion').on('hidden.bs.collapse', toggleChevron);
+        $('#accordion').on('shown.bs.collapse', toggleChevron);
+    </script>
+    <script>
+
+        $('#main-slider .carousel').carousel({
+            interval: 4000,
+            pause: false
+        })
+    </script>
+    <script>
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 150) {
+
+                $(".navbar-inverse").addClass("fixed-header");
+
+            }
+            else {
+                $(".navbar-inverse").removeClass("fixed-header");
+            }
+        });
+    </script>
+</body>
+</html>

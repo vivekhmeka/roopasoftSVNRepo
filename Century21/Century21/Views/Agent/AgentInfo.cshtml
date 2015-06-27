@@ -1,56 +1,247 @@
-﻿@model MVC.Models.AlphabeticalPagingViewModel
+﻿@model Century21.Models.AlphabeticalPagingViewAgents
 
 @{
     ViewBag.Title = "AgentInfo";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .home-link a {
+        background: transparent !important;
+    }
 
+    .agents-link a, .home-link a:hover {
+        background: #8C6D00  !important;
+    }
 
-<ul class="pagination alpha">
-    @foreach (var link in Model.Alphabet)
-    {
-        if (Model.FirstLetters.Contains(link) || (Model.NamesStartWithNumbers && link == "0-9") || link == "All")
-        {
-            if (Model.SelectedLetter == link || Model.SelectedLetter.IsEmpty() && link == "All")
-            {
-                <li class="active"><span>@link</span></li>
-            }
-            else
-            {
-                <li>@Html.ActionLink(link, "Index", new { selectedLetter = link })</li>
-            }
+    .agents-list-name {
+        width: 100%;
+        float: left;
+        background-color: rgba(205, 170, 43, 0.99);
+        padding: 5px 15px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #FFF;
+        font-weight: 400;
+        margin-bottom: 15px;
+    }
+
+    .text-center {
+        min-height: 220px;
+    }
+
+        .text-center img {
+            width: 100% !important;
+            height: 235px !important;
         }
-        else
-        {
-            <li class="inactive"><span>@link</span></li>
+
+    .agents-list-ul .col-md-2 {
+        width: 20% !important;
+    }
+
+    ul.pagination > li > a {
+        border: 0px solid #F1F1F1;
+        margin-right: 5px;
+        border-radius: 5px;
+        font-size: 16px;
+        color: #000;
+        padding: 5px 10px;
+        font-size: 30px;
+        font-weight: 300;
+        font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    }
+
+    .pagination-fixed {
+        position: fixed;
+        top: 70px;
+        z-index: 999;
+        background-color: #FFF;
+    }
+
+    @@media (max-width:991px) {
+        .text-center img {
+            width: 100% !important;
+            height: 190px !important;
         }
     }
-</ul>
-<ul>
-    @foreach (var item in Model.ProductNames)
-    {
-        <div class="col-sm-6 col-md-6" style=" cursor: pointer;">
 
-            <div class="row">
-                <div class="col-xs-12 col-sm-4 text-center">
-                    @*<img src="http://api.randomuser.me/portraits/women/21.jpg" alt="" class="center-block img-circle img-thumbnail img-responsive">*@
-                    <img src="http://dailychuckle.typepad.com/.a/6a00e54ee7a84388330134894291e5970c-250wi" alt="" class="center-block img-circle img-thumbnail img-responsive" style="width:76%;height:100px">
+    @@media (max-width:767px) {
+        .text-center img {
+            width: 220px !important;
+            height: 220px !important;
+        }
 
-                </div>
-                <!--/col-->
-                <div class="col-xs-12 col-sm-6">
-                    <h4>@item.AGENT_FNAME @item.AGENT_LNAME </h4>
-                    <b>Contact Number:</b> @item.AGENT_PHONE<br />
-                    <b>Email ID:</b>@item.AGENT_EMAIL
+        .agents-list-ul .col-md-2 {
+            width: 100% !important;
+        }
+    }
+</style>
+
+<script type="text/javascript">
+    debugger;
+
+    function AgentInfo(agentID) {
+        debugger;
+        window.location.href = '@Url.Action("AgentBio", "Agent")?ID=' + agentID;
+    }
+
+    $(function () {
+
+        var queryString = window.location.href.split('=');
+        if (queryString.length == 1) {
+            var selectedLetter = "A";
+            var asciiCode = selectedLetter.charCodeAt()
+            $('#hdnAlphabetical').val(--asciiCode);
+            BindAgentInformation(selectedLetter);
+        }
+        else if (queryString.length > 1) {
+            debugger;
+            var selectedLetter = queryString[1];
+            var asciiCode = selectedLetter.charCodeAt()
+            $('#hdnAlphabetical').val(--asciiCode);
+            BindAgentInformation(selectedLetter);
+        }
+    });
 
 
-                </div>
-                <!--/col-->
-                <div class="clearfix"></div>
+    function imgerror(object) {
 
-            </div>
 
+        var AgentId = $(object).attr("agentId");
+        var ImageSrc = $(object).attr("src");
+
+        if (ImageSrc.substr(ImageSrc.length - 7) != "_th.jpg") {
+            $(object).attr("src", "http://rpengine.realproconsulting.com/agents/" + AgentId + "_th.jpg");
+        }
+        else {
+            $(object).attr("src", "/images/user_icon.png");
+        }
+       // $(object).attr("src", "/images/user_icon.png");
+    }
+
+
+    function BindAgentInformation(selectedLetter) {
+        vData = { 'alphabeticalLetter': selectedLetter };
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("AgentsInformation", "Agent")',
+            datatype: "json",
+            data: vData,
+            success: function (result) {
+                var selectedAlphabet = $('#hdnAlphabetical').val();
+                var asciiCode = parseInt(selectedAlphabet);
+                asciiCode++;
+                debugger;
+
+                if (asciiCode == result.SelectedLetter.charCodeAt()) {
+                    //var queryString = window.location.href.split('=');
+                    //alert(queryString[1]);
+                    var dataTOBind = ' <div class="agents-list-name" id=id="Agent_"' + result.SelectedLetter + '>' + result.SelectedLetter + '</div>';
+                    var data = result.alphabeticalAgentInformation;
+                    debugger;
+                    if (data.length > 0) {
+                        $.each(data, function (count, item) {
+
+                            var agentImage = "http://rpengine.realproconsulting.com/agents/" + item.AGENTID + ".jpg";
+                            dataTOBind += ' <div class="col-sm-2 col-md-2" style=" cursor: pointer;"><div class="row"><div class=" col-sm-12 text-center" onclick="AgentInfo(' + item.AGENTID + ')">';
+
+                            dataTOBind += '<img src="' + agentImage + '" id="Agent' + item.AGENTID + '" agentId="' + item.AGENTID + '"alt="" class="img-thumbnail img-responsive" style="width:100%;height:100px" onError="imgerror(this);" ><h4>' + item.AGENT_FNAME + '</h4><h4>' + item.AGENT_LNAME + '</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><div class="clearfix"></div></div> </div>';
+                        });
+                    }
+                    else {
+                        dataTOBind += '<div class="col-sm-2 col-md-12" style=" cursor: pointer;"><h1 style="color: #1A1818;text-align:center;">No Agents</h1></div>';
+                    }
+
+                    $('.agents-list-ul').append(dataTOBind);
+                    $('#hdnAlphabetical').val(asciiCode);
+                }
+            },
+            error: function (err) {
+
+            }
+        });
+    }
+
+    $(function () {
+        $(window).scroll(function () {
+            if ($(document).height() == $(window).scrollTop() + $(window).height() || $(this).scrollTop() > 200) {
+                debugger;
+                var asciiCodeInString = $('#hdnAlphabetical').val();
+                var asciiCode = parseInt(asciiCodeInString) + 1;
+                var queryString = window.location.href.split('=');
+                var selectedLetter = String.fromCharCode(asciiCode);
+                if (queryString.length == 1) {
+
+                    if (64 < asciiCode && asciiCode < 91) {
+                        BindAgentInformation(selectedLetter);
+
+                    }
+                }
+            }
+        });
+    });
+</script>
+
+<img class="block" id="u1305_img" src="~/images/istock_000038645416med.jpg" alt="" style="width:100%;">
+<div class="container">
+    <div class="row">
+        <div class="clip_frame pinned-colelem" id="u1305">
+            <!-- image -->
         </div>
-    }
-</ul>
-<a id="alphabetA" href="@Url.Action("AgentInfo", "Agent", new { alphabet = "A" })">A</a>
+
+        <ul id="alphabets" style="font-size:25px" class="pagination alpha">
+            @foreach (var link in Model.Alphabet)
+            {
+                if (Model.SelectedLetter == link || Model.SelectedLetter.IsEmpty())
+                {
+                    <li class="active"><span>@link</span></li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink(link, "AgentInfo", new { selectedLetter = link })</li>
+
+                }
+            }
+        </ul>
+
+        <ul class="agents-list-ul" style="padding:0"></ul>
+
+        <input type="hidden" name="AgentRoleID" id="hdnAgentRoleID" value="@ViewBag.RoleID" />
+        @*@{
+            var character = Model.SelectedLetter.ToCharArray();
+            var asciicode = (int)character[0];
+            asciicode--;*@
+        <input type="hidden" name="selectedLetter" id="hdnAlphabetical" />
+        @*}*@
+
+    </div>
+</div>
+
+<script>
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 150) {
+
+            $(".navbar-inverse").addClass("fixed-header");
+
+        }
+        else {
+            $(".navbar-inverse").removeClass("fixed-header");
+        }
+    });
+
+    $(function () {
+        var queryString = window.location.href.split('=');
+        if (queryString.length > 1) {
+            $('html, body').animate({ scrollTop: $('#alphabets').offset().top - 200 }, 325);
+        }
+
+    });
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 400) {
+            $(".pagination").addClass("pagination-fixed");
+        }
+        else {
+            $(".pagination").removeClass("pagination-fixed");
+        }
+    });
+
+</script>

@@ -1,0 +1,301 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home</title>
+
+    <!-- core CSS -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <style>
+        .home-link a, .for-sellers-link-sub3 a, .for-sellers-link-sub4 a, .for-sellers-link-sub5 a {
+            background: transparent !important;
+        }
+
+            .for-sellers-link-sub2 a, .seller-link-main, .home-link a:hover, .for-sellers-link-sub3 a:hover, .for-sellers-link-sub4 a:hover, .for-sellers-link-sub5 a:hover {
+                background: #8C6D00 !important;
+            }
+
+
+
+
+        .bg-img-div {
+            background-image: url("../../images/contemporary colonial.jpg");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-size: 100% 1000px;
+            background-attachment: fixed;
+            background-attachment: fixed;
+        }
+
+        .background-img-container {
+            background: rgba(255, 255, 255, 0.76);
+        }
+
+        .buyers-info-content li, p {
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 31px;
+            text-align: justify;
+        }
+
+        .buyers-info {
+            background: transparent;
+        }
+
+            .buyers-info h1 {
+                text-align: center;
+                font-size: 80px;
+                font-weight: bold;
+                color: #000;
+                padding-top: 80px;
+                margin: 0;
+                margin-left: 22%;
+                letter-spacing: -8px;
+                font-family: bebas-neue, sans-serif;
+                transform: scale(1,1.3);
+                -webkit-transform: scale(1,1.3);
+                -moz-transform: scale(1,1.3);
+                -ms-transform: scale(1,1.3);
+                -o-transform: scale(1,1.3);
+            }
+
+
+
+                .buyers-info h1 span {
+                    color: #8C6D00 !important;
+                }
+
+            .buyers-info h3 {
+                text-align: center;
+                font-size: 25px;
+                font-weight: bold;
+                color: #FFF;
+                padding-bottom: 90px;
+                background-image: url('../../images/bar1-u7536.png');
+                background-repeat: no-repeat;
+                /* text-align: center; */
+                background-size: 100% 55px;
+                width: 68%;
+                margin: 0 auto;
+                margin-left: 22%;
+                position: relative;
+                margin-top: 0%;
+            }
+
+        @@media (max-width:1199px) {
+            .buyers-info h3 span {
+                margin-left: 2% !important;
+            }
+
+            .buyers-info h1 {
+                margin-left: 21%;
+                font-size: 53px;
+            }
+        }
+
+        @@media (max-width:991px) {
+            .buyers-info h3 {
+                font-size: 19px;
+            }
+        }
+
+        @@media (max-width:800px) {
+            .buyers-info h3 {
+                width: 100%;
+                margin-left: 10px;
+            }
+        }
+
+
+
+
+        @@media (max-width:767px) {
+
+            .buyers-info h1 {
+                margin-left: 10%;
+            }
+
+            .buyers-info h3 {
+                margin-left: 0px;
+            }
+        }
+
+
+
+        @@media (max-width:650px) {
+            .buyers-info h3 {
+                background-image: none;
+                color: #258EDF;
+            }
+        }
+
+        .buyers-info h3 span {
+            padding-top: 13px;
+            display: -webkit-inline-box;
+            margin-left: 32%;
+        }
+
+        .buyers-info h4 {
+            background-color: rgba(252, 209, 53, 0.81) !important;
+        }
+
+        .buyers-page-heading {
+            background: #8C6D00 !important;
+            color: #FFF;
+            font-size: 30px;
+            text-align: left;
+            padding: 5px;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 0px;
+            font-weight: inherit;
+        }
+
+        .buyers-info-content {
+            background-color: transparent;
+            padding-bottom: 10px;
+            border: 0px solid #DDD;
+            margin-bottom: 0px;
+            color: #000;
+            font-size: 17px;
+        }
+
+        #bottom {
+            border-top: 3px solid #8C6D00 !important;
+        }
+
+        iframe {
+            border: 5px solid #000 !important;
+        }
+
+        .shape {
+            width: 0;
+            height: 0;
+            border-left: 55px solid transparent;
+            border-right: 55px solid transparent;
+            border-top: 80px solid #8C6D00 !important;
+            margin-left: 43%;
+        }
+    </style>
+</head><!--/head-->
+<body class="homepage">
+
+    <div class="row" style="margin:0">
+        <!--<div class="fixed-img"></div>-->
+
+        <div class="container background-img-container">
+            <div class="buyers-info wow fadeInDown">
+                <h1><span>SELLING </span>PROCESS</h1>
+                <h3><span>THINGS EVERY BUYER SHOULD KNOW</span></h3>
+            </div>
+            <div class="row buyers-info-content wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown; -webkit-animation-name: fadeInDown;">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">Home Inspection  >  Obtain Real Estate Tax Bills, Survey  >  Research Data/CMA  >  Interpret Data  >  Verify Tax Info</h1>
+                </div>
+
+                <div class="col-xs-12"><div class="shape"></div></div>
+
+                <div class="col-xs-12 col-sm-12">
+                    <p style="font-weight:bold; text-align:center; font-size:20px; padding-top:10px;margin-top: 20px;margin-bottom: 40px;">Obtain Permits & C/O's  >  Verify Mortgage Balances  >  Review Legal Disclosures</p>
+                </div>
+            </div>
+
+            <div class="row buyers-info-content wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown; -webkit-animation-name: fadeInDown;">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">Prepare Marketing Material  > Listing Proposal</h1>
+                </div>
+                <div class="col-xs-12"><div class="shape"></div></div>
+                <div class="col-xs-12 col-sm-12">
+                    <p style="font-weight:bold; text-align:center; font-size:20px; padding-top:10px;margin-top: 20px;margin-bottom: 40px;">
+                        Review needed repairs  > De-cluttering  >  Staging  >  Photos/Virtual Tour
+                    </p>
+                </div>
+            </div>
+
+            <div class="row buyers-info-content wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown; -webkit-animation-name: fadeInDown;">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">Post Online  >  Promote in Office & Industry  >  Discuss Feedback</h1>
+                </div>
+                <div class="col-xs-12"><div class="shape"></div></div>
+                <div class="col-xs-12 col-sm-12">
+                    <p style="font-weight:bold; text-align:center; font-size:20px; padding-top:10px;margin-top: 20px;margin-bottom: 40px;">
+                        Order for Sale Sign   >  Send just listed cards  >  Schedule Public Open House
+                    </p>
+                </div>
+            </div>
+
+            <div class="row buyers-info-content wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown; -webkit-animation-name: fadeInDown;">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">Discuss Security Measures  >  Availability  Details  >  Review showing procedures  >Discuss Buyer Profile</h1>
+                </div>
+                <div class="col-xs-12"><div class="shape"></div></div>
+                <div class="col-xs-12 col-sm-12">
+                    <p style="font-weight:bold; text-align:center; font-size:20px; padding-top:10px;margin-top: 20px;margin-bottom: 40px;">
+                        Discuss/Review offers  >  Explain Negotiation Process  >  Inspection
+                    </p>
+                </div>
+            </div>
+            <div class="row buyers-info-content wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown; -webkit-animation-name: fadeInDown;">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">Contract Preparation  >  Expeditor  >  Termite  >  Appraisal</h1>
+                </div>
+                <div class="col-xs-12"><div class="shape"></div></div>
+                <div class="col-xs-12 col-sm-12" style="margin-bottom:50px;">
+                    <p style="font-weight:bold; text-align:center; font-size:20px; padding-top:10px;margin-top: 20px;margin-bottom: 40px;">
+                        Walk-Thru  >  Switch Over Utilities  >  Closing
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function toggleChevron(e) {
+            $(e.target)
+                .prev('.panel-heading')
+                .find("i.indicator")
+                .toggleClass('glyphicon-chevron-down glyphicon-chevron-right');
+        }
+        $('#accordion').on('hidden.bs.collapse', toggleChevron);
+        $('#accordion').on('shown.bs.collapse', toggleChevron);
+    </script>
+    <script>
+
+        $('#main-slider .carousel').carousel({
+            interval: 4000,
+            pause: false
+        })
+    </script>
+    <script>
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 150) {
+
+                $(".navbar-inverse").addClass("fixed-header");
+
+            }
+            else {
+                $(".navbar-inverse").removeClass("fixed-header");
+            }
+        });
+    </script>
+</body>
+</html>

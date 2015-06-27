@@ -1,0 +1,172 @@
+﻿@{
+    ViewBag.Title = "ForBuyers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home</title>
+
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <style>
+        .buyers-info {
+            background: #f5f5f5;
+        }
+
+        .for-buyers-link a {
+            background: #8C6D00 !important;
+        }
+
+        .home-link a, .for-buyers-link-subl a, .for-buyers-link-sub2 a, .for-buyers-link-sub3 a, .for-buyers-link-subnew a {
+            background: transparent !important;
+        }
+
+            .home-link a:hover, .for-buyers-link-subl a:hover, .for-buyers-link-sub2 a:hover,.for-buyers-link-subnew a:hover, .for-buyers-link-sub3 a:hover {
+                background: #8C6D00 !important;
+            }
+
+        .buyers-info h1 {
+            text-align: center;
+            font-size: 50px;
+            font-weight: bold;
+            color: #258EDF;
+            padding-top: 50px;
+            margin: 0;
+        }
+
+        .buyers-info h3 {
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            color: #258EDF;
+            padding-bottom: 50px;
+        }
+
+        .buyers-info h4 {
+            background-color: rgba(252, 209, 53, 0.81) !important;
+        }
+
+        .buyers-page-heading {
+            background: #8C6D00 !important;
+            color: #FFF;
+            font-size: 30px;
+            text-align: center;
+            padding: 5px;
+            border-radius: 5px;
+            padding: 15px;
+        }
+
+        .buyers-info-content {
+            background-color: whitesmoke;
+            padding-bottom: 10px;
+            border: 2px solid #DDD;
+            margin-bottom: 15px;
+        }
+    </style>
+</head><!--/head-->
+<body class="homepage">
+
+    <div class="row" style="margin:0">
+        <!--<div class="fixed-img"></div>-->
+        <div class="buyers-info wow fadeInDown">
+            <h1 style="padding-top:30px; padding-bottom:30px;">Buying Your Home</h1>
+            <img src="~/images/robertmosesbridge.jpg" width="100%">
+        </div>
+        <div class="container">
+            <div class="row buyers-info-content wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown; -webkit-animation-name: fadeInDown; margin-top:15px;">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">A Comfortable Process</h1>
+                </div>
+                <div class="col-xs-12 col-sm-8">
+                    <p style="text-align:justify">
+                        For anyone from first-time home buyers, to veterans in the market, Century 21 AA Realty will make
+                        you comfortable with the process and ensure you are satisfied with every  aspect of your new home. Please contact us to set up a
+                        meeting so we can discuss your individual needs and move forward in making your dream a reality.
+                    </p>
+                </div>
+                <div class="col-xs-12 col-sm-4"><img src="~/images/house7.jpg"></div>
+
+            </div>
+            <div class="wow fadeInDown" style="color:#8C6D00 !important;font-size: 25px;font-weight: 600;padding: 30px 0px; text-align:center">
+                CLICK the Arrow to View More Listings...
+                <a href="@Url.Action("Index", "AdvancedSearch")"> <img src="~/images/arrow07-u3606.png" width="70px" style="cursor:pointer"></a>
+            </div>
+            <div class="row buyers-info-content wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown; -webkit-animation-name: fadeInDown;">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">Long Island</h1>
+                </div>
+                <div class="col-xs-12 col-sm-8">
+                    <p style="text-align:justify">
+                        First of all, congratulations on moving to such a diverse and exciting place,
+                        you are going to love it. Those of you moving within the city may be looking at a new
+                        neighborhood to suit a changing lifestyle. Whatever your familiarity with the city,rest-assured that
+                        Century 21 AA Realty knows everyneighborhood and can help pick what is right for you.
+                    </p>
+                    <p style="text-align:justify">
+                        Long Island has so much to offer as a whole and with a finger on the pulse of
+                        listings throughout the city, in a wide-range of communities, C21 AA can help you
+                        explore the characteristics that are most important to you.
+                    </p>
+                </div>
+                <div class="col-xs-12 col-sm-4"><img src="~/images/island.png" width="100%"></div>
+            </div>
+
+            <div class="row buyers-info-content wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown; -webkit-animation-name: fadeInDown;">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">Mortgage Information</h1>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <p style="text-align:center"><img src="~/images/mortgage-u3582.png" style="background-color: #1E76CD;padding: 10px;border-radius: 20px;"></p>
+                    <p style="text-align:justify">
+                        Hearth is committed to seeing your dream through to the end. With over 20 years of
+                        experience in the real estate market, we can help you figure out what you can afford
+                        and get you the advice you need throughout the process.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleChevron(e) {
+            $(e.target)
+                .prev('.panel-heading')
+                .find("i.indicator")
+                .toggleClass('glyphicon-chevron-down glyphicon-chevron-right');
+        }
+        $('#accordion').on('hidden.bs.collapse', toggleChevron);
+        $('#accordion').on('shown.bs.collapse', toggleChevron);
+    </script>
+    <script>
+
+        $('#main-slider .carousel').carousel({
+            interval: 4000,
+            pause: false
+        })
+    </script>
+    <script>
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 150) {
+
+                $(".navbar-inverse").addClass("fixed-header");
+
+            }
+            else {
+                $(".navbar-inverse").removeClass("fixed-header");
+            }
+        });
+    </script>
+</body>
+</html>
+

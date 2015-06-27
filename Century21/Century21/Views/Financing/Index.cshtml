@@ -1,0 +1,286 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html class="html" lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home</title>
+
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+
+    <style>
+        .home-link a {
+            background: transparent !important;
+        }
+
+            .financing-link a, .home-link a:hover {
+                background: #8C6D00 !important;
+            }
+
+        .bg-img-div {
+            background-image: url("../../images/contemporary colonial.jpg");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-size: 100% 1000px;
+            background-attachment: fixed;
+            background-attachment: fixed;
+        }
+
+        .background-img-container {
+            background: rgba(255, 255, 255, 0.76);
+        }
+
+        .buyers-info-content li, p {
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 31px;
+            text-align: justify;
+        }
+
+        .buyers-info {
+            background: transparent;
+        }
+
+            .buyers-info h1 {
+                text-align: center;
+                font-size: 80px;
+                font-weight: bold;
+                color: #000;
+                padding-top: 80px;
+                margin: 0;
+                margin-left: 24%;
+                letter-spacing: -8px;
+                font-family: bebas-neue, sans-serif;
+                transform: scale(1,1.3);
+                -webkit-transform: scale(1,1.3);
+                -moz-transform: scale(1,1.3);
+                -ms-transform: scale(1,1.3);
+                -o-transform: scale(1,1.3);
+            }
+
+                .buyers-info h1 span {
+                    color: #8C6D00 !important;
+                }
+
+            .buyers-info h3 {
+                text-align: center;
+                font-size: 25px;
+                font-weight: bold;
+                color: #FFF;
+                padding-bottom: 90px;
+                background-image: url('../../images/bar1-u7536.png');
+                background-repeat: no-repeat;
+                /* text-align: center; */
+                background-size: 100% 55px;
+                width: 68%;
+                margin: 0 auto;
+                margin-left: 22%;
+                position: relative;
+                margin-top: 0%;
+            }
+
+        @@media (max-width:1199px) {
+            .buyers-info h3 span {
+                margin-left: 2% !important;
+            }
+
+            .buyers-info h1 {
+                margin-left: 21%;
+                font-size: 71px;
+            }
+        }
+
+        @@media (max-width:991px) {
+            .buyers-info h3 {
+                font-size: 19px;
+            }
+
+            .buyers-info h1 {
+                margin-left: 21%;
+                font-size: 56px;
+            }
+        }
+
+        @@media (max-width:800px) {
+            .buyers-info h3 {
+                width: 100%;
+                margin-left: 0px;
+            }
+        }
+
+
+
+
+        @@media (max-width:767px) {
+
+            .buyers-info h1 {
+                margin-left: 10%;
+            }
+
+            .buyers-info h3 {
+                margin-left: 0px;
+            }
+        }
+
+
+
+        @@media (max-width:650px) {
+            .buyers-info h3 {
+                background-image: none;
+                color: #258EDF;
+            }
+        }
+
+        .buyers-info h3 span {
+            padding-top: 13px;
+            display: -webkit-inline-box;
+            margin-left: 32%;
+        }
+
+        .buyers-info h4 {
+            background-color: rgba(252, 209, 53, 0.81) !important;
+        }
+
+        .buyers-page-heading {
+            background: #8C6D00 !important;
+            color: #FFF;
+            font-size: 30px;
+            text-align: left;
+            padding: 5px;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 0px;
+            font-weight: inherit;
+        }
+
+        .buyers-info-content {
+            background-color: transparent;
+            padding-bottom: 10px;
+            border: 0px solid #DDD;
+            margin-bottom: 0px;
+            color: #000;
+            font-size: 17px;
+        }
+
+        #bottom {
+            border-top: 3px solid #8C6D00 !important;
+        }
+
+        iframe {
+            border: 5px solid #000 !important;
+        }
+    </style>
+</head>
+<!--/head-->
+<body class="homepage">
+    <div class="row" style="margin: 0">
+        <!--<div class="fixed-img"></div>-->
+        <div class="container background-img-container">
+            <div class="buyers-info">
+                <h1><span>FINANCE</span> OPTIONS</h1>
+                <h3><span>THINGS EVERY BUYER SHOULD KNOW</span></h3>
+            </div>
+
+            <div class="row buyers-info-content">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">Mortgages Today</h1>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <p>If you listen to the headlines, this may appear to be a difficult time for lining up financing for the home you want to buy. But headlines can be deceiving. Burned by losses in sub-prime loans, banks have understandably tightened their requirements for creditworthiness. But there is, in fact, plenty of money available for qualified borrowers. And rates are historically low.</p>
+                    <p>So don’t let mortgage worries keep you from shopping for that home of your dreams. We can identify companies and loan officers who will help. It would be wise to seek our expert help to find the loan that is right for you. We deal with mortgage lenders every day so we know the reputations of local firms thoroughly.</p>
+                    <p>Loan companies often have different standards for qualifying customers; some are willing to look at a less-than-perfect credit rating generously, while others are quite strict in that regard. A firm whose paperwork for granting a loan is extensive and time consuming may not fit your timeframe.</p>
+                    <p>Sometimes lenders with low interest rates will have very stringent guidelines for underwriting loans. They may not make loans on certain kinds of property or be willing to deal with people who are marginally qualified.</p>
+                    <p>We can discuss your needs and suggest several possible firms whose loan programs may be right for you.</p>
+                </div>
+            </div>
+
+            <div class="row buyers-info-content">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">Your First Mortgage</h1>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <p>The prospect of going to a lender and asking for your first mortgage can be a nerve-wracking experience. You may be concerned because you are new on the job or have not built up a strong credit history. Lending institutions are more concerned about your future ability to meet payments than what your past history showed. A secure job and future prospects will mean more to a lender than the fact that you've been a starving student for the past few years!</p>
+                    <p>The mortgage options for first-time homebuyers typically include:</p>
+                    <p>ADJUSTABLE RATE MORTGAGES – These start with a low introductory rate, then adjust to the prevailing rate at set intervals throughout the loan. They are attractive to new borrowers because monthly payments are low at the beginning, and it is hoped that rising salaries and home values will make later payments affordable. But as the current mortgage crisis demonstrates, hopes are sometimes dashed by reality.</p>
+                    <p>GRADUATED PAYMENT MORTGAGES – Like Adjustables, the payments rise over time, but more predictably because the increased payments are predetermined.</p>
+                    <p>FIXED RATE MORTGAGES – These are the safest loan instruments because the interest rate is set for the life of the loan. And rates these days are very attractive. Fixed Rate mortgages typically require better credit history and a higher down payment, but they are recommended for those you can qualify.</p>
+                </div>
+            </div>
+
+            <div class="row buyers-info-content">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">How Much to Borrow</h1>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <p>
+                        When you’re figuring out how much you need to buy a home, don’t simply add up the down payment and closing costs. You should also include incidental costs such as moving expenses and any repairs or refurbishing you may want to do. It’s important to leave yourself a financial cushion to cover costs of this sort.
+                    </p>
+                    <p>Some lenders stipulate that buyers must have such a cushion, equal to about two or three months of mortgage payments, set aside in a bank account. If you are putting down less than 10 percent on your house, this is very likely to be a condition of your mortgage loan.</p>
+                </div>
+            </div>
+
+            <div class="row buyers-info-content" style="padding-bottom:75px;">
+                <div class="col-xs-12 col-sm-12">
+                    <h1 class="buyers-page-heading">Mortgage Protection Insurance</h1>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <p>
+                        When you take out a new mortgage you will undoubtedly be offered mortgage insurance. If you have only a small down payment, some lenders may require it in order to make the loan.
+                        Having your mortgage insured so as to provide a security for your family is a very basic part of estate planning.
+                    </p>
+                    <p>
+                        Purchasing mortgage insurance is, like purchasing any kind of insurance, best researched.
+                        You may, in fact, be able to increase the amount of your present life insurance policy to cover the mortgage amount and have it cost you less than separate mortgage insurance. You should ask your insurance agent what they have to offer.
+                    </p>
+                    <p>
+                        If you do choose to take the mortgage insurance that is offered, check what the policy covers. The policy may cover you only for accidental death or may only pay half of the mortgage in the event of the death of one of two joint owners. Ideally the insurance covers both owners. Dealing with the grief of losing a mate and also possibly the job of being a single parent is a tremendous burden. Having a home with no mortgage payment would not remove the grief but would decrease additional financial stress.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/#bottom-->
+    <script>
+        function toggleChevron(e) {
+            $(e.target)
+                .prev('.panel-heading')
+                .find("i.indicator")
+                .toggleClass('glyphicon-chevron-down glyphicon-chevron-right');
+        }
+        $('#accordion').on('hidden.bs.collapse', toggleChevron);
+        $('#accordion').on('shown.bs.collapse', toggleChevron);
+    </script>
+    <script>
+
+        $('#main-slider .carousel').carousel({
+            interval: 4000,
+            pause: false
+        })
+    </script>
+    <script>
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 150) {
+
+                $(".navbar-inverse").addClass("fixed-header");
+
+            }
+            else {
+                $(".navbar-inverse").removeClass("fixed-header");
+            }
+        });
+    </script>
+</body>
+</html>

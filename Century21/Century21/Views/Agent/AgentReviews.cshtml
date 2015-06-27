@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "AgentReviews";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AgentReviews</h2>
+
+<div class="form-group">
+    @*@Html.LabelFor(model => model.AGENT_ImageNew)*@
+    <input id="fileUpload" style=" margin-top: 15px;" name="file" type="file" class="validationRequired" onchange="ReadUrl(this)" />
+</div>

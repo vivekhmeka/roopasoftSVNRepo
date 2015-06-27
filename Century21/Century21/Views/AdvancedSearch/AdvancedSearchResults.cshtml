@@ -1,0 +1,320 @@
+﻿@model List<Century21.Models.storedResult>
+    @*@model Century21.Models.FilterProperties*@
+
+
+    @{
+        ViewBag.Title = "SearchResults";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        int count = 0;
+        int i = 0;
+        string aID = "";
+
+    }
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false"></script>
+    <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.8/src/markerwithlabel.js"></script>
+    <script src="~/Scripts/jquery.blockUI.js"></script>
+    <style>
+        .leftside-content-scroll .media-body {
+            font-size: 14px !important;
+            font-weight: 700 !important;
+            line-height: 10px !important;
+        }
+ .home-link a {
+        background: transparent !important;
+    }
+
+    .home-link a:hover {
+        background: #8C6D00  !important;
+    }
+    </style>
+    <div>
+        <script type="text/javascript">
+            var Listtype = '@ViewBag.Listtype';
+            $(document).ready(function () {
+                $("#btnSendAgentEmail").click(function () {
+                    debugger;
+                    var mlNumber = $("#txtmlNumber").val();
+                    var CustomerEmail = $("#txtFromEmail").val();
+                    var agentFirstName = $("#txtagentFirstName").val();
+                    var AgentEmail = $("#txtEmailAgent").val();
+                    var name = $("#txtName").val();
+                    var Phone = $("#txtPhone").val();
+                    var query = $("#txtAreaQuery").val();
+                    $.ajax({
+                        url: "@Url.Action("SendQuery", "Agents")",
+                        data: { Phone: Phone, mlNumber: mlNumber, AgentName: agentFirstName, CustomerEmail: CustomerEmail, AgentEmail: AgentEmail, name: name, query: query },
+                        success: function () {
+                            alert("mail sent succesfully");
+                        }
+                    })
+                });
+            });
+            $('#myTab a').click(function (e) {
+                e.preventDefault()
+                $(this).tab('show')
+            })
+            $("input:checkbox").click(function () {
+                if ($(this).is(":checked")) {
+                    var group = "input:checkbox[name='" + $(this).attr("name") + "']";
+                    $(group).prop("checked", false);
+                    $(this).prop("checked", true);
+                } else {
+                    $(this).prop("checked", false);
+                }
+            });
+
+            $("#SubmitId").click(function () {
+                debugger;
+                var searchedkey = $('#city').val();
+                var price = $('#price').val();
+                var price;
+                $("input[name='price']:checked"), function () {
+                    price = $(this).val();
+                }
+                var beds = $('#beds').val();
+                var Listtype = $('#Listtype').val();
+                debugger;
+                if (Listtype == null) {
+                    Listtype = "";
+                }
+                window.location.href = '@Url.Action("SearchDetail", "AdvancedSearch")?searchKey=' + searchedkey + '&beds=' + beds + '&price=' + price + '&Listtype=' + Listtype;
+            });
+
+
+            $(document).ready(function () {
+                //$('#Listtype1').multiselect();
+                //$('#price1').multiselect();
+                //$('#beds').multiselect();
+
+                @* $("#SubmitId").click(function () {
+               //$.blockUI({ message: '<h3> <img src=@Url.Content("~/Images/Loading.gif") /></h3>' });
+               $.blockUI({ message: '<h3></h3>' });
+           });*@
+
+                @*$.blockUI({ message: '<h3> <img src=@Url.Content("~/Images/Loading.gif") /></h3>' });*@
+                $.blockUI({ message: '<h3></h3>' });
+                $('#myCarousel').carousel({
+                    interval: 2000
+                });
+
+                var clickEvent = false;
+                $('#myCarousel').on('click', '.nav a', function () {
+                    clickEvent = true;
+                    $('.nav li').removeClass('active');
+                    $(this).parent().addClass('active');
+                }).on('slid.bs.carousel', function (e) {
+
+                    if (!clickEvent) {
+                        var count = $('.nav').children().length - 1;
+                        var current = $('.nav li.active');
+                        current.removeClass('active').next().addClass('active');
+                        var id = parseInt(current.data('slide-to'));
+                        if (count == id) {
+                            $('.nav li').first().addClass('active');
+                        }
+                    }
+                    clickEvent = false;
+                });
+
+                var vData = new Array();
+                var marker = [];
+                var markersArray = [];
+                var map;
+
+                var mapOptions = {
+                    zoom: 8,
+                    center: new google.maps.LatLng(40.884340, -102.468240)
+                };
+                map = new google.maps.Map(document.getElementById('GMap'),
+                    mapOptions);
+                google.maps.event.addListenerOnce(map, 'tilesloaded', function () {
+                    $.unblockUI();
+                });
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SearchDetailforMap", "AdvancedSearch")',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (data) {
+                        debugger;
+                      
+                        @*$.blockUI({ message: '<h3> <img src=@Url.Content("~/Images/Loading.gif") /></h3>' });*@
+                        $.blockUI({ message: '<h3></h3>' });
+                        var vData = new Array();
+                        $.each(data.result, function (i, item) {
+                            // var vRow = [item.latitude, item.longitude, item.street, item.county, item.state, item.url, item.beds, item.list_price, item.baths, item.ml_number];
+                            var vRow = [item.latitude, item.longitude, item.street, item.county, item.state, item.url, item.beds, item.list_price, item.baths, item.ml_number, item.address, item.city, item.zip];
+                            vData.push(vRow);
+                        });
+
+                        marker = [];
+                        for (var i = 0; i < markersArray.length; i++) {
+                            if (markersArray[i] != undefined)
+                                markersArray[i].setMap(null);
+                        }
+                        markersArray = [];
+                        if (vData.length == 0) {
+                            var latlng = new google.maps.LatLng(-34.397, 150.644);
+
+                        } else {
+                            var latlng = new google.maps.LatLng(vData[0][0], vData[0][1]);
+                        }
+                        var bounds = new google.maps.LatLngBounds();
+                        bounds.extend(latlng);
+
+                        markersArray.push(newmarker);
+                        map.setZoom(12);
+                        for (var i = 0; i < vData.length; i++) {
+                            var data = vData[i];
+                            var roomstext = "";
+                            var bathtext = "";
+                            if (isNaN(parseInt(data[6]))) {
+                                roomstext = "0 Room";
+                            }
+                            else {
+                                roomstext = (parseInt(data[6]) > 1 ? "Rooms" : "Room");
+                            }
+                            if (isNaN(parseInt(data[8]))) {
+                                bathtext = "0 Baths";
+                            }
+                            else {
+                                bathtext = (parseInt(data[8]) > 1 ? "Baths" : "Bath");
+                            }
+
+                            debugger;
+                            var last3digit = data[9].substring(data[9].length - 3);
+                            var image1 = "http://links.mlslirealtor.com/mlsphotos/FULL/1/" + last3digit + "/" + data[9] + ".jpg";
+                            @*//var data7 = data[7];
+                        //@String.Format("{0:C}", data[7]);*@
+                            //var hoverData = "<img width='50px' height='50px' src='" + image1 + "' /><p>" + data[2] + ',' + data[3] + ',' + data[4] + "</p><p>$" + data[7] + "<br/>" + data[6] + ' ' + roomstext + "," + data[8] + bathtext + "</p>";
+                            var hoverData = "<img width='50px' height='50px' src='" + image1 + "' /><p>" + data[10] + ',' + data[11] + ',' + data[4] + ',' + data[12] + "</p><p>$" + data[7] + "<br/>" + data[6] + ' ' + roomstext + "," + data[8] + bathtext + "</p>";
+                            var newmarker = new MarkerWithLabel({
+                                position: new google.maps.LatLng(data[0], data[1]),
+                                map: map,
+                                icon: '@Url.Content("~/Images/mouse_off.png")',
+                                draggable: false,
+                                html: hoverData,
+                                mapdiv: i,
+                                raiseOnDrag: false,
+                                labelInBackground: false
+                            });
+
+                            markersArray.push(newmarker);
+                            var contentString = "test";
+
+                            var infowindow = new google.maps.InfoWindow({
+                                content: contentString
+                                // put  it  default data  don't remove
+                            });
+                            google.maps.event.addListener(newmarker, "mouseover", function (e) {
+
+                                this.setIcon('@Url.Content("~/Images/mouse_on.png")');
+                                infowindow.setContent(this.html);
+                                infowindow.open(map, this);
+                            });
+
+                            google.maps.event.addListener(newmarker, 'mouseout', function () {
+                                //this.set('labelContent', "<div id='circle_off'></div>");
+                                this.setIcon('@Url.Content("~/Images/mouse_off.png")');
+                                infowindow.close();
+                            });
+                            google.maps.event.addListener(newmarker, 'click', function () {
+                                debugger;
+                                //$("#" + this.mapdiv).click();
+                                window.location.href = '@Url.Action("PropertyDetail", "Home")?street=' + data[2] + '&ml_number=' + data[9] + '&cityIs=' + data[3];
+                            });
+                        }
+
+                        map.fitBounds(bounds);
+                        map.fitBounds(bounds);
+                        var listener = google.maps.event.addListener(map, "idle", function () {
+                            if (map.getZoom() > 16) map.setZoom(14);
+                            google.maps.event.removeListener(listener);
+                        });
+                        $.unblockUI();
+                    }, error: function (error) { debugger; $.unblockUI(); }
+                });
+            });
+
+            function clickMedia(obj) {
+                debugger;
+                var ml_number = $(obj).attr('mlnumber');
+                var street = $(obj).attr('address');
+                var searchType = "AdvancedSearch";
+                window.location.href = '@Url.Action("PropertyDetail", "Home")?street=' + street + '&ml_number=' + ml_number + '&cityIs=' + street + '&searchType=' + searchType;
+            }
+        </script>
+
+        <div class="row" style="margin: 0">
+            <div class="container"></div>
+            <div class="leftside-content-scroll col-xs-12 col-sm-4" leftside-content">
+                <div style="color: #258EDF;font-weight: bold;font-size: 18px;padding-top: 10px;">
+                    @if (Model == null)
+                    {
+                        <span class="resultsProperties">Your search has produced 0 results.</span>
+                    }
+                    else
+                    {
+                        @*<div style="float:right" class="col-xs-12 col-sm-6">
+                                <div class="col-md-8">
+                                    <img src="~/images/ios7-search-strong.png" width="20px" />
+                                    Advanced Search
+                                </div>
+                                <div class="">
+                                    Sort by price
+                                </div>
+                            </div>*@
+
+                        <span class="resultsProperties">Your search has produced @Model.Count results.</span>
+                        foreach (var item in Model)
+                        {
+                            var last3digit = item.ml_number.Substring(item.ml_number.Length - 3);
+                            var image1 = "http://links.mlslirealtor.com/mlsphotos/FULL/1/" + last3digit + "/" + item.ml_number + ".jpg";
+                            <div class="media" id="@count" data-toggle="modal" mlnumber="@item.ml_number" street="@item.street" address="@item.address" onclick="clickMedia(this)">
+                                <a href="#" class="pull-left">
+                                    <img src="@image1" class="media-object" style="width: 126px; height:135px" alt='' />
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">
+                                        <a><b>@item.address &nbsp; @item.city ,&nbsp;@item.state @item.zip</b></a>
+                                    </h4>
+                                    <p class="rent-div">
+                                        <span>
+                                            <img src="~/Images/mouse_off.png" style="width: 14px;" />
+                                        </span>&nbsp; @System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(item.list_type)
+                                    </p>
+                                    <p class="doller-div"><b>@String.Format("{0:C}", item.list_price) </b></p>
+                                    <p class="db-div"><b>Bedrooms:</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@item.beds</p><p> <b>Bathrooms:</b>&nbsp;&nbsp;&nbsp;&nbsp; @item.baths</p>
+                                    @*@{   ((DateTime.Now-item.list_date).value.TotalDays}*@
+                                    <p class="db-div">Days on the market <b>@((DateTime.Now.Date - item.list_date.Value.Date).Days)</b></p>
+
+                                    @{
+                            aID = item.list_agent_id;
+                            var agentImage = "";
+                            WebClient client = new WebClient();
+                            try
+                            {
+                                client.DownloadData("http://rpengine.realproconsulting.com/agents/" + aID + ".jpg");
+                                agentImage = "http://rpengine.realproconsulting.com/agents/" + aID + ".jpg";
+                            }
+                            catch
+                            {
+                                agentImage = Url.Content("~/images/logo.jpg");
+
+                            }
+                                    }
+                                    <a href="#" class="pull-right">
+                                        <img src="@agentImage" class="media-object searech-details-small-img" style="width: 85px; height:auto; padding:5px" alt='' />
+                                    </a>
+                                </div>
+                            </div>
+                            <hr />
+                            count++;
+                        }
+                    }
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-8 map-content" style="height: 800px;" id="GMap"></div>
+        </div>
+    </div>
