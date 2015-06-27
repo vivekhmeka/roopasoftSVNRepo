@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RETSDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="RETSDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
 warning 6002: The table/view 'RETSDB.dbo.ADDITIONAL_DATA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ADDITIONAL_DATA">
@@ -224,6 +224,28 @@ warning 6013: The table/view 'RETSDB.dbo.cities' does not have a primary key def
           <Property Name="Last_Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="Message" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ContactInformation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SellAHome" Type="varchar" MaxLength="50" />
+          <Property Name="BuyAHome" Type="varchar" MaxLength="50" />
+          <Property Name="RealtysBuyersGuide" Type="varchar" MaxLength="50" />
+          <Property Name="MarketAnalysisOfMyHome" Type="varchar" MaxLength="50" />
+          <Property Name="CareerInRealEstate" Type="varchar" MaxLength="50" />
+          <Property Name="Ml_number" Type="varchar" MaxLength="50" />
+          <Property Name="Mls_ID" Type="varchar" MaxLength="50" />
+          <Property Name="CompID" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Company" Type="varchar" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Cell" Type="varchar" MaxLength="50" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="Zip" Type="varchar" MaxLength="50" />
+          <Property Name="ContactMsg" Type="varchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6013: The table/view 'RETSDB.dbo.counties' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
@@ -1947,6 +1969,21 @@ warning 6002: The table/view 'RETSDB.dbo.SEARCHES' does not have a primary key d
           <Property Name="ACRES_HIGH" Type="varchar" MaxLength="250" />
           <Property Name="company_id" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="SellersInformation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ml_number" Type="varchar" MaxLength="50" />
+          <Property Name="Mls_ID" Type="varchar" MaxLength="50" />
+          <Property Name="CompID" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="Zip" Type="varchar" MaxLength="50" />
+          <Property Name="SellerMsg" Type="varchar(max)" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'RETSDB.dbo.SOLD_DATA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SOLD_DATA">
@@ -2117,9 +2154,45 @@ warning 6002: The table/view 'RETSDB.dbo.virtual_tours_info' does not have a pri
           <Property Name="datemodified" Type="varchar" MaxLength="250" />
           <Property Name="modified_date" Type="datetime" />
         </EntityType>
+        <Function Name="FULLMLSgetListings" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mls" Type="varchar" Mode="In" />
+          <Parameter Name="Date" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="getAdvancedSearchResults" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MLSID" Type="varchar" Mode="In" />
+          <Parameter Name="Location" Type="varchar" Mode="In" />
+          <Parameter Name="Counties" Type="varchar" Mode="In" />
+          <Parameter Name="ListType" Type="varchar" Mode="In" />
+          <Parameter Name="Beds" Type="varchar" Mode="In" />
+          <Parameter Name="Baths" Type="varchar" Mode="In" />
+          <Parameter Name="WithOpenHouse" Type="varchar" Mode="In" />
+          <Parameter Name="WaterFront" Type="varchar" Mode="In" />
+          <Parameter Name="Price" Type="real" Mode="In" />
+          <Parameter Name="Styles" Type="varchar" Mode="In" />
+          <Parameter Name="SchoolDistricts" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="getAdvancedSearchResults_Updated" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MLSID" Type="varchar" Mode="In" />
+          <Parameter Name="Location" Type="varchar" Mode="In" />
+          <Parameter Name="Counties" Type="varchar" Mode="In" />
+          <Parameter Name="ListType" Type="varchar" Mode="In" />
+          <Parameter Name="Beds" Type="varchar" Mode="In" />
+          <Parameter Name="Baths" Type="varchar" Mode="In" />
+          <Parameter Name="WithOpenHouse" Type="varchar" Mode="In" />
+          <Parameter Name="WaterFront" Type="varchar" Mode="In" />
+          <Parameter Name="Price" Type="varchar" Mode="In" />
+          <Parameter Name="Styles" Type="varchar" Mode="In" />
+          <Parameter Name="SchoolDistricts" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="getAutoSearchResultsBasedOnKeyAndListingtypeTab" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="searchParam" Type="varchar" Mode="In" />
           <Parameter Name="tab" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="getcityByCounty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="County" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="getMlsDatadueToagent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="agents" Type="nvarchar(max)" Mode="In" />
         </Function>
         <Function Name="getMlsDetailBySearchKeywordbycityTab" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SearchKey" Type="nvarchar" Mode="In" />
@@ -2144,8 +2217,45 @@ warning 6002: The table/view 'RETSDB.dbo.virtual_tours_info' does not have a pri
         <Function Name="getMlsDetailsBySearchKeyWords" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CityName" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="getResultBasedCityandStreet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cities" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Streets" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Listtype" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="waterfront" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <Function Name="getUsCityZipData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="searchKey" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateAgentData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MLS" Type="int" Mode="In" />
+          <Parameter Name="DATE_ADDED" Type="datetime" Mode="In" />
+          <Parameter Name="AGENTID" Type="nvarchar" Mode="In" />
+          <Parameter Name="FIRST_NAME" Type="nvarchar" Mode="In" />
+          <Parameter Name="MIDDLE_NAME" Type="nvarchar" Mode="In" />
+          <Parameter Name="LAST_NAME" Type="nvarchar" Mode="In" />
+          <Parameter Name="EMAIL_ADDRESS" Type="nvarchar" Mode="In" />
+          <Parameter Name="PHONE_AC" Type="nvarchar" Mode="In" />
+          <Parameter Name="PHONE" Type="nvarchar" Mode="In" />
+          <Parameter Name="CELL_PHONE_AC" Type="nvarchar" Mode="In" />
+          <Parameter Name="CELL_PHONE" Type="nvarchar" Mode="In" />
+          <Parameter Name="FAX_AC" Type="nvarchar" Mode="In" />
+          <Parameter Name="FAX" Type="nvarchar" Mode="In" />
+          <Parameter Name="ADDRESS_DIR_PRE" Type="nvarchar" Mode="In" />
+          <Parameter Name="ADDRESS_DIR_SUF" Type="nvarchar" Mode="In" />
+          <Parameter Name="ADDRESS_NUM" Type="nvarchar" Mode="In" />
+          <Parameter Name="ADDRESS" Type="nvarchar" Mode="In" />
+          <Parameter Name="ADDRESS_SUF" Type="nvarchar" Mode="In" />
+          <Parameter Name="ADDRESS_2" Type="nvarchar" Mode="In" />
+          <Parameter Name="CITY" Type="nvarchar" Mode="In" />
+          <Parameter Name="STATE" Type="nvarchar" Mode="In" />
+          <Parameter Name="ZIP" Type="nvarchar" Mode="In" />
+          <Parameter Name="TITLE" Type="nvarchar" Mode="In" />
+          <Parameter Name="DESIGNATIONS" Type="nvarchar" Mode="In" />
+          <Parameter Name="OFFICEID" Type="nvarchar" Mode="In" />
+          <Parameter Name="FIRMID" Type="nvarchar" Mode="In" />
+          <Parameter Name="AGENT_STATUS" Type="nvarchar" Mode="In" />
+          <Parameter Name="Facebook_URL" Type="nvarchar" Mode="In" />
+          <Parameter Name="profile_Picture" Type="varbinary(max)" Mode="In" />
         </Function>
         <Function Name="UpdateAgentsData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MLS" Type="int" Mode="In" />
@@ -2190,9 +2300,11 @@ warning 6002: The table/view 'RETSDB.dbo.virtual_tours_info' does not have a pri
         <EntityContainer Name="RETSDBModelStoreContainer">
           <EntitySet Name="bob_form" EntityType="Self.bob_form" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContactDetails" EntityType="Self.ContactDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContactInformation" EntityType="Self.ContactInformation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dtproperties" EntityType="Self.dtproperties" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mobileapp_admin" EntityType="Self.mobileapp_admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="mobileapp_users" EntityType="Self.mobileapp_users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SellersInformation" EntityType="Self.SellersInformation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ADDITIONAL_DATA" EntityType="Self.ADDITIONAL_DATA" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -3518,7 +3630,7 @@ warning 6002: The table/view 'RETSDB.dbo.virtual_tours_info' does not have a pri
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="RETSDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="RETSDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="bob_form">
           <Key>
             <PropertyRef Name="userid" />
@@ -3549,6 +3661,28 @@ warning 6002: The table/view 'RETSDB.dbo.virtual_tours_info' does not have a pri
           <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ContactInformation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SellAHome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BuyAHome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RealtysBuyersGuide" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MarketAnalysisOfMyHome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CareerInRealEstate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ml_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mls_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cell" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Zip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContactMsg" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="dtproperty">
           <Key>
@@ -3585,6 +3719,21 @@ warning 6002: The table/view 'RETSDB.dbo.virtual_tours_info' does not have a pri
           <Property Name="active" Type="Int32" />
           <Property Name="last_login" Type="DateTime" Precision="3" />
           <Property Name="provider" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SellersInformation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ml_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mls_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Zip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SellerMsg" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -4945,9 +5094,11 @@ warning 6002: The table/view 'RETSDB.dbo.virtual_tours_info' does not have a pri
         <EntityContainer Name="RETSDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="bob_form" EntityType="Self.bob_form" />
           <EntitySet Name="ContactDetails" EntityType="Self.ContactDetail" />
+          <EntitySet Name="ContactInformations" EntityType="Self.ContactInformation" />
           <EntitySet Name="dtproperties" EntityType="Self.dtproperty" />
           <EntitySet Name="mobileapp_admin" EntityType="Self.mobileapp_admin" />
           <EntitySet Name="mobileapp_users" EntityType="Self.mobileapp_users" />
+          <EntitySet Name="SellersInformations" EntityType="Self.SellersInformation" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="ADDITIONAL_DATA" EntityType="Self.ADDITIONAL_DATA" />
           <EntitySet Name="ADDITIONAL_DATA_IMPORT" EntityType="Self.ADDITIONAL_DATA_IMPORT" />
@@ -4974,9 +5125,45 @@ warning 6002: The table/view 'RETSDB.dbo.virtual_tours_info' does not have a pri
           <EntitySet Name="USERS" EntityType="Self.USER" />
           <EntitySet Name="virtual_tours" EntityType="Self.virtual_tours" />
           <EntitySet Name="virtual_tours_info" EntityType="Self.virtual_tours_info" />
+          <FunctionImport Name="FULLMLSgetListings" ReturnType="Collection(RETSDBModel.FULLMLSgetListings_Result)">
+            <Parameter Name="mls" Mode="In" Type="String" />
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="getAdvancedSearchResults" ReturnType="Collection(RETSDBModel.getAdvancedSearchResults_Result)">
+            <Parameter Name="MLSID" Mode="In" Type="String" />
+            <Parameter Name="Location" Mode="In" Type="String" />
+            <Parameter Name="Counties" Mode="In" Type="String" />
+            <Parameter Name="ListType" Mode="In" Type="String" />
+            <Parameter Name="Beds" Mode="In" Type="String" />
+            <Parameter Name="Baths" Mode="In" Type="String" />
+            <Parameter Name="WithOpenHouse" Mode="In" Type="String" />
+            <Parameter Name="WaterFront" Mode="In" Type="String" />
+            <Parameter Name="Price" Mode="In" Type="Single" />
+            <Parameter Name="Styles" Mode="In" Type="String" />
+            <Parameter Name="SchoolDistricts" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getAdvancedSearchResults_Updated">
+            <Parameter Name="MLSID" Mode="In" Type="String" />
+            <Parameter Name="Location" Mode="In" Type="String" />
+            <Parameter Name="Counties" Mode="In" Type="String" />
+            <Parameter Name="ListType" Mode="In" Type="String" />
+            <Parameter Name="Beds" Mode="In" Type="String" />
+            <Parameter Name="Baths" Mode="In" Type="String" />
+            <Parameter Name="WithOpenHouse" Mode="In" Type="String" />
+            <Parameter Name="WaterFront" Mode="In" Type="String" />
+            <Parameter Name="Price" Mode="In" Type="String" />
+            <Parameter Name="Styles" Mode="In" Type="String" />
+            <Parameter Name="SchoolDistricts" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="getAutoSearchResultsBasedOnKeyAndListingtypeTab" ReturnType="Collection(String)">
             <Parameter Name="searchParam" Mode="In" Type="String" />
             <Parameter Name="tab" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getcityByCounty" ReturnType="Collection(String)">
+            <Parameter Name="County" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getMlsDatadueToagent" ReturnType="Collection(RETSDBModel.getMlsDatadueToagent_Result)">
+            <Parameter Name="agents" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="getMlsDetailBySearchKeywordbycityTab" ReturnType="Collection(RETSDBModel.getMlsDetailBySearchKeywordbycityTab_Result)">
             <Parameter Name="SearchKey" Mode="In" Type="String" />
@@ -5001,8 +5188,45 @@ warning 6002: The table/view 'RETSDB.dbo.virtual_tours_info' does not have a pri
           <FunctionImport Name="getMlsDetailsBySearchKeyWords" ReturnType="Collection(RETSDBModel.getMlsDetailsBySearchKeyWords_Result)">
             <Parameter Name="CityName" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="getResultBasedCityandStreet" ReturnType="Collection(RETSDBModel.getResultBasedCityandStreet_Result)">
+            <Parameter Name="Cities" Mode="In" Type="String" />
+            <Parameter Name="Streets" Mode="In" Type="String" />
+            <Parameter Name="Listtype" Mode="In" Type="String" />
+            <Parameter Name="waterfront" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="getUsCityZipData" ReturnType="Collection(RETSDBModel.getUsCityZipData_Result)">
             <Parameter Name="searchKey" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateAgentData">
+            <Parameter Name="MLS" Mode="In" Type="Int32" />
+            <Parameter Name="DATE_ADDED" Mode="In" Type="DateTime" />
+            <Parameter Name="AGENTID" Mode="In" Type="String" />
+            <Parameter Name="FIRST_NAME" Mode="In" Type="String" />
+            <Parameter Name="MIDDLE_NAME" Mode="In" Type="String" />
+            <Parameter Name="LAST_NAME" Mode="In" Type="String" />
+            <Parameter Name="EMAIL_ADDRESS" Mode="In" Type="String" />
+            <Parameter Name="PHONE_AC" Mode="In" Type="String" />
+            <Parameter Name="PHONE" Mode="In" Type="String" />
+            <Parameter Name="CELL_PHONE_AC" Mode="In" Type="String" />
+            <Parameter Name="CELL_PHONE" Mode="In" Type="String" />
+            <Parameter Name="FAX_AC" Mode="In" Type="String" />
+            <Parameter Name="FAX" Mode="In" Type="String" />
+            <Parameter Name="ADDRESS_DIR_PRE" Mode="In" Type="String" />
+            <Parameter Name="ADDRESS_DIR_SUF" Mode="In" Type="String" />
+            <Parameter Name="ADDRESS_NUM" Mode="In" Type="String" />
+            <Parameter Name="ADDRESS" Mode="In" Type="String" />
+            <Parameter Name="ADDRESS_SUF" Mode="In" Type="String" />
+            <Parameter Name="ADDRESS_2" Mode="In" Type="String" />
+            <Parameter Name="CITY" Mode="In" Type="String" />
+            <Parameter Name="STATE" Mode="In" Type="String" />
+            <Parameter Name="ZIP" Mode="In" Type="String" />
+            <Parameter Name="TITLE" Mode="In" Type="String" />
+            <Parameter Name="DESIGNATIONS" Mode="In" Type="String" />
+            <Parameter Name="OFFICEID" Mode="In" Type="String" />
+            <Parameter Name="FIRMID" Mode="In" Type="String" />
+            <Parameter Name="AGENT_STATUS" Mode="In" Type="String" />
+            <Parameter Name="Facebook_URL" Mode="In" Type="String" />
+            <Parameter Name="profile_Picture" Mode="In" Type="Binary" />
           </FunctionImport>
           <FunctionImport Name="UpdateAgentsData">
             <Parameter Name="MLS" Mode="In" Type="Int32" />
@@ -5045,6 +5269,861 @@ warning 6002: The table/view 'RETSDB.dbo.virtual_tours_info' does not have a pri
             <Parameter Name="LinkedIn_URL" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="FULLMLSgetListings_Result">
+          <Property Type="Int32" Name="mls" Nullable="true" />
+          <Property Type="DateTime" Name="date_added" Nullable="true" Precision="23" />
+          <Property Type="String" Name="retsysid" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ml_number" Nullable="true" MaxLength="250" />
+          <Property Type="DateTime" Name="list_date" Nullable="true" Precision="23" />
+          <Property Type="Single" Name="list_price" Nullable="true" />
+          <Property Type="Int32" Name="days_on_market" Nullable="true" />
+          <Property Type="DateTime" Name="contract_date" Nullable="true" Precision="23" />
+          <Property Type="Single" Name="contract_price" Nullable="true" />
+          <Property Type="Int32" Name="contract_dom" Nullable="true" />
+          <Property Type="DateTime" Name="sell_date" Nullable="true" Precision="23" />
+          <Property Type="Single" Name="sell_price" Nullable="true" />
+          <Property Type="String" Name="exp_date" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="list_status" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="list_type" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="prop_type" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="address" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="street_number" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="unit_number" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="street" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="city" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="state" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="zip" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="county" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="access_24hr" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="acres" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="adult_comm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="age" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="ac" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="adtext" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="add_fee_freq" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="add_fee_des" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="add_fees" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="add_fees_amt" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="amenities" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="amps" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="appearance" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="appliances" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="app_req" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="apt2_leased" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="apt_loc" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="area" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="area_name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="association" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="attic" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="aux_rooms" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="basement" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="basement_finished" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="basement_descr" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="baths_disp" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="baths" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="baths_full" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="baths_half" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="baths_tq" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="baths_1q" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="board_health_ap" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="beachrights" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="beds" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="block" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="business_age" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="building_approved" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="building_sqft" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="brs" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="brslisting" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="bulkhead" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="bus_name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="bus_type" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="cable" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="caczones" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="carpet" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="ceiling_ht" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="cofo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="comm_charges" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="construct_type" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="coop_shares" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="county_use" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="cross_st" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="culdesac" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="deck" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="deduct_per" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="deposit" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="desc1" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="desc2" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="desc3" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="desc4" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="desc5" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="desc6" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="desc7" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="desc8" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="detattached" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="development" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="dining_room" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="directions" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="dishwasher" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="dock" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="driveway" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="dryer" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="easements" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="eik" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="electric" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="electric_avail" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="electric_meter" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="elevator" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="end_unit" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_1" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_2" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_3" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_4" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_5" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_6" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_7" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_8" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_9" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_10" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_11" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_12" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_13" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_14" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_15" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_16" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_17" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_18" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_19" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_20" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="excluded" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="expenses" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="expenses_inc" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="exterior" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="extras" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="extra_land" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="families" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="fence" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="fireplaces" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="fix_eqp" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="flip_tax" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="flip_tax_amt" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="flr_ld" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="fl_number" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="floors" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="foreclosure" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="foundation" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="ftr_garage" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="front_ft" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="fuel" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="furnished" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="garage" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="garage_type" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="garage_capacity" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="garbage" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="gas_avail" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="gas_meter" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="gated" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="gov_pending" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="green_cert" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="green_cert_type" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="green_cert_year" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="greenfeatures" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="greenfeatures_desc" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="gross_inc" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="ground_care" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="handicap" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="handicap_desc" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="heat" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="heat_sys" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="heat_units" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="hoa" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="hoa_fee_per" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="hoa_fees_inc" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="horseprop" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="hot_wt" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="house_color" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="house_dimen" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="house_keep" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="improvements" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="inc1_dol" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="inc2_dol" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="inc3_dol" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="inc4_dol" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="inc5_dol" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="inc6_dol" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="inc7_dol" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="inc8_dol" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="included" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="insurance" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="inventory" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="interior" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="internet" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="kitchen" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="land_use" Nullable="true" MaxLength="250" />
+          <Property Type="Decimal" Name="latitude" Nullable="true" Precision="10" Scale="8" />
+          <Property Type="String" Name="leasetype" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="lease_yrs" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="lease_hel_imp" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="lease_purch" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="level_roll" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="levels" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="level1" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="level2" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="level3" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="levelb" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="living_room" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="load_dock" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="longitude" Nullable="true" Precision="10" Scale="8" />
+          <Property Type="String" Name="lot" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="lot_size" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="lot_sqft" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="lot_frontage" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="maint" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="maint_deduct" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="maint_rep" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="max_finance" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="main_bath" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="main_unit_leased" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="master_br" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="mgmt" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="minage" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="min_plot" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="model" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="neighborhood" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="net_inc" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="new_constr" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="num_1bd" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="num2_bd" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="num3_bd" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="num4_bd" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="num_buildings" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="num_com_units" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="num_fl_units" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="num_kit" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="num_man_units" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="num_med_units" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="num_nco_units" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="num_res_units" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="occupy" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="occ_date" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="oth_approval" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="office" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="office_perc" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="owner_prop" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="owner_add" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="owner_phone" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="owner_email" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="owner_cell" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="own_w_sub" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="opt_buy" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="other" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="out_of_area" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="owner_fin" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="owner_occ" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="owner_pays" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="parking" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="parking_fees" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="parking_spaces" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="patio" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="patio_terr" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="payroll" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="paved" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="permitted_use" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="pets" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="pic" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="plans_approve" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="pool" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="poll_care" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="pool_desc" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="possession" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="poss_subdiv" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="post_office" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="porch" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="pp_sf" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="prop_disc" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="prop_subtype1" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="prop_subtype2" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="prop_subtype3" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="public_record" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="public_private" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="priv_entrance" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="raw_land" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="refrigerator" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="rent_control" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rent_stable" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rent_inc" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rent1" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rent2" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rent3" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rent4" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rent5" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rent6" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rent_allowed" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rent_sqft" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rent_program" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rent_program_type" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="REO" Nullable="true" MaxLength="205" />
+          <Property Type="String" Name="reserve" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="road_surface" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="roof" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rooms" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="s_r" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="sale_type" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sd_name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sd_name2" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sd_name3" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sd_name4" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sd_number" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sd_type" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sd_type2" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sd_type3" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sd_type4" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="shares" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="seats" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="securitydep" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sep_thermostat" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="seasonal" Nullable="true" MaxLength="250" />
+          <Property Type="Single" Name="AugLaborDayamt" Nullable="true" />
+          <Property Type="Single" Name="Julyamt" Nullable="true" />
+          <Property Type="Single" Name="Juneamt" Nullable="true" />
+          <Property Type="Single" Name="memdaylabordayamt" Nullable="true" />
+          <Property Type="Single" Name="offseasonamt" Nullable="true" />
+          <Property Type="String" Name="offseason_desc" Nullable="true" MaxLength="550" />
+          <Property Type="Single" Name="weeklyamt" Nullable="true" />
+          <Property Type="Single" Name="yr_roundamt" Nullable="true" />
+          <Property Type="String" Name="whole_house_amt" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="section_area" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="seller_concession" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="septic_app" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sewer" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="short_sale" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="show_address" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="showing_instr" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="siding" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="skylight" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="smoking" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="sprinklers" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="sqft" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="stories" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="stove" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="style" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="survey" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="taxid" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="tax_assessed" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="tax_source" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="tax_yr" Nullable="true" MaxLength="250" />
+          <Property Type="Single" Name="taxes" Nullable="true" />
+          <Property Type="String" Name="term" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="topography" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="total_taxes" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="total_exp" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="total_income" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="tax_abated" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="tennis" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="tennis_desc" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="tenant_pays" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="tenant_req" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="terms" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="total_units" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="type_own" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="triple_net" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="unit2_appliances" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="unit2_baths_full" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="unit2_baths_half" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="unit2_baths_tq" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="unit2_beds" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="unit2_desc" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="unit2_rooms" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="use_restrict" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="vac_perc" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="variance_needed" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="videourl" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="village" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="village_tax" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="virtual_tour" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="virtual_tour2" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="virtual_tour3" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="virtual_tour4" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="VOW_AVM" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="VOW_3rd" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="walls" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="washer" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="water" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="water_heater" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="waterfront" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="waterfront_desc" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="water_frontage" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="waterview" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="weekend_service" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="well" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="woodfloors" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="yard" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="yr_built" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="yr_built_descr" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="zone_number" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="zoning" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="list_agent_id" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="list_agent" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="co_list_agent_id" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="co_list_agent" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="sell_agent_id" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sell_agent" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="co_sell_agent_id" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="co_sell_agent" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="realtor" Nullable="true" MaxLength="400" />
+          <Property Type="String" Name="realtor_code" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="list_branch" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="sell_realtor" Nullable="true" MaxLength="400" />
+          <Property Type="String" Name="sell_realtor_code" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="sell_branch" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="openhouse_date_start" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="openhouse_time_start" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="openhouse_date_end" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="openhouse_time_end" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="override" Nullable="true" />
+          <Property Type="Int32" Name="FMPID" Nullable="false" />
+          <Property Type="String" Name="st_dir" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="st_sfx" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="basement_slfr" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="st_dir_sfx" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="openhouse_date_start2" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="openhouse_time_start2" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="openhouse_date_end2" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="openhouse_time_end2" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="openhouse_date_start3" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="openhouse_time_start3" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="openhouse_date_end3" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="openhouse_time_end3" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="getAdvancedSearchResults_Result">
+          <Property Type="Int32" Name="mls" Nullable="true" />
+          <Property Type="DateTime" Name="date_added" Nullable="true" Precision="23" />
+          <Property Type="String" Name="retsysid" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ml_number" Nullable="true" MaxLength="250" />
+          <Property Type="DateTime" Name="list_date" Nullable="true" Precision="23" />
+          <Property Type="Single" Name="list_price" Nullable="true" />
+          <Property Type="Int32" Name="days_on_market" Nullable="true" />
+          <Property Type="DateTime" Name="contract_date" Nullable="true" Precision="23" />
+          <Property Type="Single" Name="contract_price" Nullable="true" />
+          <Property Type="Int32" Name="contract_dom" Nullable="true" />
+          <Property Type="DateTime" Name="sell_date" Nullable="true" Precision="23" />
+          <Property Type="Single" Name="sell_price" Nullable="true" />
+          <Property Type="String" Name="exp_date" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="list_status" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="list_type" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="prop_type" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="address" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="street_number" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="unit_number" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="street" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="city" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="state" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="zip" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="county" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="access_24hr" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="acres" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="adult_comm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="age" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="ac" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="adtext" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="add_fee_freq" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="add_fee_des" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="add_fees" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="add_fees_amt" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="amenities" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="amps" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="appearance" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="appliances" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="app_req" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="apt2_leased" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="apt_loc" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="area" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="area_name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="association" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="attic" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="aux_rooms" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="basement" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="basement_finished" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="basement_descr" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="baths_disp" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="baths" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="baths_full" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="baths_half" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="baths_tq" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="baths_1q" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="board_health_ap" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="beachrights" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="beds" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="block" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="business_age" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="building_approved" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="building_sqft" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="brs" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="brslisting" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="bulkhead" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="bus_name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="bus_type" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="cable" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="caczones" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="carpet" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="ceiling_ht" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="cofo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="comm_charges" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="construct_type" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="coop_shares" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="county_use" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="cross_st" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="culdesac" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="deck" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="deduct_per" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="deposit" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="desc1" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="desc2" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="desc3" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="desc4" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="desc5" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="desc6" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="desc7" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="desc8" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="detattached" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="development" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="dining_room" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="directions" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="dishwasher" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="dock" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="driveway" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="dryer" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="easements" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="eik" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="electric" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="electric_avail" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="electric_meter" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="elevator" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="end_unit" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_1" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_2" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_3" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_4" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_5" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_6" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_7" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_8" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_9" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_10" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_11" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_12" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_13" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_14" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_15" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_16" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_17" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_18" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_19" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="energyeff_20" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="excluded" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="expenses" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="expenses_inc" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="exterior" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="extras" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="extra_land" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="families" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="fence" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="fireplaces" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="fix_eqp" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="flip_tax" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="flip_tax_amt" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="flr_ld" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="fl_number" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="floors" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="foreclosure" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="foundation" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="ftr_garage" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="front_ft" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="fuel" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="furnished" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="garage" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="garage_type" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="garage_capacity" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="garbage" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="gas_avail" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="gas_meter" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="gated" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="gov_pending" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="green_cert" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="green_cert_type" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="green_cert_year" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="greenfeatures" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="greenfeatures_desc" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="gross_inc" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="ground_care" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="handicap" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="handicap_desc" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="heat" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="heat_sys" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="heat_units" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="hoa" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="hoa_fee_per" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="hoa_fees_inc" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="horseprop" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="hot_wt" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="house_color" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="house_dimen" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="house_keep" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="improvements" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="inc1_dol" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="inc2_dol" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="inc3_dol" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="inc4_dol" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="inc5_dol" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="inc6_dol" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="inc7_dol" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="inc8_dol" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="included" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="insurance" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="inventory" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="interior" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="internet" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="kitchen" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="land_use" Nullable="true" MaxLength="250" />
+          <Property Type="Decimal" Name="latitude" Nullable="true" Precision="10" Scale="8" />
+          <Property Type="String" Name="leasetype" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="lease_yrs" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="lease_hel_imp" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="lease_purch" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="level_roll" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="levels" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="level1" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="level2" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="level3" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="levelb" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="living_room" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="load_dock" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="longitude" Nullable="true" Precision="10" Scale="8" />
+          <Property Type="String" Name="lot" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="lot_size" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="lot_sqft" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="lot_frontage" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="maint" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="maint_deduct" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="maint_rep" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="max_finance" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="main_bath" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="main_unit_leased" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="master_br" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="mgmt" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="minage" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="min_plot" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="model" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="neighborhood" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="net_inc" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="new_constr" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="num_1bd" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="num2_bd" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="num3_bd" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="num4_bd" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="num_buildings" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="num_com_units" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="num_fl_units" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="num_kit" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="num_man_units" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="num_med_units" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="num_nco_units" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="num_res_units" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="occupy" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="occ_date" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="oth_approval" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="office" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="office_perc" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="owner_prop" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="owner_add" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="owner_phone" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="owner_email" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="owner_cell" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="own_w_sub" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="opt_buy" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="other" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="out_of_area" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="owner_fin" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="owner_occ" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="owner_pays" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="parking" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="parking_fees" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="parking_spaces" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="patio" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="patio_terr" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="payroll" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="paved" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="permitted_use" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="pets" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="pic" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="plans_approve" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="pool" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="poll_care" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="pool_desc" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="possession" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="poss_subdiv" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="post_office" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="porch" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="pp_sf" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="prop_disc" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="prop_subtype1" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="prop_subtype2" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="prop_subtype3" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="public_record" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="public_private" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="priv_entrance" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="raw_land" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="refrigerator" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="rent_control" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rent_stable" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rent_inc" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rent1" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rent2" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rent3" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rent4" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rent5" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rent6" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rent_allowed" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rent_sqft" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rent_program" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rent_program_type" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="REO" Nullable="true" MaxLength="205" />
+          <Property Type="String" Name="reserve" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="road_surface" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="roof" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="rooms" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="s_r" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="sale_type" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sd_name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sd_name2" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sd_name3" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sd_name4" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sd_number" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sd_type" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sd_type2" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sd_type3" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sd_type4" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="shares" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="seats" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="securitydep" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sep_thermostat" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="seasonal" Nullable="true" MaxLength="250" />
+          <Property Type="Single" Name="AugLaborDayamt" Nullable="true" />
+          <Property Type="Single" Name="Julyamt" Nullable="true" />
+          <Property Type="Single" Name="Juneamt" Nullable="true" />
+          <Property Type="Single" Name="memdaylabordayamt" Nullable="true" />
+          <Property Type="Single" Name="offseasonamt" Nullable="true" />
+          <Property Type="String" Name="offseason_desc" Nullable="true" MaxLength="550" />
+          <Property Type="Single" Name="weeklyamt" Nullable="true" />
+          <Property Type="Single" Name="yr_roundamt" Nullable="true" />
+          <Property Type="String" Name="whole_house_amt" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="section_area" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="seller_concession" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="septic_app" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sewer" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="short_sale" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="show_address" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="showing_instr" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="siding" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="skylight" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="smoking" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="sprinklers" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="sqft" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="stories" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="stove" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="style" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="survey" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="taxid" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="tax_assessed" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="tax_source" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="tax_yr" Nullable="true" MaxLength="250" />
+          <Property Type="Single" Name="taxes" Nullable="true" />
+          <Property Type="String" Name="term" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="topography" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="total_taxes" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="total_exp" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="total_income" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="tax_abated" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="tennis" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="tennis_desc" Nullable="true" MaxLength="550" />
+          <Property Type="String" Name="tenant_pays" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="tenant_req" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="terms" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="total_units" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="type_own" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="triple_net" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="unit2_appliances" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="unit2_baths_full" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="unit2_baths_half" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="unit2_baths_tq" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="unit2_beds" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="unit2_desc" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="unit2_rooms" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="use_restrict" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="vac_perc" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="variance_needed" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="videourl" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="village" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="village_tax" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="virtual_tour" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="virtual_tour2" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="virtual_tour3" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="virtual_tour4" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="VOW_AVM" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="VOW_3rd" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="walls" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="washer" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="water" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="water_heater" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="waterfront" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="waterfront_desc" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="water_frontage" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="waterview" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="weekend_service" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="well" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="woodfloors" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="yard" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="yr_built" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="yr_built_descr" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="zone_number" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="zoning" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="list_agent_id" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="list_agent" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="co_list_agent_id" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="co_list_agent" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="sell_agent_id" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sell_agent" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="co_sell_agent_id" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="co_sell_agent" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="realtor" Nullable="true" MaxLength="400" />
+          <Property Type="String" Name="realtor_code" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="list_branch" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="sell_realtor" Nullable="true" MaxLength="400" />
+          <Property Type="String" Name="sell_realtor_code" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="sell_branch" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="openhouse_date_start" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="openhouse_time_start" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="openhouse_date_end" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="openhouse_time_end" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="override" Nullable="true" />
+          <Property Type="Int32" Name="FMPID" Nullable="false" />
+          <Property Type="String" Name="st_dir" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="st_sfx" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="basement_slfr" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="st_dir_sfx" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="openhouse_date_start2" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="openhouse_time_start2" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="openhouse_date_end2" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="openhouse_time_end2" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="openhouse_date_start3" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="openhouse_time_start3" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="openhouse_date_end3" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="openhouse_time_end3" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="getMlsDatadueToagent_Result">
+          <Property Type="String" Name="ml_number" Nullable="true" MaxLength="250" />
+          <Property Type="Single" Name="list_price" Nullable="true" />
+          <Property Type="String" Name="street" Nullable="true" MaxLength="250" />
+        </ComplexType>
         <ComplexType Name="getMlsDetailBySearchKeywordbycityTab_Result">
           <Property Type="Int32" Name="mls" Nullable="true" />
           <Property Type="String" Name="list_status" Nullable="true" MaxLength="250" />
@@ -6389,6 +7468,27 @@ warning 6002: The table/view 'RETSDB.dbo.virtual_tours_info' does not have a pri
           <Property Type="String" Name="EMAIL_ADDRESS" Nullable="true" MaxLength="250" />
           <Property Type="String" Name="FIRST_NAME" Nullable="true" MaxLength="250" />
         </ComplexType>
+        <ComplexType Name="getResultBasedCityandStreet_Result">
+          <Property Type="String" Name="ml_number" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="street" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="address" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="city" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="zip" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="list_type" Nullable="true" MaxLength="250" />
+          <Property Type="Single" Name="list_price" Nullable="true" />
+          <Property Type="String" Name="beds" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="baths" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="list_date" Nullable="true" Precision="23" />
+          <Property Type="Decimal" Name="longitude" Nullable="true" Precision="10" Scale="8" />
+          <Property Type="Decimal" Name="latitude" Nullable="true" Precision="10" Scale="8" />
+          <Property Type="String" Name="waterfront" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="style" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sd_name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="county" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="state" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="list_agent_id" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="RETS_ID" Nullable="true" MaxLength="250" />
+        </ComplexType>
         <ComplexType Name="getUsCityZipData_Result">
           <Property Type="String" Name="City" Nullable="true" MaxLength="250" />
           <Property Type="String" Name="state" Nullable="true" MaxLength="250" />
@@ -6432,6 +7532,29 @@ warning 6002: The table/view 'RETSDB.dbo.virtual_tours_info' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ContactInformations">
+            <EntityTypeMapping TypeName="RETSDBModel.ContactInformation">
+              <MappingFragment StoreEntitySet="ContactInformation">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SellAHome" ColumnName="SellAHome" />
+                <ScalarProperty Name="BuyAHome" ColumnName="BuyAHome" />
+                <ScalarProperty Name="RealtysBuyersGuide" ColumnName="RealtysBuyersGuide" />
+                <ScalarProperty Name="MarketAnalysisOfMyHome" ColumnName="MarketAnalysisOfMyHome" />
+                <ScalarProperty Name="CareerInRealEstate" ColumnName="CareerInRealEstate" />
+                <ScalarProperty Name="Ml_number" ColumnName="Ml_number" />
+                <ScalarProperty Name="Mls_ID" ColumnName="Mls_ID" />
+                <ScalarProperty Name="CompID" ColumnName="CompID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Cell" ColumnName="Cell" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="ContactMsg" ColumnName="ContactMsg" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="dtproperties">
             <EntityTypeMapping TypeName="RETSDBModel.dtproperty">
               <MappingFragment StoreEntitySet="dtproperties">
@@ -6467,6 +7590,22 @@ warning 6002: The table/view 'RETSDB.dbo.virtual_tours_info' does not have a pri
                 <ScalarProperty Name="active" ColumnName="active" />
                 <ScalarProperty Name="last_login" ColumnName="last_login" />
                 <ScalarProperty Name="provider" ColumnName="provider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SellersInformations">
+            <EntityTypeMapping TypeName="RETSDBModel.SellersInformation">
+              <MappingFragment StoreEntitySet="SellersInformation">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Ml_number" ColumnName="Ml_number" />
+                <ScalarProperty Name="Mls_ID" ColumnName="Mls_ID" />
+                <ScalarProperty Name="CompID" ColumnName="CompID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="SellerMsg" ColumnName="SellerMsg" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -7850,7 +8989,876 @@ warning 6002: The table/view 'RETSDB.dbo.virtual_tours_info' does not have a pri
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="FULLMLSgetListings" FunctionName="RETSDBModel.Store.FULLMLSgetListings">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RETSDBModel.FULLMLSgetListings_Result">
+                <ScalarProperty Name="mls" ColumnName="mls" />
+                <ScalarProperty Name="date_added" ColumnName="date_added" />
+                <ScalarProperty Name="retsysid" ColumnName="retsysid" />
+                <ScalarProperty Name="ml_number" ColumnName="ml_number" />
+                <ScalarProperty Name="list_date" ColumnName="list_date" />
+                <ScalarProperty Name="list_price" ColumnName="list_price" />
+                <ScalarProperty Name="days_on_market" ColumnName="days_on_market" />
+                <ScalarProperty Name="contract_date" ColumnName="contract_date" />
+                <ScalarProperty Name="contract_price" ColumnName="contract_price" />
+                <ScalarProperty Name="contract_dom" ColumnName="contract_dom" />
+                <ScalarProperty Name="sell_date" ColumnName="sell_date" />
+                <ScalarProperty Name="sell_price" ColumnName="sell_price" />
+                <ScalarProperty Name="exp_date" ColumnName="exp_date" />
+                <ScalarProperty Name="list_status" ColumnName="list_status" />
+                <ScalarProperty Name="list_type" ColumnName="list_type" />
+                <ScalarProperty Name="prop_type" ColumnName="prop_type" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="street_number" ColumnName="street_number" />
+                <ScalarProperty Name="unit_number" ColumnName="unit_number" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="county" ColumnName="county" />
+                <ScalarProperty Name="access_24hr" ColumnName="access_24hr" />
+                <ScalarProperty Name="acres" ColumnName="acres" />
+                <ScalarProperty Name="adult_comm" ColumnName="adult_comm" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="ac" ColumnName="ac" />
+                <ScalarProperty Name="adtext" ColumnName="adtext" />
+                <ScalarProperty Name="add_fee_freq" ColumnName="add_fee_freq" />
+                <ScalarProperty Name="add_fee_des" ColumnName="add_fee_des" />
+                <ScalarProperty Name="add_fees" ColumnName="add_fees" />
+                <ScalarProperty Name="add_fees_amt" ColumnName="add_fees_amt" />
+                <ScalarProperty Name="amenities" ColumnName="amenities" />
+                <ScalarProperty Name="amps" ColumnName="amps" />
+                <ScalarProperty Name="appearance" ColumnName="appearance" />
+                <ScalarProperty Name="appliances" ColumnName="appliances" />
+                <ScalarProperty Name="app_req" ColumnName="app_req" />
+                <ScalarProperty Name="apt2_leased" ColumnName="apt2_leased" />
+                <ScalarProperty Name="apt_loc" ColumnName="apt_loc" />
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="area_name" ColumnName="area_name" />
+                <ScalarProperty Name="association" ColumnName="association" />
+                <ScalarProperty Name="attic" ColumnName="attic" />
+                <ScalarProperty Name="aux_rooms" ColumnName="aux_rooms" />
+                <ScalarProperty Name="basement" ColumnName="basement" />
+                <ScalarProperty Name="basement_finished" ColumnName="basement_finished" />
+                <ScalarProperty Name="basement_descr" ColumnName="basement_descr" />
+                <ScalarProperty Name="baths_disp" ColumnName="baths_disp" />
+                <ScalarProperty Name="baths" ColumnName="baths" />
+                <ScalarProperty Name="baths_full" ColumnName="baths_full" />
+                <ScalarProperty Name="baths_half" ColumnName="baths_half" />
+                <ScalarProperty Name="baths_tq" ColumnName="baths_tq" />
+                <ScalarProperty Name="baths_1q" ColumnName="baths_1q" />
+                <ScalarProperty Name="board_health_ap" ColumnName="board_health_ap" />
+                <ScalarProperty Name="beachrights" ColumnName="beachrights" />
+                <ScalarProperty Name="beds" ColumnName="beds" />
+                <ScalarProperty Name="block" ColumnName="block" />
+                <ScalarProperty Name="business_age" ColumnName="business_age" />
+                <ScalarProperty Name="building_approved" ColumnName="building_approved" />
+                <ScalarProperty Name="building_sqft" ColumnName="building_sqft" />
+                <ScalarProperty Name="brs" ColumnName="brs" />
+                <ScalarProperty Name="brslisting" ColumnName="brslisting" />
+                <ScalarProperty Name="bulkhead" ColumnName="bulkhead" />
+                <ScalarProperty Name="bus_name" ColumnName="bus_name" />
+                <ScalarProperty Name="bus_type" ColumnName="bus_type" />
+                <ScalarProperty Name="cable" ColumnName="cable" />
+                <ScalarProperty Name="caczones" ColumnName="caczones" />
+                <ScalarProperty Name="carpet" ColumnName="carpet" />
+                <ScalarProperty Name="ceiling_ht" ColumnName="ceiling_ht" />
+                <ScalarProperty Name="cofo" ColumnName="cofo" />
+                <ScalarProperty Name="comm_charges" ColumnName="comm_charges" />
+                <ScalarProperty Name="construct_type" ColumnName="construct_type" />
+                <ScalarProperty Name="coop_shares" ColumnName="coop_shares" />
+                <ScalarProperty Name="county_use" ColumnName="county_use" />
+                <ScalarProperty Name="cross_st" ColumnName="cross_st" />
+                <ScalarProperty Name="culdesac" ColumnName="culdesac" />
+                <ScalarProperty Name="deck" ColumnName="deck" />
+                <ScalarProperty Name="deduct_per" ColumnName="deduct_per" />
+                <ScalarProperty Name="deposit" ColumnName="deposit" />
+                <ScalarProperty Name="desc1" ColumnName="desc1" />
+                <ScalarProperty Name="desc2" ColumnName="desc2" />
+                <ScalarProperty Name="desc3" ColumnName="desc3" />
+                <ScalarProperty Name="desc4" ColumnName="desc4" />
+                <ScalarProperty Name="desc5" ColumnName="desc5" />
+                <ScalarProperty Name="desc6" ColumnName="desc6" />
+                <ScalarProperty Name="desc7" ColumnName="desc7" />
+                <ScalarProperty Name="desc8" ColumnName="desc8" />
+                <ScalarProperty Name="detattached" ColumnName="detattached" />
+                <ScalarProperty Name="development" ColumnName="development" />
+                <ScalarProperty Name="dining_room" ColumnName="dining_room" />
+                <ScalarProperty Name="directions" ColumnName="directions" />
+                <ScalarProperty Name="dishwasher" ColumnName="dishwasher" />
+                <ScalarProperty Name="dock" ColumnName="dock" />
+                <ScalarProperty Name="driveway" ColumnName="driveway" />
+                <ScalarProperty Name="dryer" ColumnName="dryer" />
+                <ScalarProperty Name="easements" ColumnName="easements" />
+                <ScalarProperty Name="eik" ColumnName="eik" />
+                <ScalarProperty Name="electric" ColumnName="electric" />
+                <ScalarProperty Name="electric_avail" ColumnName="electric_avail" />
+                <ScalarProperty Name="electric_meter" ColumnName="electric_meter" />
+                <ScalarProperty Name="elevator" ColumnName="elevator" />
+                <ScalarProperty Name="end_unit" ColumnName="end_unit" />
+                <ScalarProperty Name="energyeff_1" ColumnName="energyeff_1" />
+                <ScalarProperty Name="energyeff_2" ColumnName="energyeff_2" />
+                <ScalarProperty Name="energyeff_3" ColumnName="energyeff_3" />
+                <ScalarProperty Name="energyeff_4" ColumnName="energyeff_4" />
+                <ScalarProperty Name="energyeff_5" ColumnName="energyeff_5" />
+                <ScalarProperty Name="energyeff_6" ColumnName="energyeff_6" />
+                <ScalarProperty Name="energyeff_7" ColumnName="energyeff_7" />
+                <ScalarProperty Name="energyeff_8" ColumnName="energyeff_8" />
+                <ScalarProperty Name="energyeff_9" ColumnName="energyeff_9" />
+                <ScalarProperty Name="energyeff_10" ColumnName="energyeff_10" />
+                <ScalarProperty Name="energyeff_11" ColumnName="energyeff_11" />
+                <ScalarProperty Name="energyeff_12" ColumnName="energyeff_12" />
+                <ScalarProperty Name="energyeff_13" ColumnName="energyeff_13" />
+                <ScalarProperty Name="energyeff_14" ColumnName="energyeff_14" />
+                <ScalarProperty Name="energyeff_15" ColumnName="energyeff_15" />
+                <ScalarProperty Name="energyeff_16" ColumnName="energyeff_16" />
+                <ScalarProperty Name="energyeff_17" ColumnName="energyeff_17" />
+                <ScalarProperty Name="energyeff_18" ColumnName="energyeff_18" />
+                <ScalarProperty Name="energyeff_19" ColumnName="energyeff_19" />
+                <ScalarProperty Name="energyeff_20" ColumnName="energyeff_20" />
+                <ScalarProperty Name="excluded" ColumnName="excluded" />
+                <ScalarProperty Name="expenses" ColumnName="expenses" />
+                <ScalarProperty Name="expenses_inc" ColumnName="expenses_inc" />
+                <ScalarProperty Name="exterior" ColumnName="exterior" />
+                <ScalarProperty Name="extras" ColumnName="extras" />
+                <ScalarProperty Name="extra_land" ColumnName="extra_land" />
+                <ScalarProperty Name="families" ColumnName="families" />
+                <ScalarProperty Name="fence" ColumnName="fence" />
+                <ScalarProperty Name="fireplaces" ColumnName="fireplaces" />
+                <ScalarProperty Name="fix_eqp" ColumnName="fix_eqp" />
+                <ScalarProperty Name="flip_tax" ColumnName="flip_tax" />
+                <ScalarProperty Name="flip_tax_amt" ColumnName="flip_tax_amt" />
+                <ScalarProperty Name="flr_ld" ColumnName="flr_ld" />
+                <ScalarProperty Name="fl_number" ColumnName="fl_number" />
+                <ScalarProperty Name="floors" ColumnName="floors" />
+                <ScalarProperty Name="foreclosure" ColumnName="foreclosure" />
+                <ScalarProperty Name="foundation" ColumnName="foundation" />
+                <ScalarProperty Name="ftr_garage" ColumnName="ftr_garage" />
+                <ScalarProperty Name="front_ft" ColumnName="front_ft" />
+                <ScalarProperty Name="fuel" ColumnName="fuel" />
+                <ScalarProperty Name="furnished" ColumnName="furnished" />
+                <ScalarProperty Name="garage" ColumnName="garage" />
+                <ScalarProperty Name="garage_type" ColumnName="garage_type" />
+                <ScalarProperty Name="garage_capacity" ColumnName="garage_capacity" />
+                <ScalarProperty Name="garbage" ColumnName="garbage" />
+                <ScalarProperty Name="gas_avail" ColumnName="gas_avail" />
+                <ScalarProperty Name="gas_meter" ColumnName="gas_meter" />
+                <ScalarProperty Name="gated" ColumnName="gated" />
+                <ScalarProperty Name="gov_pending" ColumnName="gov_pending" />
+                <ScalarProperty Name="green_cert" ColumnName="green_cert" />
+                <ScalarProperty Name="green_cert_type" ColumnName="green_cert_type" />
+                <ScalarProperty Name="green_cert_year" ColumnName="green_cert_year" />
+                <ScalarProperty Name="greenfeatures" ColumnName="greenfeatures" />
+                <ScalarProperty Name="greenfeatures_desc" ColumnName="greenfeatures_desc" />
+                <ScalarProperty Name="gross_inc" ColumnName="gross_inc" />
+                <ScalarProperty Name="ground_care" ColumnName="ground_care" />
+                <ScalarProperty Name="handicap" ColumnName="handicap" />
+                <ScalarProperty Name="handicap_desc" ColumnName="handicap_desc" />
+                <ScalarProperty Name="heat" ColumnName="heat" />
+                <ScalarProperty Name="heat_sys" ColumnName="heat_sys" />
+                <ScalarProperty Name="heat_units" ColumnName="heat_units" />
+                <ScalarProperty Name="hoa" ColumnName="hoa" />
+                <ScalarProperty Name="hoa_fee_per" ColumnName="hoa_fee_per" />
+                <ScalarProperty Name="hoa_fees_inc" ColumnName="hoa_fees_inc" />
+                <ScalarProperty Name="horseprop" ColumnName="horseprop" />
+                <ScalarProperty Name="hot_wt" ColumnName="hot_wt" />
+                <ScalarProperty Name="house_color" ColumnName="house_color" />
+                <ScalarProperty Name="house_dimen" ColumnName="house_dimen" />
+                <ScalarProperty Name="house_keep" ColumnName="house_keep" />
+                <ScalarProperty Name="improvements" ColumnName="improvements" />
+                <ScalarProperty Name="inc1_dol" ColumnName="inc1_dol" />
+                <ScalarProperty Name="inc2_dol" ColumnName="inc2_dol" />
+                <ScalarProperty Name="inc3_dol" ColumnName="inc3_dol" />
+                <ScalarProperty Name="inc4_dol" ColumnName="inc4_dol" />
+                <ScalarProperty Name="inc5_dol" ColumnName="inc5_dol" />
+                <ScalarProperty Name="inc6_dol" ColumnName="inc6_dol" />
+                <ScalarProperty Name="inc7_dol" ColumnName="inc7_dol" />
+                <ScalarProperty Name="inc8_dol" ColumnName="inc8_dol" />
+                <ScalarProperty Name="included" ColumnName="included" />
+                <ScalarProperty Name="insurance" ColumnName="insurance" />
+                <ScalarProperty Name="inventory" ColumnName="inventory" />
+                <ScalarProperty Name="interior" ColumnName="interior" />
+                <ScalarProperty Name="internet" ColumnName="internet" />
+                <ScalarProperty Name="kitchen" ColumnName="kitchen" />
+                <ScalarProperty Name="land_use" ColumnName="land_use" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="leasetype" ColumnName="leasetype" />
+                <ScalarProperty Name="lease_yrs" ColumnName="lease_yrs" />
+                <ScalarProperty Name="lease_hel_imp" ColumnName="lease_hel_imp" />
+                <ScalarProperty Name="lease_purch" ColumnName="lease_purch" />
+                <ScalarProperty Name="level_roll" ColumnName="level_roll" />
+                <ScalarProperty Name="levels" ColumnName="levels" />
+                <ScalarProperty Name="level1" ColumnName="level1" />
+                <ScalarProperty Name="level2" ColumnName="level2" />
+                <ScalarProperty Name="level3" ColumnName="level3" />
+                <ScalarProperty Name="levelb" ColumnName="levelb" />
+                <ScalarProperty Name="living_room" ColumnName="living_room" />
+                <ScalarProperty Name="load_dock" ColumnName="load_dock" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="lot" ColumnName="lot" />
+                <ScalarProperty Name="lot_size" ColumnName="lot_size" />
+                <ScalarProperty Name="lot_sqft" ColumnName="lot_sqft" />
+                <ScalarProperty Name="lot_frontage" ColumnName="lot_frontage" />
+                <ScalarProperty Name="maint" ColumnName="maint" />
+                <ScalarProperty Name="maint_deduct" ColumnName="maint_deduct" />
+                <ScalarProperty Name="maint_rep" ColumnName="maint_rep" />
+                <ScalarProperty Name="max_finance" ColumnName="max_finance" />
+                <ScalarProperty Name="main_bath" ColumnName="main_bath" />
+                <ScalarProperty Name="main_unit_leased" ColumnName="main_unit_leased" />
+                <ScalarProperty Name="master_br" ColumnName="master_br" />
+                <ScalarProperty Name="mgmt" ColumnName="mgmt" />
+                <ScalarProperty Name="minage" ColumnName="minage" />
+                <ScalarProperty Name="min_plot" ColumnName="min_plot" />
+                <ScalarProperty Name="model" ColumnName="model" />
+                <ScalarProperty Name="neighborhood" ColumnName="neighborhood" />
+                <ScalarProperty Name="net_inc" ColumnName="net_inc" />
+                <ScalarProperty Name="new_constr" ColumnName="new_constr" />
+                <ScalarProperty Name="num_1bd" ColumnName="num_1bd" />
+                <ScalarProperty Name="num2_bd" ColumnName="num2_bd" />
+                <ScalarProperty Name="num3_bd" ColumnName="num3_bd" />
+                <ScalarProperty Name="num4_bd" ColumnName="num4_bd" />
+                <ScalarProperty Name="num_buildings" ColumnName="num_buildings" />
+                <ScalarProperty Name="num_com_units" ColumnName="num_com_units" />
+                <ScalarProperty Name="num_fl_units" ColumnName="num_fl_units" />
+                <ScalarProperty Name="num_kit" ColumnName="num_kit" />
+                <ScalarProperty Name="num_man_units" ColumnName="num_man_units" />
+                <ScalarProperty Name="num_med_units" ColumnName="num_med_units" />
+                <ScalarProperty Name="num_nco_units" ColumnName="num_nco_units" />
+                <ScalarProperty Name="num_res_units" ColumnName="num_res_units" />
+                <ScalarProperty Name="occupy" ColumnName="occupy" />
+                <ScalarProperty Name="occ_date" ColumnName="occ_date" />
+                <ScalarProperty Name="oth_approval" ColumnName="oth_approval" />
+                <ScalarProperty Name="office" ColumnName="office" />
+                <ScalarProperty Name="office_perc" ColumnName="office_perc" />
+                <ScalarProperty Name="owner_prop" ColumnName="owner_prop" />
+                <ScalarProperty Name="owner_add" ColumnName="owner_add" />
+                <ScalarProperty Name="owner_phone" ColumnName="owner_phone" />
+                <ScalarProperty Name="owner_email" ColumnName="owner_email" />
+                <ScalarProperty Name="owner_cell" ColumnName="owner_cell" />
+                <ScalarProperty Name="own_w_sub" ColumnName="own_w_sub" />
+                <ScalarProperty Name="opt_buy" ColumnName="opt_buy" />
+                <ScalarProperty Name="other" ColumnName="other" />
+                <ScalarProperty Name="out_of_area" ColumnName="out_of_area" />
+                <ScalarProperty Name="owner_fin" ColumnName="owner_fin" />
+                <ScalarProperty Name="owner_occ" ColumnName="owner_occ" />
+                <ScalarProperty Name="owner_pays" ColumnName="owner_pays" />
+                <ScalarProperty Name="parking" ColumnName="parking" />
+                <ScalarProperty Name="parking_fees" ColumnName="parking_fees" />
+                <ScalarProperty Name="parking_spaces" ColumnName="parking_spaces" />
+                <ScalarProperty Name="patio" ColumnName="patio" />
+                <ScalarProperty Name="patio_terr" ColumnName="patio_terr" />
+                <ScalarProperty Name="payroll" ColumnName="payroll" />
+                <ScalarProperty Name="paved" ColumnName="paved" />
+                <ScalarProperty Name="permitted_use" ColumnName="permitted_use" />
+                <ScalarProperty Name="pets" ColumnName="pets" />
+                <ScalarProperty Name="pic" ColumnName="pic" />
+                <ScalarProperty Name="plans_approve" ColumnName="plans_approve" />
+                <ScalarProperty Name="pool" ColumnName="pool" />
+                <ScalarProperty Name="poll_care" ColumnName="poll_care" />
+                <ScalarProperty Name="pool_desc" ColumnName="pool_desc" />
+                <ScalarProperty Name="possession" ColumnName="possession" />
+                <ScalarProperty Name="poss_subdiv" ColumnName="poss_subdiv" />
+                <ScalarProperty Name="post_office" ColumnName="post_office" />
+                <ScalarProperty Name="porch" ColumnName="porch" />
+                <ScalarProperty Name="pp_sf" ColumnName="pp_sf" />
+                <ScalarProperty Name="prop_disc" ColumnName="prop_disc" />
+                <ScalarProperty Name="prop_subtype1" ColumnName="prop_subtype1" />
+                <ScalarProperty Name="prop_subtype2" ColumnName="prop_subtype2" />
+                <ScalarProperty Name="prop_subtype3" ColumnName="prop_subtype3" />
+                <ScalarProperty Name="public_record" ColumnName="public_record" />
+                <ScalarProperty Name="public_private" ColumnName="public_private" />
+                <ScalarProperty Name="priv_entrance" ColumnName="priv_entrance" />
+                <ScalarProperty Name="raw_land" ColumnName="raw_land" />
+                <ScalarProperty Name="refrigerator" ColumnName="refrigerator" />
+                <ScalarProperty Name="rent_control" ColumnName="rent_control" />
+                <ScalarProperty Name="rent_stable" ColumnName="rent_stable" />
+                <ScalarProperty Name="rent_inc" ColumnName="rent_inc" />
+                <ScalarProperty Name="rent1" ColumnName="rent1" />
+                <ScalarProperty Name="rent2" ColumnName="rent2" />
+                <ScalarProperty Name="rent3" ColumnName="rent3" />
+                <ScalarProperty Name="rent4" ColumnName="rent4" />
+                <ScalarProperty Name="rent5" ColumnName="rent5" />
+                <ScalarProperty Name="rent6" ColumnName="rent6" />
+                <ScalarProperty Name="rent_allowed" ColumnName="rent_allowed" />
+                <ScalarProperty Name="rent_sqft" ColumnName="rent_sqft" />
+                <ScalarProperty Name="rent_program" ColumnName="rent_program" />
+                <ScalarProperty Name="rent_program_type" ColumnName="rent_program_type" />
+                <ScalarProperty Name="REO" ColumnName="REO" />
+                <ScalarProperty Name="reserve" ColumnName="reserve" />
+                <ScalarProperty Name="road_surface" ColumnName="road_surface" />
+                <ScalarProperty Name="roof" ColumnName="roof" />
+                <ScalarProperty Name="rooms" ColumnName="rooms" />
+                <ScalarProperty Name="s_r" ColumnName="s_r" />
+                <ScalarProperty Name="sale_type" ColumnName="sale_type" />
+                <ScalarProperty Name="sd_name" ColumnName="sd_name" />
+                <ScalarProperty Name="sd_name2" ColumnName="sd_name2" />
+                <ScalarProperty Name="sd_name3" ColumnName="sd_name3" />
+                <ScalarProperty Name="sd_name4" ColumnName="sd_name4" />
+                <ScalarProperty Name="sd_number" ColumnName="sd_number" />
+                <ScalarProperty Name="sd_type" ColumnName="sd_type" />
+                <ScalarProperty Name="sd_type2" ColumnName="sd_type2" />
+                <ScalarProperty Name="sd_type3" ColumnName="sd_type3" />
+                <ScalarProperty Name="sd_type4" ColumnName="sd_type4" />
+                <ScalarProperty Name="shares" ColumnName="shares" />
+                <ScalarProperty Name="seats" ColumnName="seats" />
+                <ScalarProperty Name="securitydep" ColumnName="securitydep" />
+                <ScalarProperty Name="sep_thermostat" ColumnName="sep_thermostat" />
+                <ScalarProperty Name="seasonal" ColumnName="seasonal" />
+                <ScalarProperty Name="AugLaborDayamt" ColumnName="AugLaborDayamt" />
+                <ScalarProperty Name="Julyamt" ColumnName="Julyamt" />
+                <ScalarProperty Name="Juneamt" ColumnName="Juneamt" />
+                <ScalarProperty Name="memdaylabordayamt" ColumnName="memdaylabordayamt" />
+                <ScalarProperty Name="offseasonamt" ColumnName="offseasonamt" />
+                <ScalarProperty Name="offseason_desc" ColumnName="offseason_desc" />
+                <ScalarProperty Name="weeklyamt" ColumnName="weeklyamt" />
+                <ScalarProperty Name="yr_roundamt" ColumnName="yr_roundamt" />
+                <ScalarProperty Name="whole_house_amt" ColumnName="whole_house_amt" />
+                <ScalarProperty Name="section_area" ColumnName="section_area" />
+                <ScalarProperty Name="seller_concession" ColumnName="seller_concession" />
+                <ScalarProperty Name="septic_app" ColumnName="septic_app" />
+                <ScalarProperty Name="sewer" ColumnName="sewer" />
+                <ScalarProperty Name="short_sale" ColumnName="short_sale" />
+                <ScalarProperty Name="show_address" ColumnName="show_address" />
+                <ScalarProperty Name="showing_instr" ColumnName="showing_instr" />
+                <ScalarProperty Name="siding" ColumnName="siding" />
+                <ScalarProperty Name="skylight" ColumnName="skylight" />
+                <ScalarProperty Name="smoking" ColumnName="smoking" />
+                <ScalarProperty Name="sprinklers" ColumnName="sprinklers" />
+                <ScalarProperty Name="sqft" ColumnName="sqft" />
+                <ScalarProperty Name="stories" ColumnName="stories" />
+                <ScalarProperty Name="stove" ColumnName="stove" />
+                <ScalarProperty Name="style" ColumnName="style" />
+                <ScalarProperty Name="survey" ColumnName="survey" />
+                <ScalarProperty Name="taxid" ColumnName="taxid" />
+                <ScalarProperty Name="tax_assessed" ColumnName="tax_assessed" />
+                <ScalarProperty Name="tax_source" ColumnName="tax_source" />
+                <ScalarProperty Name="tax_yr" ColumnName="tax_yr" />
+                <ScalarProperty Name="taxes" ColumnName="taxes" />
+                <ScalarProperty Name="term" ColumnName="term" />
+                <ScalarProperty Name="topography" ColumnName="topography" />
+                <ScalarProperty Name="total_taxes" ColumnName="total_taxes" />
+                <ScalarProperty Name="total_exp" ColumnName="total_exp" />
+                <ScalarProperty Name="total_income" ColumnName="total_income" />
+                <ScalarProperty Name="tax_abated" ColumnName="tax_abated" />
+                <ScalarProperty Name="tennis" ColumnName="tennis" />
+                <ScalarProperty Name="tennis_desc" ColumnName="tennis_desc" />
+                <ScalarProperty Name="tenant_pays" ColumnName="tenant_pays" />
+                <ScalarProperty Name="tenant_req" ColumnName="tenant_req" />
+                <ScalarProperty Name="terms" ColumnName="terms" />
+                <ScalarProperty Name="total_units" ColumnName="total_units" />
+                <ScalarProperty Name="type_own" ColumnName="type_own" />
+                <ScalarProperty Name="triple_net" ColumnName="triple_net" />
+                <ScalarProperty Name="unit2_appliances" ColumnName="unit2_appliances" />
+                <ScalarProperty Name="unit2_baths_full" ColumnName="unit2_baths_full" />
+                <ScalarProperty Name="unit2_baths_half" ColumnName="unit2_baths_half" />
+                <ScalarProperty Name="unit2_baths_tq" ColumnName="unit2_baths_tq" />
+                <ScalarProperty Name="unit2_beds" ColumnName="unit2_beds" />
+                <ScalarProperty Name="unit2_desc" ColumnName="unit2_desc" />
+                <ScalarProperty Name="unit2_rooms" ColumnName="unit2_rooms" />
+                <ScalarProperty Name="use_restrict" ColumnName="use_restrict" />
+                <ScalarProperty Name="vac_perc" ColumnName="vac_perc" />
+                <ScalarProperty Name="variance_needed" ColumnName="variance_needed" />
+                <ScalarProperty Name="videourl" ColumnName="videourl" />
+                <ScalarProperty Name="village" ColumnName="village" />
+                <ScalarProperty Name="village_tax" ColumnName="village_tax" />
+                <ScalarProperty Name="virtual_tour" ColumnName="virtual_tour" />
+                <ScalarProperty Name="virtual_tour2" ColumnName="virtual_tour2" />
+                <ScalarProperty Name="virtual_tour3" ColumnName="virtual_tour3" />
+                <ScalarProperty Name="virtual_tour4" ColumnName="virtual_tour4" />
+                <ScalarProperty Name="VOW_AVM" ColumnName="VOW_AVM" />
+                <ScalarProperty Name="VOW_3rd" ColumnName="VOW_3rd" />
+                <ScalarProperty Name="walls" ColumnName="walls" />
+                <ScalarProperty Name="washer" ColumnName="washer" />
+                <ScalarProperty Name="water" ColumnName="water" />
+                <ScalarProperty Name="water_heater" ColumnName="water_heater" />
+                <ScalarProperty Name="waterfront" ColumnName="waterfront" />
+                <ScalarProperty Name="waterfront_desc" ColumnName="waterfront_desc" />
+                <ScalarProperty Name="water_frontage" ColumnName="water_frontage" />
+                <ScalarProperty Name="waterview" ColumnName="waterview" />
+                <ScalarProperty Name="weekend_service" ColumnName="weekend_service" />
+                <ScalarProperty Name="well" ColumnName="well" />
+                <ScalarProperty Name="woodfloors" ColumnName="woodfloors" />
+                <ScalarProperty Name="yard" ColumnName="yard" />
+                <ScalarProperty Name="yr_built" ColumnName="yr_built" />
+                <ScalarProperty Name="yr_built_descr" ColumnName="yr_built_descr" />
+                <ScalarProperty Name="zone_number" ColumnName="zone_number" />
+                <ScalarProperty Name="zoning" ColumnName="zoning" />
+                <ScalarProperty Name="list_agent_id" ColumnName="list_agent_id" />
+                <ScalarProperty Name="list_agent" ColumnName="list_agent" />
+                <ScalarProperty Name="co_list_agent_id" ColumnName="co_list_agent_id" />
+                <ScalarProperty Name="co_list_agent" ColumnName="co_list_agent" />
+                <ScalarProperty Name="sell_agent_id" ColumnName="sell_agent_id" />
+                <ScalarProperty Name="sell_agent" ColumnName="sell_agent" />
+                <ScalarProperty Name="co_sell_agent_id" ColumnName="co_sell_agent_id" />
+                <ScalarProperty Name="co_sell_agent" ColumnName="co_sell_agent" />
+                <ScalarProperty Name="realtor" ColumnName="realtor" />
+                <ScalarProperty Name="realtor_code" ColumnName="realtor_code" />
+                <ScalarProperty Name="list_branch" ColumnName="list_branch" />
+                <ScalarProperty Name="sell_realtor" ColumnName="sell_realtor" />
+                <ScalarProperty Name="sell_realtor_code" ColumnName="sell_realtor_code" />
+                <ScalarProperty Name="sell_branch" ColumnName="sell_branch" />
+                <ScalarProperty Name="openhouse_date_start" ColumnName="openhouse_date_start" />
+                <ScalarProperty Name="openhouse_time_start" ColumnName="openhouse_time_start" />
+                <ScalarProperty Name="openhouse_date_end" ColumnName="openhouse_date_end" />
+                <ScalarProperty Name="openhouse_time_end" ColumnName="openhouse_time_end" />
+                <ScalarProperty Name="override" ColumnName="override" />
+                <ScalarProperty Name="FMPID" ColumnName="FMPID" />
+                <ScalarProperty Name="st_dir" ColumnName="st_dir" />
+                <ScalarProperty Name="st_sfx" ColumnName="st_sfx" />
+                <ScalarProperty Name="basement_slfr" ColumnName="basement_slfr" />
+                <ScalarProperty Name="st_dir_sfx" ColumnName="st_dir_sfx" />
+                <ScalarProperty Name="openhouse_date_start2" ColumnName="openhouse_date_start2" />
+                <ScalarProperty Name="openhouse_time_start2" ColumnName="openhouse_time_start2" />
+                <ScalarProperty Name="openhouse_date_end2" ColumnName="openhouse_date_end2" />
+                <ScalarProperty Name="openhouse_time_end2" ColumnName="openhouse_time_end2" />
+                <ScalarProperty Name="openhouse_date_start3" ColumnName="openhouse_date_start3" />
+                <ScalarProperty Name="openhouse_time_start3" ColumnName="openhouse_time_start3" />
+                <ScalarProperty Name="openhouse_date_end3" ColumnName="openhouse_date_end3" />
+                <ScalarProperty Name="openhouse_time_end3" ColumnName="openhouse_time_end3" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getAdvancedSearchResults" FunctionName="RETSDBModel.Store.getAdvancedSearchResults">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RETSDBModel.getAdvancedSearchResults_Result">
+                <ScalarProperty Name="mls" ColumnName="mls" />
+                <ScalarProperty Name="date_added" ColumnName="date_added" />
+                <ScalarProperty Name="retsysid" ColumnName="retsysid" />
+                <ScalarProperty Name="ml_number" ColumnName="ml_number" />
+                <ScalarProperty Name="list_date" ColumnName="list_date" />
+                <ScalarProperty Name="list_price" ColumnName="list_price" />
+                <ScalarProperty Name="days_on_market" ColumnName="days_on_market" />
+                <ScalarProperty Name="contract_date" ColumnName="contract_date" />
+                <ScalarProperty Name="contract_price" ColumnName="contract_price" />
+                <ScalarProperty Name="contract_dom" ColumnName="contract_dom" />
+                <ScalarProperty Name="sell_date" ColumnName="sell_date" />
+                <ScalarProperty Name="sell_price" ColumnName="sell_price" />
+                <ScalarProperty Name="exp_date" ColumnName="exp_date" />
+                <ScalarProperty Name="list_status" ColumnName="list_status" />
+                <ScalarProperty Name="list_type" ColumnName="list_type" />
+                <ScalarProperty Name="prop_type" ColumnName="prop_type" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="street_number" ColumnName="street_number" />
+                <ScalarProperty Name="unit_number" ColumnName="unit_number" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="county" ColumnName="county" />
+                <ScalarProperty Name="access_24hr" ColumnName="access_24hr" />
+                <ScalarProperty Name="acres" ColumnName="acres" />
+                <ScalarProperty Name="adult_comm" ColumnName="adult_comm" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="ac" ColumnName="ac" />
+                <ScalarProperty Name="adtext" ColumnName="adtext" />
+                <ScalarProperty Name="add_fee_freq" ColumnName="add_fee_freq" />
+                <ScalarProperty Name="add_fee_des" ColumnName="add_fee_des" />
+                <ScalarProperty Name="add_fees" ColumnName="add_fees" />
+                <ScalarProperty Name="add_fees_amt" ColumnName="add_fees_amt" />
+                <ScalarProperty Name="amenities" ColumnName="amenities" />
+                <ScalarProperty Name="amps" ColumnName="amps" />
+                <ScalarProperty Name="appearance" ColumnName="appearance" />
+                <ScalarProperty Name="appliances" ColumnName="appliances" />
+                <ScalarProperty Name="app_req" ColumnName="app_req" />
+                <ScalarProperty Name="apt2_leased" ColumnName="apt2_leased" />
+                <ScalarProperty Name="apt_loc" ColumnName="apt_loc" />
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="area_name" ColumnName="area_name" />
+                <ScalarProperty Name="association" ColumnName="association" />
+                <ScalarProperty Name="attic" ColumnName="attic" />
+                <ScalarProperty Name="aux_rooms" ColumnName="aux_rooms" />
+                <ScalarProperty Name="basement" ColumnName="basement" />
+                <ScalarProperty Name="basement_finished" ColumnName="basement_finished" />
+                <ScalarProperty Name="basement_descr" ColumnName="basement_descr" />
+                <ScalarProperty Name="baths_disp" ColumnName="baths_disp" />
+                <ScalarProperty Name="baths" ColumnName="baths" />
+                <ScalarProperty Name="baths_full" ColumnName="baths_full" />
+                <ScalarProperty Name="baths_half" ColumnName="baths_half" />
+                <ScalarProperty Name="baths_tq" ColumnName="baths_tq" />
+                <ScalarProperty Name="baths_1q" ColumnName="baths_1q" />
+                <ScalarProperty Name="board_health_ap" ColumnName="board_health_ap" />
+                <ScalarProperty Name="beachrights" ColumnName="beachrights" />
+                <ScalarProperty Name="beds" ColumnName="beds" />
+                <ScalarProperty Name="block" ColumnName="block" />
+                <ScalarProperty Name="business_age" ColumnName="business_age" />
+                <ScalarProperty Name="building_approved" ColumnName="building_approved" />
+                <ScalarProperty Name="building_sqft" ColumnName="building_sqft" />
+                <ScalarProperty Name="brs" ColumnName="brs" />
+                <ScalarProperty Name="brslisting" ColumnName="brslisting" />
+                <ScalarProperty Name="bulkhead" ColumnName="bulkhead" />
+                <ScalarProperty Name="bus_name" ColumnName="bus_name" />
+                <ScalarProperty Name="bus_type" ColumnName="bus_type" />
+                <ScalarProperty Name="cable" ColumnName="cable" />
+                <ScalarProperty Name="caczones" ColumnName="caczones" />
+                <ScalarProperty Name="carpet" ColumnName="carpet" />
+                <ScalarProperty Name="ceiling_ht" ColumnName="ceiling_ht" />
+                <ScalarProperty Name="cofo" ColumnName="cofo" />
+                <ScalarProperty Name="comm_charges" ColumnName="comm_charges" />
+                <ScalarProperty Name="construct_type" ColumnName="construct_type" />
+                <ScalarProperty Name="coop_shares" ColumnName="coop_shares" />
+                <ScalarProperty Name="county_use" ColumnName="county_use" />
+                <ScalarProperty Name="cross_st" ColumnName="cross_st" />
+                <ScalarProperty Name="culdesac" ColumnName="culdesac" />
+                <ScalarProperty Name="deck" ColumnName="deck" />
+                <ScalarProperty Name="deduct_per" ColumnName="deduct_per" />
+                <ScalarProperty Name="deposit" ColumnName="deposit" />
+                <ScalarProperty Name="desc1" ColumnName="desc1" />
+                <ScalarProperty Name="desc2" ColumnName="desc2" />
+                <ScalarProperty Name="desc3" ColumnName="desc3" />
+                <ScalarProperty Name="desc4" ColumnName="desc4" />
+                <ScalarProperty Name="desc5" ColumnName="desc5" />
+                <ScalarProperty Name="desc6" ColumnName="desc6" />
+                <ScalarProperty Name="desc7" ColumnName="desc7" />
+                <ScalarProperty Name="desc8" ColumnName="desc8" />
+                <ScalarProperty Name="detattached" ColumnName="detattached" />
+                <ScalarProperty Name="development" ColumnName="development" />
+                <ScalarProperty Name="dining_room" ColumnName="dining_room" />
+                <ScalarProperty Name="directions" ColumnName="directions" />
+                <ScalarProperty Name="dishwasher" ColumnName="dishwasher" />
+                <ScalarProperty Name="dock" ColumnName="dock" />
+                <ScalarProperty Name="driveway" ColumnName="driveway" />
+                <ScalarProperty Name="dryer" ColumnName="dryer" />
+                <ScalarProperty Name="easements" ColumnName="easements" />
+                <ScalarProperty Name="eik" ColumnName="eik" />
+                <ScalarProperty Name="electric" ColumnName="electric" />
+                <ScalarProperty Name="electric_avail" ColumnName="electric_avail" />
+                <ScalarProperty Name="electric_meter" ColumnName="electric_meter" />
+                <ScalarProperty Name="elevator" ColumnName="elevator" />
+                <ScalarProperty Name="end_unit" ColumnName="end_unit" />
+                <ScalarProperty Name="energyeff_1" ColumnName="energyeff_1" />
+                <ScalarProperty Name="energyeff_2" ColumnName="energyeff_2" />
+                <ScalarProperty Name="energyeff_3" ColumnName="energyeff_3" />
+                <ScalarProperty Name="energyeff_4" ColumnName="energyeff_4" />
+                <ScalarProperty Name="energyeff_5" ColumnName="energyeff_5" />
+                <ScalarProperty Name="energyeff_6" ColumnName="energyeff_6" />
+                <ScalarProperty Name="energyeff_7" ColumnName="energyeff_7" />
+                <ScalarProperty Name="energyeff_8" ColumnName="energyeff_8" />
+                <ScalarProperty Name="energyeff_9" ColumnName="energyeff_9" />
+                <ScalarProperty Name="energyeff_10" ColumnName="energyeff_10" />
+                <ScalarProperty Name="energyeff_11" ColumnName="energyeff_11" />
+                <ScalarProperty Name="energyeff_12" ColumnName="energyeff_12" />
+                <ScalarProperty Name="energyeff_13" ColumnName="energyeff_13" />
+                <ScalarProperty Name="energyeff_14" ColumnName="energyeff_14" />
+                <ScalarProperty Name="energyeff_15" ColumnName="energyeff_15" />
+                <ScalarProperty Name="energyeff_16" ColumnName="energyeff_16" />
+                <ScalarProperty Name="energyeff_17" ColumnName="energyeff_17" />
+                <ScalarProperty Name="energyeff_18" ColumnName="energyeff_18" />
+                <ScalarProperty Name="energyeff_19" ColumnName="energyeff_19" />
+                <ScalarProperty Name="energyeff_20" ColumnName="energyeff_20" />
+                <ScalarProperty Name="excluded" ColumnName="excluded" />
+                <ScalarProperty Name="expenses" ColumnName="expenses" />
+                <ScalarProperty Name="expenses_inc" ColumnName="expenses_inc" />
+                <ScalarProperty Name="exterior" ColumnName="exterior" />
+                <ScalarProperty Name="extras" ColumnName="extras" />
+                <ScalarProperty Name="extra_land" ColumnName="extra_land" />
+                <ScalarProperty Name="families" ColumnName="families" />
+                <ScalarProperty Name="fence" ColumnName="fence" />
+                <ScalarProperty Name="fireplaces" ColumnName="fireplaces" />
+                <ScalarProperty Name="fix_eqp" ColumnName="fix_eqp" />
+                <ScalarProperty Name="flip_tax" ColumnName="flip_tax" />
+                <ScalarProperty Name="flip_tax_amt" ColumnName="flip_tax_amt" />
+                <ScalarProperty Name="flr_ld" ColumnName="flr_ld" />
+                <ScalarProperty Name="fl_number" ColumnName="fl_number" />
+                <ScalarProperty Name="floors" ColumnName="floors" />
+                <ScalarProperty Name="foreclosure" ColumnName="foreclosure" />
+                <ScalarProperty Name="foundation" ColumnName="foundation" />
+                <ScalarProperty Name="ftr_garage" ColumnName="ftr_garage" />
+                <ScalarProperty Name="front_ft" ColumnName="front_ft" />
+                <ScalarProperty Name="fuel" ColumnName="fuel" />
+                <ScalarProperty Name="furnished" ColumnName="furnished" />
+                <ScalarProperty Name="garage" ColumnName="garage" />
+                <ScalarProperty Name="garage_type" ColumnName="garage_type" />
+                <ScalarProperty Name="garage_capacity" ColumnName="garage_capacity" />
+                <ScalarProperty Name="garbage" ColumnName="garbage" />
+                <ScalarProperty Name="gas_avail" ColumnName="gas_avail" />
+                <ScalarProperty Name="gas_meter" ColumnName="gas_meter" />
+                <ScalarProperty Name="gated" ColumnName="gated" />
+                <ScalarProperty Name="gov_pending" ColumnName="gov_pending" />
+                <ScalarProperty Name="green_cert" ColumnName="green_cert" />
+                <ScalarProperty Name="green_cert_type" ColumnName="green_cert_type" />
+                <ScalarProperty Name="green_cert_year" ColumnName="green_cert_year" />
+                <ScalarProperty Name="greenfeatures" ColumnName="greenfeatures" />
+                <ScalarProperty Name="greenfeatures_desc" ColumnName="greenfeatures_desc" />
+                <ScalarProperty Name="gross_inc" ColumnName="gross_inc" />
+                <ScalarProperty Name="ground_care" ColumnName="ground_care" />
+                <ScalarProperty Name="handicap" ColumnName="handicap" />
+                <ScalarProperty Name="handicap_desc" ColumnName="handicap_desc" />
+                <ScalarProperty Name="heat" ColumnName="heat" />
+                <ScalarProperty Name="heat_sys" ColumnName="heat_sys" />
+                <ScalarProperty Name="heat_units" ColumnName="heat_units" />
+                <ScalarProperty Name="hoa" ColumnName="hoa" />
+                <ScalarProperty Name="hoa_fee_per" ColumnName="hoa_fee_per" />
+                <ScalarProperty Name="hoa_fees_inc" ColumnName="hoa_fees_inc" />
+                <ScalarProperty Name="horseprop" ColumnName="horseprop" />
+                <ScalarProperty Name="hot_wt" ColumnName="hot_wt" />
+                <ScalarProperty Name="house_color" ColumnName="house_color" />
+                <ScalarProperty Name="house_dimen" ColumnName="house_dimen" />
+                <ScalarProperty Name="house_keep" ColumnName="house_keep" />
+                <ScalarProperty Name="improvements" ColumnName="improvements" />
+                <ScalarProperty Name="inc1_dol" ColumnName="inc1_dol" />
+                <ScalarProperty Name="inc2_dol" ColumnName="inc2_dol" />
+                <ScalarProperty Name="inc3_dol" ColumnName="inc3_dol" />
+                <ScalarProperty Name="inc4_dol" ColumnName="inc4_dol" />
+                <ScalarProperty Name="inc5_dol" ColumnName="inc5_dol" />
+                <ScalarProperty Name="inc6_dol" ColumnName="inc6_dol" />
+                <ScalarProperty Name="inc7_dol" ColumnName="inc7_dol" />
+                <ScalarProperty Name="inc8_dol" ColumnName="inc8_dol" />
+                <ScalarProperty Name="included" ColumnName="included" />
+                <ScalarProperty Name="insurance" ColumnName="insurance" />
+                <ScalarProperty Name="inventory" ColumnName="inventory" />
+                <ScalarProperty Name="interior" ColumnName="interior" />
+                <ScalarProperty Name="internet" ColumnName="internet" />
+                <ScalarProperty Name="kitchen" ColumnName="kitchen" />
+                <ScalarProperty Name="land_use" ColumnName="land_use" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="leasetype" ColumnName="leasetype" />
+                <ScalarProperty Name="lease_yrs" ColumnName="lease_yrs" />
+                <ScalarProperty Name="lease_hel_imp" ColumnName="lease_hel_imp" />
+                <ScalarProperty Name="lease_purch" ColumnName="lease_purch" />
+                <ScalarProperty Name="level_roll" ColumnName="level_roll" />
+                <ScalarProperty Name="levels" ColumnName="levels" />
+                <ScalarProperty Name="level1" ColumnName="level1" />
+                <ScalarProperty Name="level2" ColumnName="level2" />
+                <ScalarProperty Name="level3" ColumnName="level3" />
+                <ScalarProperty Name="levelb" ColumnName="levelb" />
+                <ScalarProperty Name="living_room" ColumnName="living_room" />
+                <ScalarProperty Name="load_dock" ColumnName="load_dock" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="lot" ColumnName="lot" />
+                <ScalarProperty Name="lot_size" ColumnName="lot_size" />
+                <ScalarProperty Name="lot_sqft" ColumnName="lot_sqft" />
+                <ScalarProperty Name="lot_frontage" ColumnName="lot_frontage" />
+                <ScalarProperty Name="maint" ColumnName="maint" />
+                <ScalarProperty Name="maint_deduct" ColumnName="maint_deduct" />
+                <ScalarProperty Name="maint_rep" ColumnName="maint_rep" />
+                <ScalarProperty Name="max_finance" ColumnName="max_finance" />
+                <ScalarProperty Name="main_bath" ColumnName="main_bath" />
+                <ScalarProperty Name="main_unit_leased" ColumnName="main_unit_leased" />
+                <ScalarProperty Name="master_br" ColumnName="master_br" />
+                <ScalarProperty Name="mgmt" ColumnName="mgmt" />
+                <ScalarProperty Name="minage" ColumnName="minage" />
+                <ScalarProperty Name="min_plot" ColumnName="min_plot" />
+                <ScalarProperty Name="model" ColumnName="model" />
+                <ScalarProperty Name="neighborhood" ColumnName="neighborhood" />
+                <ScalarProperty Name="net_inc" ColumnName="net_inc" />
+                <ScalarProperty Name="new_constr" ColumnName="new_constr" />
+                <ScalarProperty Name="num_1bd" ColumnName="num_1bd" />
+                <ScalarProperty Name="num2_bd" ColumnName="num2_bd" />
+                <ScalarProperty Name="num3_bd" ColumnName="num3_bd" />
+                <ScalarProperty Name="num4_bd" ColumnName="num4_bd" />
+                <ScalarProperty Name="num_buildings" ColumnName="num_buildings" />
+                <ScalarProperty Name="num_com_units" ColumnName="num_com_units" />
+                <ScalarProperty Name="num_fl_units" ColumnName="num_fl_units" />
+                <ScalarProperty Name="num_kit" ColumnName="num_kit" />
+                <ScalarProperty Name="num_man_units" ColumnName="num_man_units" />
+                <ScalarProperty Name="num_med_units" ColumnName="num_med_units" />
+                <ScalarProperty Name="num_nco_units" ColumnName="num_nco_units" />
+                <ScalarProperty Name="num_res_units" ColumnName="num_res_units" />
+                <ScalarProperty Name="occupy" ColumnName="occupy" />
+                <ScalarProperty Name="occ_date" ColumnName="occ_date" />
+                <ScalarProperty Name="oth_approval" ColumnName="oth_approval" />
+                <ScalarProperty Name="office" ColumnName="office" />
+                <ScalarProperty Name="office_perc" ColumnName="office_perc" />
+                <ScalarProperty Name="owner_prop" ColumnName="owner_prop" />
+                <ScalarProperty Name="owner_add" ColumnName="owner_add" />
+                <ScalarProperty Name="owner_phone" ColumnName="owner_phone" />
+                <ScalarProperty Name="owner_email" ColumnName="owner_email" />
+                <ScalarProperty Name="owner_cell" ColumnName="owner_cell" />
+                <ScalarProperty Name="own_w_sub" ColumnName="own_w_sub" />
+                <ScalarProperty Name="opt_buy" ColumnName="opt_buy" />
+                <ScalarProperty Name="other" ColumnName="other" />
+                <ScalarProperty Name="out_of_area" ColumnName="out_of_area" />
+                <ScalarProperty Name="owner_fin" ColumnName="owner_fin" />
+                <ScalarProperty Name="owner_occ" ColumnName="owner_occ" />
+                <ScalarProperty Name="owner_pays" ColumnName="owner_pays" />
+                <ScalarProperty Name="parking" ColumnName="parking" />
+                <ScalarProperty Name="parking_fees" ColumnName="parking_fees" />
+                <ScalarProperty Name="parking_spaces" ColumnName="parking_spaces" />
+                <ScalarProperty Name="patio" ColumnName="patio" />
+                <ScalarProperty Name="patio_terr" ColumnName="patio_terr" />
+                <ScalarProperty Name="payroll" ColumnName="payroll" />
+                <ScalarProperty Name="paved" ColumnName="paved" />
+                <ScalarProperty Name="permitted_use" ColumnName="permitted_use" />
+                <ScalarProperty Name="pets" ColumnName="pets" />
+                <ScalarProperty Name="pic" ColumnName="pic" />
+                <ScalarProperty Name="plans_approve" ColumnName="plans_approve" />
+                <ScalarProperty Name="pool" ColumnName="pool" />
+                <ScalarProperty Name="poll_care" ColumnName="poll_care" />
+                <ScalarProperty Name="pool_desc" ColumnName="pool_desc" />
+                <ScalarProperty Name="possession" ColumnName="possession" />
+                <ScalarProperty Name="poss_subdiv" ColumnName="poss_subdiv" />
+                <ScalarProperty Name="post_office" ColumnName="post_office" />
+                <ScalarProperty Name="porch" ColumnName="porch" />
+                <ScalarProperty Name="pp_sf" ColumnName="pp_sf" />
+                <ScalarProperty Name="prop_disc" ColumnName="prop_disc" />
+                <ScalarProperty Name="prop_subtype1" ColumnName="prop_subtype1" />
+                <ScalarProperty Name="prop_subtype2" ColumnName="prop_subtype2" />
+                <ScalarProperty Name="prop_subtype3" ColumnName="prop_subtype3" />
+                <ScalarProperty Name="public_record" ColumnName="public_record" />
+                <ScalarProperty Name="public_private" ColumnName="public_private" />
+                <ScalarProperty Name="priv_entrance" ColumnName="priv_entrance" />
+                <ScalarProperty Name="raw_land" ColumnName="raw_land" />
+                <ScalarProperty Name="refrigerator" ColumnName="refrigerator" />
+                <ScalarProperty Name="rent_control" ColumnName="rent_control" />
+                <ScalarProperty Name="rent_stable" ColumnName="rent_stable" />
+                <ScalarProperty Name="rent_inc" ColumnName="rent_inc" />
+                <ScalarProperty Name="rent1" ColumnName="rent1" />
+                <ScalarProperty Name="rent2" ColumnName="rent2" />
+                <ScalarProperty Name="rent3" ColumnName="rent3" />
+                <ScalarProperty Name="rent4" ColumnName="rent4" />
+                <ScalarProperty Name="rent5" ColumnName="rent5" />
+                <ScalarProperty Name="rent6" ColumnName="rent6" />
+                <ScalarProperty Name="rent_allowed" ColumnName="rent_allowed" />
+                <ScalarProperty Name="rent_sqft" ColumnName="rent_sqft" />
+                <ScalarProperty Name="rent_program" ColumnName="rent_program" />
+                <ScalarProperty Name="rent_program_type" ColumnName="rent_program_type" />
+                <ScalarProperty Name="REO" ColumnName="REO" />
+                <ScalarProperty Name="reserve" ColumnName="reserve" />
+                <ScalarProperty Name="road_surface" ColumnName="road_surface" />
+                <ScalarProperty Name="roof" ColumnName="roof" />
+                <ScalarProperty Name="rooms" ColumnName="rooms" />
+                <ScalarProperty Name="s_r" ColumnName="s_r" />
+                <ScalarProperty Name="sale_type" ColumnName="sale_type" />
+                <ScalarProperty Name="sd_name" ColumnName="sd_name" />
+                <ScalarProperty Name="sd_name2" ColumnName="sd_name2" />
+                <ScalarProperty Name="sd_name3" ColumnName="sd_name3" />
+                <ScalarProperty Name="sd_name4" ColumnName="sd_name4" />
+                <ScalarProperty Name="sd_number" ColumnName="sd_number" />
+                <ScalarProperty Name="sd_type" ColumnName="sd_type" />
+                <ScalarProperty Name="sd_type2" ColumnName="sd_type2" />
+                <ScalarProperty Name="sd_type3" ColumnName="sd_type3" />
+                <ScalarProperty Name="sd_type4" ColumnName="sd_type4" />
+                <ScalarProperty Name="shares" ColumnName="shares" />
+                <ScalarProperty Name="seats" ColumnName="seats" />
+                <ScalarProperty Name="securitydep" ColumnName="securitydep" />
+                <ScalarProperty Name="sep_thermostat" ColumnName="sep_thermostat" />
+                <ScalarProperty Name="seasonal" ColumnName="seasonal" />
+                <ScalarProperty Name="AugLaborDayamt" ColumnName="AugLaborDayamt" />
+                <ScalarProperty Name="Julyamt" ColumnName="Julyamt" />
+                <ScalarProperty Name="Juneamt" ColumnName="Juneamt" />
+                <ScalarProperty Name="memdaylabordayamt" ColumnName="memdaylabordayamt" />
+                <ScalarProperty Name="offseasonamt" ColumnName="offseasonamt" />
+                <ScalarProperty Name="offseason_desc" ColumnName="offseason_desc" />
+                <ScalarProperty Name="weeklyamt" ColumnName="weeklyamt" />
+                <ScalarProperty Name="yr_roundamt" ColumnName="yr_roundamt" />
+                <ScalarProperty Name="whole_house_amt" ColumnName="whole_house_amt" />
+                <ScalarProperty Name="section_area" ColumnName="section_area" />
+                <ScalarProperty Name="seller_concession" ColumnName="seller_concession" />
+                <ScalarProperty Name="septic_app" ColumnName="septic_app" />
+                <ScalarProperty Name="sewer" ColumnName="sewer" />
+                <ScalarProperty Name="short_sale" ColumnName="short_sale" />
+                <ScalarProperty Name="show_address" ColumnName="show_address" />
+                <ScalarProperty Name="showing_instr" ColumnName="showing_instr" />
+                <ScalarProperty Name="siding" ColumnName="siding" />
+                <ScalarProperty Name="skylight" ColumnName="skylight" />
+                <ScalarProperty Name="smoking" ColumnName="smoking" />
+                <ScalarProperty Name="sprinklers" ColumnName="sprinklers" />
+                <ScalarProperty Name="sqft" ColumnName="sqft" />
+                <ScalarProperty Name="stories" ColumnName="stories" />
+                <ScalarProperty Name="stove" ColumnName="stove" />
+                <ScalarProperty Name="style" ColumnName="style" />
+                <ScalarProperty Name="survey" ColumnName="survey" />
+                <ScalarProperty Name="taxid" ColumnName="taxid" />
+                <ScalarProperty Name="tax_assessed" ColumnName="tax_assessed" />
+                <ScalarProperty Name="tax_source" ColumnName="tax_source" />
+                <ScalarProperty Name="tax_yr" ColumnName="tax_yr" />
+                <ScalarProperty Name="taxes" ColumnName="taxes" />
+                <ScalarProperty Name="term" ColumnName="term" />
+                <ScalarProperty Name="topography" ColumnName="topography" />
+                <ScalarProperty Name="total_taxes" ColumnName="total_taxes" />
+                <ScalarProperty Name="total_exp" ColumnName="total_exp" />
+                <ScalarProperty Name="total_income" ColumnName="total_income" />
+                <ScalarProperty Name="tax_abated" ColumnName="tax_abated" />
+                <ScalarProperty Name="tennis" ColumnName="tennis" />
+                <ScalarProperty Name="tennis_desc" ColumnName="tennis_desc" />
+                <ScalarProperty Name="tenant_pays" ColumnName="tenant_pays" />
+                <ScalarProperty Name="tenant_req" ColumnName="tenant_req" />
+                <ScalarProperty Name="terms" ColumnName="terms" />
+                <ScalarProperty Name="total_units" ColumnName="total_units" />
+                <ScalarProperty Name="type_own" ColumnName="type_own" />
+                <ScalarProperty Name="triple_net" ColumnName="triple_net" />
+                <ScalarProperty Name="unit2_appliances" ColumnName="unit2_appliances" />
+                <ScalarProperty Name="unit2_baths_full" ColumnName="unit2_baths_full" />
+                <ScalarProperty Name="unit2_baths_half" ColumnName="unit2_baths_half" />
+                <ScalarProperty Name="unit2_baths_tq" ColumnName="unit2_baths_tq" />
+                <ScalarProperty Name="unit2_beds" ColumnName="unit2_beds" />
+                <ScalarProperty Name="unit2_desc" ColumnName="unit2_desc" />
+                <ScalarProperty Name="unit2_rooms" ColumnName="unit2_rooms" />
+                <ScalarProperty Name="use_restrict" ColumnName="use_restrict" />
+                <ScalarProperty Name="vac_perc" ColumnName="vac_perc" />
+                <ScalarProperty Name="variance_needed" ColumnName="variance_needed" />
+                <ScalarProperty Name="videourl" ColumnName="videourl" />
+                <ScalarProperty Name="village" ColumnName="village" />
+                <ScalarProperty Name="village_tax" ColumnName="village_tax" />
+                <ScalarProperty Name="virtual_tour" ColumnName="virtual_tour" />
+                <ScalarProperty Name="virtual_tour2" ColumnName="virtual_tour2" />
+                <ScalarProperty Name="virtual_tour3" ColumnName="virtual_tour3" />
+                <ScalarProperty Name="virtual_tour4" ColumnName="virtual_tour4" />
+                <ScalarProperty Name="VOW_AVM" ColumnName="VOW_AVM" />
+                <ScalarProperty Name="VOW_3rd" ColumnName="VOW_3rd" />
+                <ScalarProperty Name="walls" ColumnName="walls" />
+                <ScalarProperty Name="washer" ColumnName="washer" />
+                <ScalarProperty Name="water" ColumnName="water" />
+                <ScalarProperty Name="water_heater" ColumnName="water_heater" />
+                <ScalarProperty Name="waterfront" ColumnName="waterfront" />
+                <ScalarProperty Name="waterfront_desc" ColumnName="waterfront_desc" />
+                <ScalarProperty Name="water_frontage" ColumnName="water_frontage" />
+                <ScalarProperty Name="waterview" ColumnName="waterview" />
+                <ScalarProperty Name="weekend_service" ColumnName="weekend_service" />
+                <ScalarProperty Name="well" ColumnName="well" />
+                <ScalarProperty Name="woodfloors" ColumnName="woodfloors" />
+                <ScalarProperty Name="yard" ColumnName="yard" />
+                <ScalarProperty Name="yr_built" ColumnName="yr_built" />
+                <ScalarProperty Name="yr_built_descr" ColumnName="yr_built_descr" />
+                <ScalarProperty Name="zone_number" ColumnName="zone_number" />
+                <ScalarProperty Name="zoning" ColumnName="zoning" />
+                <ScalarProperty Name="list_agent_id" ColumnName="list_agent_id" />
+                <ScalarProperty Name="list_agent" ColumnName="list_agent" />
+                <ScalarProperty Name="co_list_agent_id" ColumnName="co_list_agent_id" />
+                <ScalarProperty Name="co_list_agent" ColumnName="co_list_agent" />
+                <ScalarProperty Name="sell_agent_id" ColumnName="sell_agent_id" />
+                <ScalarProperty Name="sell_agent" ColumnName="sell_agent" />
+                <ScalarProperty Name="co_sell_agent_id" ColumnName="co_sell_agent_id" />
+                <ScalarProperty Name="co_sell_agent" ColumnName="co_sell_agent" />
+                <ScalarProperty Name="realtor" ColumnName="realtor" />
+                <ScalarProperty Name="realtor_code" ColumnName="realtor_code" />
+                <ScalarProperty Name="list_branch" ColumnName="list_branch" />
+                <ScalarProperty Name="sell_realtor" ColumnName="sell_realtor" />
+                <ScalarProperty Name="sell_realtor_code" ColumnName="sell_realtor_code" />
+                <ScalarProperty Name="sell_branch" ColumnName="sell_branch" />
+                <ScalarProperty Name="openhouse_date_start" ColumnName="openhouse_date_start" />
+                <ScalarProperty Name="openhouse_time_start" ColumnName="openhouse_time_start" />
+                <ScalarProperty Name="openhouse_date_end" ColumnName="openhouse_date_end" />
+                <ScalarProperty Name="openhouse_time_end" ColumnName="openhouse_time_end" />
+                <ScalarProperty Name="override" ColumnName="override" />
+                <ScalarProperty Name="FMPID" ColumnName="FMPID" />
+                <ScalarProperty Name="st_dir" ColumnName="st_dir" />
+                <ScalarProperty Name="st_sfx" ColumnName="st_sfx" />
+                <ScalarProperty Name="basement_slfr" ColumnName="basement_slfr" />
+                <ScalarProperty Name="st_dir_sfx" ColumnName="st_dir_sfx" />
+                <ScalarProperty Name="openhouse_date_start2" ColumnName="openhouse_date_start2" />
+                <ScalarProperty Name="openhouse_time_start2" ColumnName="openhouse_time_start2" />
+                <ScalarProperty Name="openhouse_date_end2" ColumnName="openhouse_date_end2" />
+                <ScalarProperty Name="openhouse_time_end2" ColumnName="openhouse_time_end2" />
+                <ScalarProperty Name="openhouse_date_start3" ColumnName="openhouse_date_start3" />
+                <ScalarProperty Name="openhouse_time_start3" ColumnName="openhouse_time_start3" />
+                <ScalarProperty Name="openhouse_date_end3" ColumnName="openhouse_date_end3" />
+                <ScalarProperty Name="openhouse_time_end3" ColumnName="openhouse_time_end3" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getAdvancedSearchResults_Updated" FunctionName="RETSDBModel.Store.getAdvancedSearchResults_Updated" />
           <FunctionImportMapping FunctionImportName="getAutoSearchResultsBasedOnKeyAndListingtypeTab" FunctionName="RETSDBModel.Store.getAutoSearchResultsBasedOnKeyAndListingtypeTab" />
+          <FunctionImportMapping FunctionImportName="getcityByCounty" FunctionName="RETSDBModel.Store.getcityByCounty" />
+          <FunctionImportMapping FunctionImportName="getMlsDatadueToagent" FunctionName="RETSDBModel.Store.getMlsDatadueToagent">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RETSDBModel.getMlsDatadueToagent_Result">
+                <ScalarProperty Name="ml_number" ColumnName="ml_number" />
+                <ScalarProperty Name="list_price" ColumnName="list_price" />
+                <ScalarProperty Name="street" ColumnName="street" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="getMlsDetailBySearchKeywordbycityTab" FunctionName="RETSDBModel.Store.getMlsDetailBySearchKeywordbycityTab">
             <ResultMapping>
               <ComplexTypeMapping TypeName="RETSDBModel.getMlsDetailBySearchKeywordbycityTab_Result">
@@ -9219,6 +11227,31 @@ warning 6002: The table/view 'RETSDB.dbo.virtual_tours_info' does not have a pri
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getResultBasedCityandStreet" FunctionName="RETSDBModel.Store.getResultBasedCityandStreet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RETSDBModel.getResultBasedCityandStreet_Result">
+                <ScalarProperty Name="ml_number" ColumnName="ml_number" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="list_type" ColumnName="list_type" />
+                <ScalarProperty Name="list_price" ColumnName="list_price" />
+                <ScalarProperty Name="beds" ColumnName="beds" />
+                <ScalarProperty Name="baths" ColumnName="baths" />
+                <ScalarProperty Name="list_date" ColumnName="list_date" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="waterfront" ColumnName="waterfront" />
+                <ScalarProperty Name="style" ColumnName="style" />
+                <ScalarProperty Name="sd_name" ColumnName="sd_name" />
+                <ScalarProperty Name="county" ColumnName="county" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="list_agent_id" ColumnName="list_agent_id" />
+                <ScalarProperty Name="RETS_ID" ColumnName="RETS_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="getUsCityZipData" FunctionName="RETSDBModel.Store.getUsCityZipData">
             <ResultMapping>
               <ComplexTypeMapping TypeName="RETSDBModel.getUsCityZipData_Result">
@@ -9227,6 +11260,7 @@ warning 6002: The table/view 'RETSDB.dbo.virtual_tours_info' does not have a pri
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateAgentData" FunctionName="RETSDBModel.Store.UpdateAgentData" />
           <FunctionImportMapping FunctionImportName="UpdateAgentsData" FunctionName="RETSDBModel.Store.UpdateAgentsData" />
         </EntityContainerMapping>
       </Mapping>

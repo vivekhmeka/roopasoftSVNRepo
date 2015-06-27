@@ -29,9 +29,11 @@ namespace Century21.DataModels
     
         public virtual DbSet<bob_form> bob_form { get; set; }
         public virtual DbSet<ContactDetail> ContactDetails { get; set; }
+        public virtual DbSet<ContactInformation> ContactInformations { get; set; }
         public virtual DbSet<dtproperty> dtproperties { get; set; }
         public virtual DbSet<mobileapp_admin> mobileapp_admin { get; set; }
         public virtual DbSet<mobileapp_users> mobileapp_users { get; set; }
+        public virtual DbSet<SellersInformation> SellersInformations { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<ADDITIONAL_DATA> ADDITIONAL_DATA { get; set; }
         public virtual DbSet<ADDITIONAL_DATA_IMPORT> ADDITIONAL_DATA_IMPORT { get; set; }
@@ -59,6 +61,117 @@ namespace Century21.DataModels
         public virtual DbSet<virtual_tours> virtual_tours { get; set; }
         public virtual DbSet<virtual_tours_info> virtual_tours_info { get; set; }
     
+        public virtual ObjectResult<FULLMLSgetListings_Result> FULLMLSgetListings(string mls, Nullable<System.DateTime> date)
+        {
+            var mlsParameter = mls != null ?
+                new ObjectParameter("mls", mls) :
+                new ObjectParameter("mls", typeof(string));
+    
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FULLMLSgetListings_Result>("FULLMLSgetListings", mlsParameter, dateParameter);
+        }
+    
+        public virtual ObjectResult<getAdvancedSearchResults_Result> getAdvancedSearchResults(string mLSID, string location, string counties, string listType, string beds, string baths, string withOpenHouse, string waterFront, Nullable<float> price, string styles, string schoolDistricts)
+        {
+            var mLSIDParameter = mLSID != null ?
+                new ObjectParameter("MLSID", mLSID) :
+                new ObjectParameter("MLSID", typeof(string));
+    
+            var locationParameter = location != null ?
+                new ObjectParameter("Location", location) :
+                new ObjectParameter("Location", typeof(string));
+    
+            var countiesParameter = counties != null ?
+                new ObjectParameter("Counties", counties) :
+                new ObjectParameter("Counties", typeof(string));
+    
+            var listTypeParameter = listType != null ?
+                new ObjectParameter("ListType", listType) :
+                new ObjectParameter("ListType", typeof(string));
+    
+            var bedsParameter = beds != null ?
+                new ObjectParameter("Beds", beds) :
+                new ObjectParameter("Beds", typeof(string));
+    
+            var bathsParameter = baths != null ?
+                new ObjectParameter("Baths", baths) :
+                new ObjectParameter("Baths", typeof(string));
+    
+            var withOpenHouseParameter = withOpenHouse != null ?
+                new ObjectParameter("WithOpenHouse", withOpenHouse) :
+                new ObjectParameter("WithOpenHouse", typeof(string));
+    
+            var waterFrontParameter = waterFront != null ?
+                new ObjectParameter("WaterFront", waterFront) :
+                new ObjectParameter("WaterFront", typeof(string));
+    
+            var priceParameter = price.HasValue ?
+                new ObjectParameter("Price", price) :
+                new ObjectParameter("Price", typeof(float));
+    
+            var stylesParameter = styles != null ?
+                new ObjectParameter("Styles", styles) :
+                new ObjectParameter("Styles", typeof(string));
+    
+            var schoolDistrictsParameter = schoolDistricts != null ?
+                new ObjectParameter("SchoolDistricts", schoolDistricts) :
+                new ObjectParameter("SchoolDistricts", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getAdvancedSearchResults_Result>("getAdvancedSearchResults", mLSIDParameter, locationParameter, countiesParameter, listTypeParameter, bedsParameter, bathsParameter, withOpenHouseParameter, waterFrontParameter, priceParameter, stylesParameter, schoolDistrictsParameter);
+        }
+    
+        public virtual int getAdvancedSearchResults_Updated(string mLSID, string location, string counties, string listType, string beds, string baths, string withOpenHouse, string waterFront, string price, string styles, string schoolDistricts)
+        {
+            var mLSIDParameter = mLSID != null ?
+                new ObjectParameter("MLSID", mLSID) :
+                new ObjectParameter("MLSID", typeof(string));
+    
+            var locationParameter = location != null ?
+                new ObjectParameter("Location", location) :
+                new ObjectParameter("Location", typeof(string));
+    
+            var countiesParameter = counties != null ?
+                new ObjectParameter("Counties", counties) :
+                new ObjectParameter("Counties", typeof(string));
+    
+            var listTypeParameter = listType != null ?
+                new ObjectParameter("ListType", listType) :
+                new ObjectParameter("ListType", typeof(string));
+    
+            var bedsParameter = beds != null ?
+                new ObjectParameter("Beds", beds) :
+                new ObjectParameter("Beds", typeof(string));
+    
+            var bathsParameter = baths != null ?
+                new ObjectParameter("Baths", baths) :
+                new ObjectParameter("Baths", typeof(string));
+    
+            var withOpenHouseParameter = withOpenHouse != null ?
+                new ObjectParameter("WithOpenHouse", withOpenHouse) :
+                new ObjectParameter("WithOpenHouse", typeof(string));
+    
+            var waterFrontParameter = waterFront != null ?
+                new ObjectParameter("WaterFront", waterFront) :
+                new ObjectParameter("WaterFront", typeof(string));
+    
+            var priceParameter = price != null ?
+                new ObjectParameter("Price", price) :
+                new ObjectParameter("Price", typeof(string));
+    
+            var stylesParameter = styles != null ?
+                new ObjectParameter("Styles", styles) :
+                new ObjectParameter("Styles", typeof(string));
+    
+            var schoolDistrictsParameter = schoolDistricts != null ?
+                new ObjectParameter("SchoolDistricts", schoolDistricts) :
+                new ObjectParameter("SchoolDistricts", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("getAdvancedSearchResults_Updated", mLSIDParameter, locationParameter, countiesParameter, listTypeParameter, bedsParameter, bathsParameter, withOpenHouseParameter, waterFrontParameter, priceParameter, stylesParameter, schoolDistrictsParameter);
+        }
+    
         public virtual ObjectResult<string> getAutoSearchResultsBasedOnKeyAndListingtypeTab(string searchParam, string tab)
         {
             var searchParamParameter = searchParam != null ?
@@ -70,6 +183,24 @@ namespace Century21.DataModels
                 new ObjectParameter("tab", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("getAutoSearchResultsBasedOnKeyAndListingtypeTab", searchParamParameter, tabParameter);
+        }
+    
+        public virtual ObjectResult<string> getcityByCounty(string county)
+        {
+            var countyParameter = county != null ?
+                new ObjectParameter("County", county) :
+                new ObjectParameter("County", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("getcityByCounty", countyParameter);
+        }
+    
+        public virtual ObjectResult<getMlsDatadueToagent_Result> getMlsDatadueToagent(string agents)
+        {
+            var agentsParameter = agents != null ?
+                new ObjectParameter("agents", agents) :
+                new ObjectParameter("agents", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getMlsDatadueToagent_Result>("getMlsDatadueToagent", agentsParameter);
         }
     
         public virtual ObjectResult<getMlsDetailBySearchKeywordbycityTab_Result> getMlsDetailBySearchKeywordbycityTab(string searchKey, string tab)
@@ -146,6 +277,27 @@ namespace Century21.DataModels
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getMlsDetailsBySearchKeyWords_Result>("getMlsDetailsBySearchKeyWords", cityNameParameter);
         }
     
+        public virtual ObjectResult<getResultBasedCityandStreet_Result> getResultBasedCityandStreet(string cities, string streets, string listtype, string waterfront)
+        {
+            var citiesParameter = cities != null ?
+                new ObjectParameter("Cities", cities) :
+                new ObjectParameter("Cities", typeof(string));
+    
+            var streetsParameter = streets != null ?
+                new ObjectParameter("Streets", streets) :
+                new ObjectParameter("Streets", typeof(string));
+    
+            var listtypeParameter = listtype != null ?
+                new ObjectParameter("Listtype", listtype) :
+                new ObjectParameter("Listtype", typeof(string));
+    
+            var waterfrontParameter = waterfront != null ?
+                new ObjectParameter("waterfront", waterfront) :
+                new ObjectParameter("waterfront", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getResultBasedCityandStreet_Result>("getResultBasedCityandStreet", citiesParameter, streetsParameter, listtypeParameter, waterfrontParameter);
+        }
+    
         public virtual ObjectResult<getUsCityZipData_Result> getUsCityZipData(string searchKey)
         {
             var searchKeyParameter = searchKey != null ?
@@ -153,6 +305,127 @@ namespace Century21.DataModels
                 new ObjectParameter("searchKey", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getUsCityZipData_Result>("getUsCityZipData", searchKeyParameter);
+        }
+    
+        public virtual int UpdateAgentData(Nullable<int> mLS, Nullable<System.DateTime> dATE_ADDED, string aGENTID, string fIRST_NAME, string mIDDLE_NAME, string lAST_NAME, string eMAIL_ADDRESS, string pHONE_AC, string pHONE, string cELL_PHONE_AC, string cELL_PHONE, string fAX_AC, string fAX, string aDDRESS_DIR_PRE, string aDDRESS_DIR_SUF, string aDDRESS_NUM, string aDDRESS, string aDDRESS_SUF, string aDDRESS_2, string cITY, string sTATE, string zIP, string tITLE, string dESIGNATIONS, string oFFICEID, string fIRMID, string aGENT_STATUS, string facebook_URL, byte[] profile_Picture)
+        {
+            var mLSParameter = mLS.HasValue ?
+                new ObjectParameter("MLS", mLS) :
+                new ObjectParameter("MLS", typeof(int));
+    
+            var dATE_ADDEDParameter = dATE_ADDED.HasValue ?
+                new ObjectParameter("DATE_ADDED", dATE_ADDED) :
+                new ObjectParameter("DATE_ADDED", typeof(System.DateTime));
+    
+            var aGENTIDParameter = aGENTID != null ?
+                new ObjectParameter("AGENTID", aGENTID) :
+                new ObjectParameter("AGENTID", typeof(string));
+    
+            var fIRST_NAMEParameter = fIRST_NAME != null ?
+                new ObjectParameter("FIRST_NAME", fIRST_NAME) :
+                new ObjectParameter("FIRST_NAME", typeof(string));
+    
+            var mIDDLE_NAMEParameter = mIDDLE_NAME != null ?
+                new ObjectParameter("MIDDLE_NAME", mIDDLE_NAME) :
+                new ObjectParameter("MIDDLE_NAME", typeof(string));
+    
+            var lAST_NAMEParameter = lAST_NAME != null ?
+                new ObjectParameter("LAST_NAME", lAST_NAME) :
+                new ObjectParameter("LAST_NAME", typeof(string));
+    
+            var eMAIL_ADDRESSParameter = eMAIL_ADDRESS != null ?
+                new ObjectParameter("EMAIL_ADDRESS", eMAIL_ADDRESS) :
+                new ObjectParameter("EMAIL_ADDRESS", typeof(string));
+    
+            var pHONE_ACParameter = pHONE_AC != null ?
+                new ObjectParameter("PHONE_AC", pHONE_AC) :
+                new ObjectParameter("PHONE_AC", typeof(string));
+    
+            var pHONEParameter = pHONE != null ?
+                new ObjectParameter("PHONE", pHONE) :
+                new ObjectParameter("PHONE", typeof(string));
+    
+            var cELL_PHONE_ACParameter = cELL_PHONE_AC != null ?
+                new ObjectParameter("CELL_PHONE_AC", cELL_PHONE_AC) :
+                new ObjectParameter("CELL_PHONE_AC", typeof(string));
+    
+            var cELL_PHONEParameter = cELL_PHONE != null ?
+                new ObjectParameter("CELL_PHONE", cELL_PHONE) :
+                new ObjectParameter("CELL_PHONE", typeof(string));
+    
+            var fAX_ACParameter = fAX_AC != null ?
+                new ObjectParameter("FAX_AC", fAX_AC) :
+                new ObjectParameter("FAX_AC", typeof(string));
+    
+            var fAXParameter = fAX != null ?
+                new ObjectParameter("FAX", fAX) :
+                new ObjectParameter("FAX", typeof(string));
+    
+            var aDDRESS_DIR_PREParameter = aDDRESS_DIR_PRE != null ?
+                new ObjectParameter("ADDRESS_DIR_PRE", aDDRESS_DIR_PRE) :
+                new ObjectParameter("ADDRESS_DIR_PRE", typeof(string));
+    
+            var aDDRESS_DIR_SUFParameter = aDDRESS_DIR_SUF != null ?
+                new ObjectParameter("ADDRESS_DIR_SUF", aDDRESS_DIR_SUF) :
+                new ObjectParameter("ADDRESS_DIR_SUF", typeof(string));
+    
+            var aDDRESS_NUMParameter = aDDRESS_NUM != null ?
+                new ObjectParameter("ADDRESS_NUM", aDDRESS_NUM) :
+                new ObjectParameter("ADDRESS_NUM", typeof(string));
+    
+            var aDDRESSParameter = aDDRESS != null ?
+                new ObjectParameter("ADDRESS", aDDRESS) :
+                new ObjectParameter("ADDRESS", typeof(string));
+    
+            var aDDRESS_SUFParameter = aDDRESS_SUF != null ?
+                new ObjectParameter("ADDRESS_SUF", aDDRESS_SUF) :
+                new ObjectParameter("ADDRESS_SUF", typeof(string));
+    
+            var aDDRESS_2Parameter = aDDRESS_2 != null ?
+                new ObjectParameter("ADDRESS_2", aDDRESS_2) :
+                new ObjectParameter("ADDRESS_2", typeof(string));
+    
+            var cITYParameter = cITY != null ?
+                new ObjectParameter("CITY", cITY) :
+                new ObjectParameter("CITY", typeof(string));
+    
+            var sTATEParameter = sTATE != null ?
+                new ObjectParameter("STATE", sTATE) :
+                new ObjectParameter("STATE", typeof(string));
+    
+            var zIPParameter = zIP != null ?
+                new ObjectParameter("ZIP", zIP) :
+                new ObjectParameter("ZIP", typeof(string));
+    
+            var tITLEParameter = tITLE != null ?
+                new ObjectParameter("TITLE", tITLE) :
+                new ObjectParameter("TITLE", typeof(string));
+    
+            var dESIGNATIONSParameter = dESIGNATIONS != null ?
+                new ObjectParameter("DESIGNATIONS", dESIGNATIONS) :
+                new ObjectParameter("DESIGNATIONS", typeof(string));
+    
+            var oFFICEIDParameter = oFFICEID != null ?
+                new ObjectParameter("OFFICEID", oFFICEID) :
+                new ObjectParameter("OFFICEID", typeof(string));
+    
+            var fIRMIDParameter = fIRMID != null ?
+                new ObjectParameter("FIRMID", fIRMID) :
+                new ObjectParameter("FIRMID", typeof(string));
+    
+            var aGENT_STATUSParameter = aGENT_STATUS != null ?
+                new ObjectParameter("AGENT_STATUS", aGENT_STATUS) :
+                new ObjectParameter("AGENT_STATUS", typeof(string));
+    
+            var facebook_URLParameter = facebook_URL != null ?
+                new ObjectParameter("Facebook_URL", facebook_URL) :
+                new ObjectParameter("Facebook_URL", typeof(string));
+    
+            var profile_PictureParameter = profile_Picture != null ?
+                new ObjectParameter("profile_Picture", profile_Picture) :
+                new ObjectParameter("profile_Picture", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateAgentData", mLSParameter, dATE_ADDEDParameter, aGENTIDParameter, fIRST_NAMEParameter, mIDDLE_NAMEParameter, lAST_NAMEParameter, eMAIL_ADDRESSParameter, pHONE_ACParameter, pHONEParameter, cELL_PHONE_ACParameter, cELL_PHONEParameter, fAX_ACParameter, fAXParameter, aDDRESS_DIR_PREParameter, aDDRESS_DIR_SUFParameter, aDDRESS_NUMParameter, aDDRESSParameter, aDDRESS_SUFParameter, aDDRESS_2Parameter, cITYParameter, sTATEParameter, zIPParameter, tITLEParameter, dESIGNATIONSParameter, oFFICEIDParameter, fIRMIDParameter, aGENT_STATUSParameter, facebook_URLParameter, profile_PictureParameter);
         }
     
         public virtual int UpdateAgentsData(Nullable<int> mLS, Nullable<System.DateTime> dATE_ADDED, string aGENTID, string fIRST_NAME, string mIDDLE_NAME, string lAST_NAME, string eMAIL_ADDRESS, string pHONE_AC, string pHONE, string cELL_PHONE_AC, string cELL_PHONE, string fAX_AC, string fAX, string aDDRESS_DIR_PRE, string aDDRESS_DIR_SUF, string aDDRESS_NUM, string aDDRESS, string aDDRESS_SUF, string aDDRESS_2, string cITY, string sTATE, string zIP, string tITLE, string dESIGNATIONS, string oFFICEID, string fIRMID, string aGENT_STATUS, string facebook_URL, byte[] profile_Picture, string aGENT_PASSWORD, string aGENT_TITLE, string aGENT_LANGUAGE, string aGENT_TXT, string aGENT_BIO_TEXT, string aGENT_BLOG, string twitter_URL, string google_Plus_URL, string linkedIn_URL)

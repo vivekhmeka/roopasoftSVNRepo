@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="realproagentsdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="realproagentsdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AGENT_INFO">
           <Key>
             <PropertyRef Name="AGENTID" />
@@ -69,6 +69,77 @@
           <Property Name="Agent_Youtube_URL" Type="nvarchar(max)" />
           <Property Name="Agent_Instagram_URL" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="COMPANY_INFO">
+          <Key>
+            <PropertyRef Name="COMPID" />
+          </Key>
+          <Property Name="COMPID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="COMPANY_NAME" Type="varchar" MaxLength="250" />
+          <Property Name="MLS_COMP_CODE" Type="varchar" MaxLength="50" />
+          <Property Name="BROOKLYN_ID" Type="int" />
+          <Property Name="RETS_IDs" Type="varchar" MaxLength="250" />
+          <Property Name="COMPANY_STATUS" Type="int" />
+          <Property Name="COMPANY_TP" Type="int" />
+          <Property Name="COMPANY_AOM" Type="int" />
+          <Property Name="COMPANY_RATES" Type="int" />
+          <Property Name="MLS_LI" Type="int" />
+          <Property Name="MLS_BROOKLYN" Type="int" />
+          <Property Name="SAUNDERS" Type="int" />
+          <Property Name="COMPANY_URL" Type="varchar" MaxLength="200" />
+          <Property Name="ERA_TALKING" Type="int" />
+          <Property Name="VIRTUAL_TOUR" Type="int" />
+          <Property Name="OFFICE_PAGES" Type="int" />
+          <Property Name="OFFICE_URL" Type="varchar" MaxLength="250" />
+          <Property Name="OFFICE_DRIVE" Type="varchar" MaxLength="250" />
+          <Property Name="OFFICE_ADDITIONAL_PAGE" Type="int" />
+          <Property Name="AGENT_PAGES" Type="int" />
+          <Property Name="AGENT_URL" Type="varchar" MaxLength="250" />
+          <Property Name="AGENT_DRIVE" Type="varchar" MaxLength="250" />
+          <Property Name="ADDITIONAL_PAGE" Type="int" />
+          <Property Name="PROSPECTMATCH" Type="int" />
+          <Property Name="PRODUCTION" Type="int" />
+          <Property Name="RENTALPERIODS" Type="int" />
+          <Property Name="MLS_STATS" Type="int" />
+          <Property Name="WEB_STATS" Type="int" />
+          <Property Name="TESTIMONIALS" Type="int" />
+          <Property Name="OFFICE_PIC_W" Type="int" />
+          <Property Name="OFFICE_PIC_H" Type="int" />
+          <Property Name="AGENT_PIC_W" Type="int" />
+          <Property Name="AGENT_PIC_H" Type="int" />
+          <Property Name="AGENT_PIC_SM_W" Type="int" />
+          <Property Name="AGENT_PIC_SM_H" Type="int" />
+          <Property Name="TESTIMONIAL_W" Type="int" />
+          <Property Name="TESTIMONIAL_H" Type="int" />
+          <Property Name="ADDTLIMGS" Type="int" />
+          <Property Name="FLOORPLANS" Type="int" />
+          <Property Name="LANDINGS" Type="int" />
+          <Property Name="SHOWTHEM" Type="int" />
+          <Property Name="NEWSLETTERS" Type="int" />
+          <Property Name="OFFICE_BLOGS" Type="int" />
+          <Property Name="AGENT_BLOGS" Type="int" />
+          <Property Name="VENDORS" Type="int" />
+          <Property Name="linktable" Type="int" />
+          <Property Name="SITEMAP" Type="int" />
+          <Property Name="SITE_DRIVE" Type="varchar" MaxLength="250" />
+          <Property Name="HP_MESSAGE" Type="int" />
+          <Property Name="PASSWORDS" Type="int" />
+          <Property Name="INTRANET" Type="int" />
+          <Property Name="REALPING" Type="int" />
+          <Property Name="professionals" Type="int" />
+          <Property Name="marketingreports" Type="int" />
+          <Property Name="seotowns" Type="int" />
+          <Property Name="developments" Type="int" />
+          <Property Name="HEADLINES" Type="int" />
+          <Property Name="VIDEOS" Type="int" />
+          <Property Name="towns" Type="int" />
+        </EntityType>
+        <EntityType Name="User_Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="USERS">
           <Key>
             <PropertyRef Name="USERID" />
@@ -84,13 +155,19 @@
           <Property Name="LAST_LOGGED_IP" Type="varchar" MaxLength="18" />
           <Property Name="LAST_LOGGED_PC" Type="varchar" MaxLength="50" />
           <Property Name="USER_EMAIL" Type="varchar" MaxLength="250" />
+          <Property Name="User_Role" Type="int" />
         </EntityType>
+        <Function Name="getAgentsForCentury21Company" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="getAllCompanyAdministrtors" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RoleID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="realproagentsdbModelStoreContainer">
           <EntitySet Name="AGENT_INFO" EntityType="Self.AGENT_INFO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMPANY_INFO" EntityType="Self.COMPANY_INFO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Role" EntityType="Self.User_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="realproagentsdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -173,11 +250,118 @@
           <Property Name="LAST_LOGGED_IP" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
           <Property Name="LAST_LOGGED_PC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="USER_EMAIL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="User_Role" Type="Int32" />
         </EntityType>
         <EntityContainer Name="realproagentsdbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AGENT_INFO" EntityType="Self.AGENT_INFO" />
           <EntitySet Name="USERS" EntityType="Self.USER" />
+          <FunctionImport Name="getAgentsForCentury21Company" ReturnType="Collection(realproagentsdbModel.getAgentsForCentury21Company_Result)" />
+          <EntitySet Name="COMPANY_INFO" EntityType="realproagentsdbModel.COMPANY_INFO" />
+          <EntitySet Name="User_Role" EntityType="realproagentsdbModel.User_Role" />
+          <FunctionImport Name="getAllCompanyAdministrtors1" ReturnType="Collection(realproagentsdbModel.getAllCompanyAdministrtors1_Result)">
+          <Parameter Name="RoleID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getAllCompanyAdministrtors" ReturnType="Collection(realproagentsdbModel.getAllCompanyAdministrtors_Result)">
+          <Parameter Name="RoleID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="getAgentsForCentury21Company_Result">
+          <Property Type="Int32" Name="AgentID" Nullable="false" />
+          <Property Type="String" Name="Agent_Fname" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Agent_Lname" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="Agent_Image" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="COMPANY_INFO">
+          <Key>
+            <PropertyRef Name="COMPID" />
+          </Key>
+          <Property Name="COMPID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COMPANY_NAME" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="MLS_COMP_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BROOKLYN_ID" Type="Int32" />
+          <Property Name="RETS_IDs" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="COMPANY_STATUS" Type="Int32" />
+          <Property Name="COMPANY_TP" Type="Int32" />
+          <Property Name="COMPANY_AOM" Type="Int32" />
+          <Property Name="COMPANY_RATES" Type="Int32" />
+          <Property Name="MLS_LI" Type="Int32" />
+          <Property Name="MLS_BROOKLYN" Type="Int32" />
+          <Property Name="SAUNDERS" Type="Int32" />
+          <Property Name="COMPANY_URL" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ERA_TALKING" Type="Int32" />
+          <Property Name="VIRTUAL_TOUR" Type="Int32" />
+          <Property Name="OFFICE_PAGES" Type="Int32" />
+          <Property Name="OFFICE_URL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="OFFICE_DRIVE" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="OFFICE_ADDITIONAL_PAGE" Type="Int32" />
+          <Property Name="AGENT_PAGES" Type="Int32" />
+          <Property Name="AGENT_URL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="AGENT_DRIVE" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ADDITIONAL_PAGE" Type="Int32" />
+          <Property Name="PROSPECTMATCH" Type="Int32" />
+          <Property Name="PRODUCTION" Type="Int32" />
+          <Property Name="RENTALPERIODS" Type="Int32" />
+          <Property Name="MLS_STATS" Type="Int32" />
+          <Property Name="WEB_STATS" Type="Int32" />
+          <Property Name="TESTIMONIALS" Type="Int32" />
+          <Property Name="OFFICE_PIC_W" Type="Int32" />
+          <Property Name="OFFICE_PIC_H" Type="Int32" />
+          <Property Name="AGENT_PIC_W" Type="Int32" />
+          <Property Name="AGENT_PIC_H" Type="Int32" />
+          <Property Name="AGENT_PIC_SM_W" Type="Int32" />
+          <Property Name="AGENT_PIC_SM_H" Type="Int32" />
+          <Property Name="TESTIMONIAL_W" Type="Int32" />
+          <Property Name="TESTIMONIAL_H" Type="Int32" />
+          <Property Name="ADDTLIMGS" Type="Int32" />
+          <Property Name="FLOORPLANS" Type="Int32" />
+          <Property Name="LANDINGS" Type="Int32" />
+          <Property Name="SHOWTHEM" Type="Int32" />
+          <Property Name="NEWSLETTERS" Type="Int32" />
+          <Property Name="OFFICE_BLOGS" Type="Int32" />
+          <Property Name="AGENT_BLOGS" Type="Int32" />
+          <Property Name="VENDORS" Type="Int32" />
+          <Property Name="linktable" Type="Int32" />
+          <Property Name="SITEMAP" Type="Int32" />
+          <Property Name="SITE_DRIVE" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="HP_MESSAGE" Type="Int32" />
+          <Property Name="PASSWORDS" Type="Int32" />
+          <Property Name="INTRANET" Type="Int32" />
+          <Property Name="REALPING" Type="Int32" />
+          <Property Name="professionals" Type="Int32" />
+          <Property Name="marketingreports" Type="Int32" />
+          <Property Name="seotowns" Type="Int32" />
+          <Property Name="developments" Type="Int32" />
+          <Property Name="HEADLINES" Type="Int32" />
+          <Property Name="VIDEOS" Type="Int32" />
+          <Property Name="towns" Type="Int32" />
+        </EntityType>
+        <EntityType Name="User_Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="getAllCompanyAdministrtors1_Result">
+          <Property Type="Int32" Name="AGENTID" Nullable="false" />
+          <Property Type="String" Name="AGENT_FNAME" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="AGENT_LNAME" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="AGENT_EMAIL" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="AGENT_PHONE" Nullable="true" MaxLength="50" />
+          <Property Type="Binary" Name="AGENT_ImageNew" Nullable="true" />
+          <Property Type="Int32" Name="USERID" Nullable="false" />
+          <Property Type="Int32" Name="User_Role" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getAllCompanyAdministrtors_Result">
+          <Property Type="Int32" Name="AGENTID" Nullable="false" />
+          <Property Type="String" Name="AGENT_FNAME" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="AGENT_LNAME" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="AGENT_EMAIL" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="AGENT_PHONE" Nullable="true" MaxLength="50" />
+          <Property Type="Binary" Name="AGENT_ImageNew" Nullable="true" />
+          <Property Type="Int32" Name="USERID" Nullable="false" />
+          <Property Type="Int32" Name="User_Role" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -252,6 +436,7 @@
           <EntitySetMapping Name="USERS">
             <EntityTypeMapping TypeName="realproagentsdbModel.USER">
               <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="User_Role" ColumnName="User_Role" />
                 <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
                 <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
                 <ScalarProperty Name="USERID" ColumnName="USERID" />
@@ -266,6 +451,103 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="getAgentsForCentury21Company" FunctionName="realproagentsdbModel.Store.getAgentsForCentury21Company">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="realproagentsdbModel.getAgentsForCentury21Company_Result">
+                <ScalarProperty Name="AgentID" ColumnName="AgentID" />
+                <ScalarProperty Name="Agent_Fname" ColumnName="Agent_Fname" />
+                <ScalarProperty Name="Agent_Lname" ColumnName="Agent_Lname" />
+                <ScalarProperty Name="Agent_Image" ColumnName="Agent_Image" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="COMPANY_INFO">
+            <EntityTypeMapping TypeName="realproagentsdbModel.COMPANY_INFO">
+              <MappingFragment StoreEntitySet="COMPANY_INFO">
+                <ScalarProperty Name="towns" ColumnName="towns" />
+                <ScalarProperty Name="VIDEOS" ColumnName="VIDEOS" />
+                <ScalarProperty Name="HEADLINES" ColumnName="HEADLINES" />
+                <ScalarProperty Name="developments" ColumnName="developments" />
+                <ScalarProperty Name="seotowns" ColumnName="seotowns" />
+                <ScalarProperty Name="marketingreports" ColumnName="marketingreports" />
+                <ScalarProperty Name="professionals" ColumnName="professionals" />
+                <ScalarProperty Name="REALPING" ColumnName="REALPING" />
+                <ScalarProperty Name="INTRANET" ColumnName="INTRANET" />
+                <ScalarProperty Name="PASSWORDS" ColumnName="PASSWORDS" />
+                <ScalarProperty Name="HP_MESSAGE" ColumnName="HP_MESSAGE" />
+                <ScalarProperty Name="SITE_DRIVE" ColumnName="SITE_DRIVE" />
+                <ScalarProperty Name="SITEMAP" ColumnName="SITEMAP" />
+                <ScalarProperty Name="linktable" ColumnName="linktable" />
+                <ScalarProperty Name="VENDORS" ColumnName="VENDORS" />
+                <ScalarProperty Name="AGENT_BLOGS" ColumnName="AGENT_BLOGS" />
+                <ScalarProperty Name="OFFICE_BLOGS" ColumnName="OFFICE_BLOGS" />
+                <ScalarProperty Name="NEWSLETTERS" ColumnName="NEWSLETTERS" />
+                <ScalarProperty Name="SHOWTHEM" ColumnName="SHOWTHEM" />
+                <ScalarProperty Name="LANDINGS" ColumnName="LANDINGS" />
+                <ScalarProperty Name="FLOORPLANS" ColumnName="FLOORPLANS" />
+                <ScalarProperty Name="ADDTLIMGS" ColumnName="ADDTLIMGS" />
+                <ScalarProperty Name="TESTIMONIAL_H" ColumnName="TESTIMONIAL_H" />
+                <ScalarProperty Name="TESTIMONIAL_W" ColumnName="TESTIMONIAL_W" />
+                <ScalarProperty Name="AGENT_PIC_SM_H" ColumnName="AGENT_PIC_SM_H" />
+                <ScalarProperty Name="AGENT_PIC_SM_W" ColumnName="AGENT_PIC_SM_W" />
+                <ScalarProperty Name="AGENT_PIC_H" ColumnName="AGENT_PIC_H" />
+                <ScalarProperty Name="AGENT_PIC_W" ColumnName="AGENT_PIC_W" />
+                <ScalarProperty Name="OFFICE_PIC_H" ColumnName="OFFICE_PIC_H" />
+                <ScalarProperty Name="OFFICE_PIC_W" ColumnName="OFFICE_PIC_W" />
+                <ScalarProperty Name="TESTIMONIALS" ColumnName="TESTIMONIALS" />
+                <ScalarProperty Name="WEB_STATS" ColumnName="WEB_STATS" />
+                <ScalarProperty Name="MLS_STATS" ColumnName="MLS_STATS" />
+                <ScalarProperty Name="RENTALPERIODS" ColumnName="RENTALPERIODS" />
+                <ScalarProperty Name="PRODUCTION" ColumnName="PRODUCTION" />
+                <ScalarProperty Name="PROSPECTMATCH" ColumnName="PROSPECTMATCH" />
+                <ScalarProperty Name="ADDITIONAL_PAGE" ColumnName="ADDITIONAL_PAGE" />
+                <ScalarProperty Name="AGENT_DRIVE" ColumnName="AGENT_DRIVE" />
+                <ScalarProperty Name="AGENT_URL" ColumnName="AGENT_URL" />
+                <ScalarProperty Name="AGENT_PAGES" ColumnName="AGENT_PAGES" />
+                <ScalarProperty Name="OFFICE_ADDITIONAL_PAGE" ColumnName="OFFICE_ADDITIONAL_PAGE" />
+                <ScalarProperty Name="OFFICE_DRIVE" ColumnName="OFFICE_DRIVE" />
+                <ScalarProperty Name="OFFICE_URL" ColumnName="OFFICE_URL" />
+                <ScalarProperty Name="OFFICE_PAGES" ColumnName="OFFICE_PAGES" />
+                <ScalarProperty Name="VIRTUAL_TOUR" ColumnName="VIRTUAL_TOUR" />
+                <ScalarProperty Name="ERA_TALKING" ColumnName="ERA_TALKING" />
+                <ScalarProperty Name="COMPANY_URL" ColumnName="COMPANY_URL" />
+                <ScalarProperty Name="SAUNDERS" ColumnName="SAUNDERS" />
+                <ScalarProperty Name="MLS_BROOKLYN" ColumnName="MLS_BROOKLYN" />
+                <ScalarProperty Name="MLS_LI" ColumnName="MLS_LI" />
+                <ScalarProperty Name="COMPANY_RATES" ColumnName="COMPANY_RATES" />
+                <ScalarProperty Name="COMPANY_AOM" ColumnName="COMPANY_AOM" />
+                <ScalarProperty Name="COMPANY_TP" ColumnName="COMPANY_TP" />
+                <ScalarProperty Name="COMPANY_STATUS" ColumnName="COMPANY_STATUS" />
+                <ScalarProperty Name="RETS_IDs" ColumnName="RETS_IDs" />
+                <ScalarProperty Name="BROOKLYN_ID" ColumnName="BROOKLYN_ID" />
+                <ScalarProperty Name="MLS_COMP_CODE" ColumnName="MLS_COMP_CODE" />
+                <ScalarProperty Name="COMPANY_NAME" ColumnName="COMPANY_NAME" />
+                <ScalarProperty Name="COMPID" ColumnName="COMPID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Role">
+            <EntityTypeMapping TypeName="realproagentsdbModel.User_Role">
+              <MappingFragment StoreEntitySet="User_Role">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="getAllCompanyAdministrtors" FunctionName="realproagentsdbModel.Store.getAllCompanyAdministrtors">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="realproagentsdbModel.getAllCompanyAdministrtors_Result">
+                <ScalarProperty Name="AGENTID" ColumnName="AGENTID" />
+                <ScalarProperty Name="AGENT_FNAME" ColumnName="AGENT_FNAME" />
+                <ScalarProperty Name="AGENT_LNAME" ColumnName="AGENT_LNAME" />
+                <ScalarProperty Name="AGENT_EMAIL" ColumnName="AGENT_EMAIL" />
+                <ScalarProperty Name="AGENT_PHONE" ColumnName="AGENT_PHONE" />
+                <ScalarProperty Name="AGENT_ImageNew" ColumnName="AGENT_ImageNew" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="User_Role" ColumnName="User_Role" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

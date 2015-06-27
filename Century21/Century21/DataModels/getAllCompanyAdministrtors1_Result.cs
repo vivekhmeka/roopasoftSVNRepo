@@ -10,21 +10,16 @@
 namespace Century21.DataModels
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class USER
+    public partial class getAllCompanyAdministrtors1_Result
     {
-        public string USERNAME { get; set; }
-        public string PASSWORD { get; set; }
+        public int AGENTID { get; set; }
+        public string AGENT_FNAME { get; set; }
+        public string AGENT_LNAME { get; set; }
+        public string AGENT_EMAIL { get; set; }
+        public string AGENT_PHONE { get; set; }
+        public byte[] AGENT_ImageNew { get; set; }
         public int USERID { get; set; }
-        public Nullable<int> USER_LEVEL { get; set; }
-        public Nullable<int> COMPID { get; set; }
-        public Nullable<int> AGENTID { get; set; }
-        public Nullable<int> OFFICEID { get; set; }
-        public Nullable<System.DateTime> LAST_LOGGED { get; set; }
-        public string LAST_LOGGED_IP { get; set; }
-        public string LAST_LOGGED_PC { get; set; }
-        public string USER_EMAIL { get; set; }
         public Nullable<int> User_Role { get; set; }
     }
 }
