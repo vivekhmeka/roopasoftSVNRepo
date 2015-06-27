@@ -13,17 +13,20 @@ using System.Web.Mvc;
 
 namespace Century21.Models
 {
-    class FilterProperties
+    public class FilterProperties
     {
         public string city { get; set; }
         public string price { get; set; }
         public string beds { get; set; }
+        public string beds1 { get; set; }
         public string Listtype { get; set; }
+        public string price1 { get; set; }
         public List<SelectListItem> getprices { get; set; }
         public List<SelectListItem> getBeds { get; set; }
         public List<SelectListItem> getRooms { get; set; }
 
         public List<storedResult> storedProperties { get; set; }
+        public List<SelectListItem> getprices1 { get; set; }
         public storedResult storedproperties1 { get; set; }
 
         public List<SelectListItem> GetPriceList()
@@ -37,6 +40,24 @@ namespace Century21.Models
                  new SelectListItem{ Value="1000000-5000000",Text="$1000000-$5000000"},
                  new SelectListItem{ Value="5000000-10000000",Text="$5000000-$10000000"}
              };
+
+            myList = data.ToList();
+            return myList;
+        }
+        public List<SelectListItem> GetPriceList1()
+        {
+            List<SelectListItem> myList = new List<SelectListItem>();
+            var data = new[]{
+                 new SelectListItem{ Value="0-100000",Text="$0-$100000"},
+                 new SelectListItem{ Value="100000-300000",Text="$100000-$300000"},
+                 new SelectListItem{ Value="300000-500000",Text="$300000-$500000"},
+                 new SelectListItem{ Value="500000-1000000",Text="$500000-$1000000"},
+                 new SelectListItem{ Value="1000000-5000000",Text="$1000000-$5000000"},
+                 new SelectListItem{ Value="5000000-10000000",Text="$5000000-$10000000"}
+             };
+
+
+
 
             myList = data.ToList();
             return myList;
