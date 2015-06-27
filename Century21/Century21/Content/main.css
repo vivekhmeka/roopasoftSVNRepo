@@ -22,7 +22,10 @@ h6 {
   font-family: 'Open Sans', sans-serif;
   color:#4e4e4e;
 }
-
+.well 
+{
+      background-color: #E5E5E5 !important;
+}
 h1{
   font-size: 36px;
   color:#fff;
@@ -43,6 +46,17 @@ h4{
   font-size: 16px;
 }
 
+#btnSendAgentEmail{
+    background-color: rgba(158, 131, 32, 0.81) !important;
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+
+#btnSearch, #SubmitId,#login_submit,#register-submit{
+background-color: rgba(158, 131, 32, 0.81) !important;
+border:1px solid rgba(158, 131, 32, 0.81) !important;
+}
+
 a {
   color: #c52d2f;
   -webkit-transition: color 300ms, background-color 300ms;
@@ -54,6 +68,10 @@ a {
 a:hover, a:focus {
   color: #d43133;
 }
+ #bottom {
+         
+            border-top: 3px solid #8C6D00 !important;
+        }
 
 hr {
   border-top: 1px solid #e5e5e5;
@@ -70,7 +88,14 @@ hr {
   margin-top: 10px;
 }
 
-
+ .right-side-btn .btn-primary {
+  margin-top: 2px;
+  margin-bottom:0px !important;
+}
+ .agent-img
+ {
+     width:100% !important;
+ }
 .btn-primary:hover, 
 .btn-primary:focus{
   background: #c52d2f;
@@ -142,8 +167,58 @@ body > section {
   margin-bottom: 0;
 }
 
+.contact-chechboxs {
+    background-color: #7F7F7F;
+  border: 3px solid #e3e3e3;
+    float: left;
+  width: 100%;
+    padding-bottom: 10px;
+}
 
+.contact-chechboxs h1 {
+    background: rgba(213, 180, 62, 0.81) !important;
+  border-radius: 5px;
+    color: #FFF;
+    font-size: 25px;
+    text-align: center;
+    padding: 5px;
+    margin-top:10px;
+}
+.leftside-content-scroll {
+ max-height: 800px;
+  height: 800px;
+  overflow-y: scroll;
+}
+.searchpage-box {
+    background-color: #DDD;
+  border-bottom: 2px solid #CDAA2C;
+   padding: 5px 0;
+  border-top: 2px solid #CDAA2C;
+}
+#btnSearch {
+      background-color: #39b3d7;
+      color:#FFF;
+}
 
+.media-heading a
+
+{
+      color: #111 !important;
+      cursor:pointer;
+}
+.popup-div {
+    width:50%;
+    margin-left:25%;
+   margin-top: 13%;
+}
+.media-heading a:hover
+
+{
+      color: #c52d2f !important;
+}
+.feature-wrap img{
+    height:200px !important;
+}
 @-webkit-keyframes scaleIn {
   0% {
     opacity: 0;
@@ -322,7 +397,7 @@ input.search-form:hover {
 }
 
 .navbar-inverse .navbar-nav > li > a:hover{
-	background-color: rgba(252, 209, 53, 0.81);
+	background-color: #8C6D00;
   color: #fff;
 }
 
@@ -373,7 +448,7 @@ input.search-form:hover {
 .navbar-inverse .navbar-nav .dropdown-menu > li:hover > a,
 .navbar-inverse .navbar-nav .dropdown-menu > li:focus > a,
 .navbar-inverse .navbar-nav .dropdown-menu > li.active > a {
-  background-color: rgba(252, 209, 53, 0.81);
+  background-color: #8C6D00;
   color: #fff;
 }
 
@@ -1169,7 +1244,88 @@ a.accordion-toggle  i{
   padding: 70px 0;
   text-align: center;
 }
+.contact-info {
+           
+        }
 
+            .contact-info h1 {
+                text-align: center;
+                font-size: 40px;
+                font-weight: bold;
+                color: #258EDF;
+                padding-top: 30px;
+                margin: 0;
+                padding-bottom: 30px;
+                margin-bottom: 15px;
+            }
+
+        .contact-info-fields input {
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075) !important;
+            box-shadow: inset 0 1px 1px rgba(0,0,0,0.075) !important;
+            height: 40px !important;
+        }
+
+        .contact-info-fields button {
+            background-color: #8C6D00  !important;
+            border-color: #269abc !important;
+            -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+            width: 172px;
+            box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+            font-size: 18px;
+        }
+         .fixed-img {
+            height: 600px;
+            width: 100%;
+            border-color: #000000;
+            position: fixed;
+            top: 90px;
+            background: #FFFFFF url("images/contemporary.jpg") no-repeat left top;
+            background-size: cover;
+        }
+
+        .navbar {
+            z-index: 9999;
+        }
+
+        .buyers-info {
+            background: #f5f5f5;
+        }
+
+            .buyers-info h1 {
+                text-align: center;
+                font-size: 50px;
+                font-weight: bold;
+                color: #258EDF;
+                padding-top: 50px;
+                margin: 0;
+            }
+
+            .buyers-info h3 {
+                text-align: center;
+                font-size: 25px;
+                font-weight: bold;
+                color: #258EDF;
+                padding-bottom: 50px;
+            }
+
+            .buyers-info h4 {
+                background-color: rgba(252, 209, 53, 0.81) !important;
+            }
+
+        .buyers-page-heading {
+            background: rgba(252, 209, 53, 0.81) !important;
+            color: #FFF;
+            font-size: 25px;
+            text-align: center;
+            padding: 5px;
+        }
+
+        .buyers-info-content {
+            background-color: whitesmoke;
+            padding-bottom: 10px;
+            border: 2px solid #DDD;
+            margin-bottom: 15px;
+        }
 
 .joomla-skill {
   background: rgb(242,242,242); /* Old browsers */
@@ -2155,7 +2311,9 @@ ul.faq li > div h3 {
   height: 0;
   overflow: hidden;
 }
-
+.searech-details-small-img {
+    margin-top:-50px;
+}
 .embed-container iframe,
 .embed-container object,
 .embed-container embed {
@@ -2238,25 +2396,43 @@ ul.faq li > div h3 {
 }
 
 ul.pagination > li > a {
-  border: 1px solid #F1F1F1;
-  margin-right:5px;
+  border: 0px solid #F1F1F1;
+  margin-right: -4px;
   border-radius: 5px;
-  font-size: 16px;
-  padding: 5px 14px;
+  font-size: 13px;
+  color: #000;
+  padding: 5px 12px;
+  font-size: 13px;
+  font-weight: bold;
 }
+    ul.pagination > li > a:hover {
+        background-color:#FFF !important;
+         background:#FFF !important;
+         color: #000 !important;
+    }
 
 ul.pagination > li > a i{
   margin-left:5px;
   margin-right:5px;
 }
+.home-link a, .home-link .dropdown-menu li a:hover {
+               background: #8C6D00 !important;
+        }
 
+.home-link .dropdown-menu li a {
+               background: transparent ;
+        }
 ul.pagination > li.active > a, 
 ul.pagination > li:hover > a {
-  background-color: #c52d2f !important;
-  border-color: #c52d2f !important;
-  color: #fff;
+  background-color:#FFF !important;
+         background:#FFF !important;
+         color: #000 !important;
 }
-
+ul.pagination > li > a:hover {
+        background-color:#FFF !important;
+         background:#FFF !important;
+         color: #000 !important;
+    }
 .search_box {
   background-image: url("../images/search_icon.png");
   background-position: 314px 15px;
@@ -2520,7 +2696,7 @@ shortcodes page css
 ************************/
 #bottom {
   background: #f5f5f5;
-  border-bottom: 3px solid rgba(252, 209, 53, 0.81);
+    border-bottom: 3px solid #8C6D00;
   font-size: 14px;
 }
 
@@ -2685,7 +2861,7 @@ background:rgba(252, 209, 53, 0.81) !important;
   line-height: none!important;
   border: 0 solid #357ebd;
   font-size: 18px;
-  margin-top: -10px;
+  margin-top: 7px;
   margin-bottom: 10px;
   font-weight: bold;
 }
@@ -2693,9 +2869,18 @@ background:rgba(252, 209, 53, 0.81) !important;
 {
 	margin-top:15px;
 }
+#accordion .panel-primary {
+    margin-bottom:5px !important;
+	border:1px solid rgba(192, 163, 56, 0.81) !important;
+	  border-radius: 5px;
+}
+    #accordion .panel-body {
+background-color: #FFF;
+border:0;   
+    }
 #accordion .panel-default
 {
-	margin-bottom:5px;
+	margin-bottom:5px !important;
 	border:1px solid rgba(192, 163, 56, 0.81) !important;
 	  border-radius: 5px;
 }
@@ -2724,6 +2909,11 @@ background:rgba(252, 209, 53, 0.81) !important;
   font-size: 16px;
   width: 185px;
 }
+@media (max-width:1300px) {
+    .searech-details-small-img {
+        margin-top: 0px;
+    }
+}
 
 @media (max-width:991px)
 {
@@ -2743,6 +2933,11 @@ background:rgba(252, 209, 53, 0.81) !important;
  margin-top: 0px; 
 
 }
+    .popup-div {
+    width:90%;
+    margin-left:5%;
+   margin-top: 8%;
+}
 .search-homes
 {
 	width:60%;
@@ -2756,7 +2951,10 @@ background:rgba(252, 209, 53, 0.81) !important;
   margin-left: 5%;
 }
 }
-
-
+@media (max-width: 416px) {
+    .fixed-header {
+        margin-top: -80px;
+    }
+}
 
 
