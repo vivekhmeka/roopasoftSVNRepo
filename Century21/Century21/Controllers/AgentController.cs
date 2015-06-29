@@ -108,14 +108,14 @@ namespace Century21.Controllers
         {
             return View();
         }
-        public ActionResult SendQuery(string Phone, string mlNumber, string AgentName, string CustomerEmail, string AgentEmail, string name, string query)
+        public ActionResult SendQuery(string phone, string mlNumber, string agentName, string customerEmail, string agentEmail, string name, string query)
         {
             string successMessage = "";
 
             var textFilePath = Server.MapPath("~\\Models\\AgentSendNotification.txt");
             string strFile = System.IO.File.ReadAllText(textFilePath);
-            strFile = string.Format(strFile, AgentName, mlNumber, name, Phone, CustomerEmail, query, "Joseph");
-            var result = DBHelper.SendAgentNotificationEmail(AgentEmail, strFile);
+            strFile = string.Format(strFile, agentName, mlNumber, name, phone, customerEmail, query, "Joseph");
+            var result = DBHelper.SendAgentNotificationEmail(agentEmail, strFile);
             if (result)
             {
                 successMessage = "success";
