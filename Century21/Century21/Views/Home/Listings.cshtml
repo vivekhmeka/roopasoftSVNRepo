@@ -5,7 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 @{
     ViewBag.Title = "PropertyDetail";
     var last3digit = Model.ml_number.Substring(Model.ml_number.Length - 3);
@@ -113,7 +112,6 @@
                             <span style="font-weight: bold;" id="Address">@Html.DisplayFor(m => m.county),</span>
                             <span id="CityZip"></span>@Html.DisplayFor(m => m.state),Zipcode:@Html.DisplayFor(m => m.zip)
                         </div>
-
                     </div>
                 </div>
                 <div class="col-xs12 col-sm-4">

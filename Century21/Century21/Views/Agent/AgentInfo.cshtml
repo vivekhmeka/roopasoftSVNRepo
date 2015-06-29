@@ -77,15 +77,12 @@
 </style>
 
 <script type="text/javascript">
-    debugger;
-
     function AgentInfo(agentID) {
         debugger;
         window.location.href = '@Url.Action("AgentBio", "Agent")?ID=' + agentID;
     }
 
     $(function () {
-
         var queryString = window.location.href.split('=');
         if (queryString.length == 1) {
             var selectedLetter = "A";
@@ -102,22 +99,16 @@
         }
     });
 
-
     function imgerror(object) {
-
-
         var AgentId = $(object).attr("agentId");
         var ImageSrc = $(object).attr("src");
-
         if (ImageSrc.substr(ImageSrc.length - 7) != "_th.jpg") {
             $(object).attr("src", "http://rpengine.realproconsulting.com/agents/" + AgentId + "_th.jpg");
         }
         else {
             $(object).attr("src", "/images/user_icon.png");
         }
-       // $(object).attr("src", "/images/user_icon.png");
     }
-
 
     function BindAgentInformation(selectedLetter) {
         vData = { 'alphabeticalLetter': selectedLetter };
@@ -130,7 +121,6 @@
                 var selectedAlphabet = $('#hdnAlphabetical').val();
                 var asciiCode = parseInt(selectedAlphabet);
                 asciiCode++;
-                debugger;
 
                 if (asciiCode == result.SelectedLetter.charCodeAt()) {
                     //var queryString = window.location.href.split('=');
@@ -219,9 +209,7 @@
 <script>
     $(window).scroll(function () {
         if ($(this).scrollTop() > 150) {
-
             $(".navbar-inverse").addClass("fixed-header");
-
         }
         else {
             $(".navbar-inverse").removeClass("fixed-header");
@@ -243,5 +231,4 @@
             $(".pagination").removeClass("pagination-fixed");
         }
     });
-
 </script>

@@ -38,7 +38,6 @@
             window.location.href = '@Url.Action("Agents","Admin")?compID=' + SelectedValue;
         });
         if ('@Session["SelectedCompanyID"]' != null && '@Session["SelectedCompanyID"]' != '') {
-            debugger;
             $("#Company").val('@Session["SelectedCompanyID"]');
         }
     });
@@ -101,7 +100,7 @@
 <script>
     function ShowInpupop(obj) {
         var agentid = $(obj).attr('agentid');
-        window.location.href = '@Url.Action("EditAgentDetail", "Admin")?ID=' + agentid;
+        window.location.href = '@Url.Action("EditAgentDetail", "Admin")?editAgentID=' + agentid;
     }
 </script>
 

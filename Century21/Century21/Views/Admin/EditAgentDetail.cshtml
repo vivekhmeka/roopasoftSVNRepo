@@ -39,7 +39,6 @@
     });
 </script>
 
-
 <style>
     .left {
         float: left;
@@ -113,7 +112,6 @@
     //$('.form-control input[type=text]').attr('disabled', 'disabled');
 
     $(document).ready(function () {
-        debugger;
         //$('#AGENT_BIO_TEXT').summernote();
         var roleID = $("#hdnRoleID").val();
         if (roleID != '1001' && roleID != '1002') {
@@ -122,8 +120,6 @@
             $("#agentPassword,#agentPhone,.note-codable,.note-editable").prop('disabled', false);
             $(".note-editable").attr('contenteditable', 'true');
         }
-        debugger;
-
         $('#AGENT_LANGUAGE').multiselect();
         var lang = '@Model.AGENT_LANGUAGE';
         var languages = lang.split(',');
@@ -136,7 +132,6 @@
 <div class="container" style="margin-top: 10px; min-height: 350px;  margin-bottom: 20px;">
     <input type="hidden" id="hdnRoleID" value="@ViewBag.RoleID" />
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
-
    
     <div class="row agent-details-div">
         @using (Html.BeginForm("EditAgentDetail", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -328,7 +323,6 @@
                     @Html.LabelFor(model => model.AGENT_FB_URL, htmlAttributes: new { @class = "left" })
                     @Html.EditorFor(model => model.AGENT_FB_URL, new { htmlAttributes = new { @class = "form-control", @id = "agentFbUrl" } })
                     @Html.ValidationMessageFor(model => model.AGENT_FB_URL, "", new { @class = "text-danger" })
-
 
                 </div>
                 <div class="col-xs-12 col-sm-6 form-group">

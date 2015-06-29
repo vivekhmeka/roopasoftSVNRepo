@@ -162,7 +162,6 @@
             //window.location.href = '@@Url.Action("AgentDetails", "Agent")?agentID='+agentID+'&agentInfo=contact';
         }
 
-
         function AgentMyListings(agentID) {
             var scrollPos = $('#listings').offset().top;
             $(window).scrollTop(scrollPos - 105);
@@ -219,8 +218,6 @@
                 }
             });
         });
-
-
     </script>
 </head><!--/head-->
 <body class="homepage">
@@ -468,9 +465,6 @@
                                 <div class="col-xs-12 col-sm-4"></div>
                                 <div class="col-xs-12 col-sm-3"> </div>
                                 <div class="col-xs-12 col-sm-3"></div>
-
-
-
                             </div>
 
                             <div class="row">
@@ -478,9 +472,6 @@
                                 <div class="col-xs-12 col-sm-4"><b>@item.address &nbsp; @item.city ,&nbsp;@item.state @item.zip</b></div>
                                 <div class="col-xs-12 col-sm-3">Bedrooms :@item.beds  Bathrooms:@item.baths <br />Days on the Market <b>@((DateTime.Now.Date - item.list_date.Value.Date).Days) </div>
                                 <div class="col-xs-12 col-sm-3">@String.Format("{0:C}", item.list_price)</div>
-
-
-
                             </div>
                             @*<div>
                                 <div class="media" data-toggle="modal" city="@item.city" mlnumber="@item.ml_number" street="@item.street" address="@item.address" onclick="clickMedia(this)">
