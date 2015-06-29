@@ -29,7 +29,6 @@ namespace Century21.Controllers
         {
             int compid;
             List<AGENT_INFO> agentsResult = new List<AGENT_INFO>();
-            //List<getAllCompanyAdministrtors_Result> companyAdministrators = new List<getAllCompanyAdministrtors_Result>();
             int agentRoleID = Convert.ToInt32(Session["RoleID"]);
             // Super Admin
             IEnumerable<SelectListItem> companyName = realproDbEntities.COMPANY_INFO.Select(x => new SelectListItem
@@ -45,7 +44,6 @@ namespace Century21.Controllers
             }
             if (agentRoleID == 1001 && compID == null)
             {
-
                 List<getAllCompanyAdministrtors_Result> companyAdminAgentNames = realproDbEntities.getAllCompanyAdministrtors(agentRoleID).ToList();
                 List<AGENT_INFO> lstAgentInfo = new List<AGENT_INFO>();
                 for (int count = 0; count < companyAdminAgentNames.Count; count++)
@@ -86,11 +84,6 @@ namespace Century21.Controllers
 
         public ActionResult AddAgent()
         {
-            //var agentLanguages = realproDbEntities.AGENT_INFO.Select(l => l.AGENT_LANGUAGE);// FirstOrDefault(t => t.AGENTID == agentID);
-            ////var serializedAgentResult = JsonConvert.SerializeObject(agentLanguages);
-            ////var deserializedAgentResult = JsonConvert.DeserializeObject<NewAgentDetail>(serializedAgentResult);
-            ////deserializedAgentResult.AllLanguages = deserializedAgentResult.GetLanguageList();
-            //ViewBag.AgentLanguages = agentLanguages;
             return View();
         }
 
@@ -175,16 +168,16 @@ namespace Century21.Controllers
             realproDbEntities.SaveChanges();
             return RedirectToAction("AddAgent", "Admin");
         }
-        public ActionResult EditAgentDetail(string ID)
+        public ActionResult EditAgentDetail(string editAgentID)
         {
             var agentID = 0;
-            if (ID == null)
+            if (editAgentID == null)
             {
                 agentID = int.Parse(Session["AgentID"].ToString());
             }
             else
             {
-                agentID = int.Parse(ID);
+                agentID = int.Parse(editAgentID);
             }
 
             var dbResult = realproDbEntities.AGENT_INFO.FirstOrDefault(t => t.AGENTID == agentID);
@@ -240,7 +233,6 @@ namespace Century21.Controllers
                         updateAgent.AGENT_BIO_TEXT = agentDetailModel.AGENT_BIO_TEXT;
                         updateAgent.AGENT_PHONE = agentDetailModel.AGENT_PHONE;
                         updateAgent.AGENT_LANGUAGE = Request["hiddenLanguage"].ToString();
-
                     }
                     else
                     {
