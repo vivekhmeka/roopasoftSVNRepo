@@ -1284,7 +1284,7 @@ a.accordion-toggle  i{
         }
 
         .navbar {
-            z-index: 9999;
+            z-index: 999;
         }
 
         .buyers-info {
@@ -2861,7 +2861,7 @@ background:rgba(252, 209, 53, 0.81) !important;
   line-height: none!important;
   border: 0 solid #357ebd;
   font-size: 18px;
-  margin-top: 7px;
+  margin-top: 6px;
   margin-bottom: 10px;
   font-weight: bold;
 }
@@ -2899,7 +2899,7 @@ border:0;
 }
 .address-bar span
 {
-	font-size:13px;
+	font-size:14px;
 	  font-weight: 600 !important;
 }
 .slidersandprofile-div .btn-primary 
