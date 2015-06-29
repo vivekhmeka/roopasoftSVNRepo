@@ -35,7 +35,7 @@ namespace Century21.Controllers
                     featuredPropertiesMlNumbers.Add(featuredPropertyListDetail[count].ml_number);
                 //ViewBag.featuredPropertiesMlNumbers = featuredPropertiesMlNumbers;
                 Session["featuredPropertiesMlNumbers"] = featuredPropertiesMlNumbers;
-                Session["SearchType"] = "FeaturedProperties";
+                //Session["SearchType"] = "FeaturedProperties";
                 ViewBag.SearchType = "FeaturedProperties";
                 ViewBag.SelectedIndex = 0;
                 return View(featuredPropertyListDetail);
@@ -44,7 +44,6 @@ namespace Century21.Controllers
             {
                 throw;
             }
-            return View();
         }
         public ActionResult About()
         {
@@ -89,12 +88,10 @@ namespace Century21.Controllers
         {
             try
             {
-                var time1 = DateTime.Now;
                 List<string> searchResults = new List<string>();
                 searchResults = retsDbEntities.getAutoSearchResultsBasedOnKeyAndListingtypeTab(key, searchType).ToList();
                 ViewBag.Results = searchResults;
                 Session["results"] = searchResults;
-                var time2 = DateTime.Now;
                 return Json(searchResults, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
